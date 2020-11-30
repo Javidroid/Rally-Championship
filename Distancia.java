@@ -18,4 +18,35 @@ public enum Distancia
         this.nombre = nombre;
         this.valor = valor;
     }
+    
+    /**
+     * Devuelve el atributo nombre 
+     *
+     * @return     Nombre
+     */
+    public String getNombre()
+    {
+        return nombre;
+    }
+    
+    /**
+     * Devuelve el atributo valor
+     * 
+     * @return     Valor
+     */
+    public double getValor()
+    {
+        return valor;
+    }
+    
+    /**
+     * Sobreescribe el metodo de String toString
+     * 
+     * @return     Representacion del Objeto 
+     */
+    @Override
+    public String toString()
+    {
+        return getNombre() + "(Original" + getValor() + ")";
+    }
 }
