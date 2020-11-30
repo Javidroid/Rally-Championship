@@ -16,18 +16,17 @@ public class Circuito
 {
     // Campos de cada circuito
     private String nombre;      //Nombre del circuito
-    private float complejidad;  //Usar un enum con complejidad BAJA (1.0), MEDIA (1.25), ALTA (1.5)
-    private int distancia;      //ENUM: CORTA (250), INTERMEDIA (275), LARGA (300)
+    private Complejidad complejidad;  //ENUM: BAJA (1.0), MEDIA (1.25), ALTA (1.5)
+    private Distancia distancia;      //ENUM: CORTA (250), INTERMEDIA (275), LARGA (300)
 
     /**
      * Constructor de Circuito
      */
-    public Circuito()
+    public Circuito(String nombre, Complejidad complejidad, Distancia distancia)
     {
-        // initialise instance variables
-        
-        //aquí hay que hacer algo con los enum
-        //también es importante ver cómo hacer las ComplicacionesExtra
+        this.nombre = nombre;
+        this.complejidad = complejidad;
+        this.distancia = distancia;
     }
 
     /**
@@ -40,6 +39,25 @@ public class Circuito
         // put your code here
         
     }
+    
+    /**
+     * Devuelve la complejidad del circuito
+     * 
+     * @return     Complejidad del circuito instanciado
+     */
+    public double getComplejidad(){
+        return 1.25; //this.complejidad.getValor();
+    }
+    
+    /**
+     * Devuelve la distancia del circuito
+     * 
+     * @return     Distancia del circuito instanciado
+     */
+    public double getDistancia(){
+        return 1.25; //this.distancia.getValor();
+    }
+    
     
     
     /**

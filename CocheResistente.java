@@ -8,26 +8,28 @@
 public class CocheResistente extends Coche
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private double reserva;
 
     /**
      * Constructor for objects of class CocheResistente
      */
-    public CocheResistente()
+    public CocheResistente(String nombre, Velocidad velocidad, Combustible combustible)
     {
-        // initialise instance variables
-        x = 0;
+        super(nombre, velocidad, combustible);    
+        reserva = 100.0;
     }
+    
+    
 
     /**
-     * An example of a method - replace this comment with your own
+     * Descripción de lo que hace el método
      * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * @param  x   descripción de cada parámetro
+     * @return     lo que devuelve, si devuelve xd
      */
-    public int sampleMethod(int y)
+    public void metodoPlantilla()
     {
         // put your code here
-        return x + y;
+        
     }
 }

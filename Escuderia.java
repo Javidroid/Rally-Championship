@@ -29,12 +29,16 @@ public class Escuderia
     /**
      * Constructor de Escuderia
      */
-    public Escuderia()
+    public Escuderia(String nombre)
     {
         // initialise instance variables
+        this.nombre = nombre;
         
+        //inicializar estructuras
     }
 
+    
+    
     /**
      * Descripción de lo que hace el método
      * 

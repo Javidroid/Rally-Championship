@@ -19,20 +19,68 @@
 public class Coche
 {
     private String nombre;
-    private float velocidad;
-    private float combustible;
+    private Velocidad velocidad;
+    private Combustible combustible;
 
     /**
      * Constructor de Coche
      */
-    public Coche()
+    public Coche(String nombre, Velocidad velocidad, Combustible combustible)
     {
-        // initialise instance variables
-        
-        //usar el enum para velocidad y combustible
-        
+        this.nombre = nombre;
+        this.velocidad = velocidad;
+        this.combustible = combustible;
     }
 
+    /**
+     * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito
+     * 
+     * @param  piloto       El piloto que conduce el coche
+     * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
+     * @return              Velocidad real del coche
+     */
+    public double calcularVelocidadReal(Piloto piloto, Circuito circuito)
+    {
+        // put your code here
+        double velocidadReal = 0; //QUITAR INICIALIZACION
+        //velocidadReal = (velocidad * piloto.destreza) / circuito.getComplejidad();
+        return velocidadReal;
+    }
+    
+    /**
+     * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
+     * 
+     * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)
+     * @param  circuito     El circuito en el que el coche compite (para usar la distancia)
+     * @return              Tiempo que tarda el coche en recorrer el circuito
+     */
+    public double calcularTiempoNecesario(Piloto piloto, Circuito circuito)
+    {
+        // put your code here
+        double tiempo;
+        double velocidadReal; 
+        velocidadReal = calcularVelocidadReal(piloto, circuito);
+        
+        tiempo = circuito.getDistancia() / velocidadReal * 60;
+        return tiempo;
+    }
+    
+    /**
+     * Reduce la cantidad de combustible que le queda en coche en función a lo que tarde
+     * el piloto en el circuito indicado
+     * 
+     * @param  piloto       El piloto que conduce el coche (para calcular el tiempo)
+     * @param  circuito     El circuito en el que el coche compite (para calcular el tiempo)
+     */
+    public void reducirCombustible(Piloto piloto, Circuito circuito)
+    {
+        double minutos;
+        minutos = calcularTiempoNecesario(piloto, circuito);
+        //this.combustible.getValor() = this.combustiblegetValor() - minutos;
+    }
+    
+    
+    
     /**
      * Descripción de lo que hace el método
      * 

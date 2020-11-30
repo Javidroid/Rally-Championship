@@ -17,20 +17,23 @@
  */
 public abstract class Piloto //esta clase es abstract
 {
-    private String nombre;
-    private Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
-    private float concentracion;
-    private float destreza; //este campo lo tiene que generar cada subclase 
+    protected String nombre;
+    protected Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
+    protected Concentracion concentracion;
+    protected double destreza; //este campo lo tiene que generar cada subclase 
     //private ? resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
-    private boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
+    protected boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
     /**
      * Constructor de Piloto
      */
-    public Piloto()
+    public Piloto(String nombre, Coche cocheAsignado, Concentracion concentracion)
     {
-        // initialise instance variables
-        
-        //no se si necesita constructor al ser una clase abstracta
+        this.nombre = nombre;
+        this.cocheAsignado = cocheAsignado;
+        this.concentracion = concentracion;
+        //inicializar resultados
+        descalificado = false;
+        //destreza se inicializa en cada subclase
     }
 
     /**
@@ -39,7 +42,7 @@ public abstract class Piloto //esta clase es abstract
      * 
      * @return     Devuelve la destreza calculada y también la guarda en el campo destreza
      */
-    public abstract float calcularDestreza();   
+    public abstract double calcularDestreza();   
     
     
     
