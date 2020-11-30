@@ -7,7 +7,6 @@
  */
 public class CocheRapido extends Coche
 {
-    // instance variables - replace the example below with your own
     private double nitro;
 
     /**
@@ -21,6 +20,7 @@ public class CocheRapido extends Coche
 
     /**
      * Calcula la velocidad real del CocheRapido en función del piloto y la complejidad del circuito
+     * También varía según el nitro restante.
      * 
      * @param  piloto       El piloto que conduce el coche
      * @param  circuito     El circuito en el que el coche compite
@@ -29,9 +29,23 @@ public class CocheRapido extends Coche
     @Override
     public double calcularVelocidadReal(Piloto piloto, Circuito circuito)
     {
-        //calcular la velocidadReal del cocheRapido
+        double velocidadNitro;
+        double diferencia;
+        velocidadNitro = super.calcularVelocidadReal(piloto, circuito);
         
-        return -1;
+        if(nitro > 0){
+            diferencia = velocidadNitro*1.2 - velocidadNitro;
+            if(diferencia > nitro){ //no hay suficiente nitro para aumentar 20%
+                velocidadNitro += nitro;
+                nitro -= nitro; //nitro = 0;
+            }
+            else{
+                velocidadNitro += diferencia;
+                nitro -= diferencia;
+            }
+        }
+        
+        return velocidadNitro;
     }
     
     

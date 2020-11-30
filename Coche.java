@@ -19,19 +19,77 @@
 public class Coche
 {
     private String nombre;
-    private Velocidad velocidad;
-    private Combustible combustible;
-
+    private Velocidad velocidad; //esto es velocidad teórica
+    private Combustible combustibleTotal;   //deposito lleno, combustible original, no es modificable
+    private double deposito; //es variable con cada carrera, hasta que llega a 0
+    
+    //********************************************
+    //REVISAR QUÉ SETTERS/GETTERS SE NECESITAN Y SI SON PUBLIC, PRIVATE, PROTECTED
     /**
      * Constructor de Coche
      */
-    public Coche(String nombre, Velocidad velocidad, Combustible combustible)
+    public Coche(String nombre, Velocidad velocidad, Combustible combustibleTotal)
     {
-        this.nombre = nombre;
-        this.velocidad = velocidad;
-        this.combustible = combustible;
+        setNombre(nombre);
+        setVelocidad(velocidad);
+        setCombustibleTotal(combustibleTotal); 
+        setDeposito(combustibleTotal.getValor());
     }
 
+    
+    //SETTERS
+    /**
+     * Setter de nombre
+     * @param  nombre   Nuevo valor del campo nombre
+     */
+    private void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * Setter de velocidad
+     * @param  velocidad   Nuevo valor del campo velocidad
+     */
+    private void setVelocidad(Velocidad velocidad){this.velocidad = velocidad;}
+    
+    /**
+     * Setter de combustibleTotal
+     * @param  combustibleTotal   Nuevo valor del campo combustibleTotal (que NO es variable)
+     */
+    private void setCombustibleTotal(Combustible combustibleTotal){this.combustibleTotal = combustibleTotal;}
+    
+    /**
+     * Setter de deposito
+     * @param  nuevoDeposito   Nuevo valor del campo deposito (que es variable)
+     */
+    private void setDeposito(double nuevoDeposito){deposito = nuevoDeposito;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de nombre
+     * @return  nombre
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * Getter de velocidad (teórica)
+     * @return  velocidad
+     */
+    public Velocidad getVelocidad(){return velocidad;}
+    
+    /**
+     * Getter de combustibleTotal
+     * @return  combustibleTotal
+     */
+    public Combustible getCombustibleTotal(){return combustibleTotal;}
+    
+    /**
+     * Getter de deposito
+     * @return  deposito
+     */
+    public double getDeposito(){return deposito;}
+    
+    
+    //FUNCIONALIDADES DE COCHE    
     /**
      * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito
      * 
@@ -41,9 +99,8 @@ public class Coche
      */
     public double calcularVelocidadReal(Piloto piloto, Circuito circuito)
     {
-        // put your code here
-        double velocidadReal = 0; //QUITAR INICIALIZACION
-        //velocidadReal = (velocidad * piloto.destreza) / circuito.getComplejidad();
+        double velocidadReal;
+        velocidadReal = (velocidad.getValor() * piloto.destreza) / circuito.getComplejidad().getValor();
         return velocidadReal;
     }
     
@@ -56,12 +113,11 @@ public class Coche
      */
     public double calcularTiempoNecesario(Piloto piloto, Circuito circuito)
     {
-        // put your code here
         double tiempo;
         double velocidadReal; 
         velocidadReal = calcularVelocidadReal(piloto, circuito);
         
-        tiempo = circuito.getDistancia() / velocidadReal * 60;
+        tiempo = circuito.getDistancia().getValor() / velocidadReal * 60;
         return tiempo;
     }
     
@@ -76,9 +132,25 @@ public class Coche
     {
         double minutos;
         minutos = calcularTiempoNecesario(piloto, circuito);
-        //this.combustible.getValor() = this.combustiblegetValor() - minutos;
+        setDeposito(deposito-minutos);
     }
     
+    /**
+     * Aumenta el depósito la cantidad indicada.
+     * Actualmente sólo sirve para CocheResistente y su funcionalidad de
+     * depósito de reserva. Pero podría servir para
+     * futuras implementaciones
+     * 
+     * @param  cantidad   La cantidad que se AÑADE al depósito
+     */
+    //La funcionalidad de este método podría sustituirse cambiando a 
+    //protected el método setDeposito para que se pueda modificar desde
+    //CocheResistente directamente, pero podría romper un poco la 
+    //encapsulación
+    public void repostar(double cantidad)
+    {
+        setDeposito(deposito+cantidad);
+    }
     
     
     /**

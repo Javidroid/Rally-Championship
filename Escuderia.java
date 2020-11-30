@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Esta clase representa las distintas Escuderías que compiten.
  * 
@@ -17,26 +17,100 @@
 public class Escuderia
 {
     private String nombre;
-    //private ? <Piloto> pilotos;
-    //private ? <Coche> coches;
-  
-    //hay que ver qué estructura (collection) seleccionar para almacenar pilotos y coches
-    
-    //nos están pidiendo que haya un orden así que habría que ver una lista, pero
-    //tal vez usar un mapa para que la escudería asigne un piloto a un coche
-    
+    private List <Piloto> pilotos;
+    private List <Coche> coches;
+    //Revisar si la Collection es una lista (probablemente sí porque se requiere orden)
+    //Hay que usar el Comparator para ordenar por distintos criterios
 
     /**
      * Constructor de Escuderia
      */
     public Escuderia(String nombre)
     {
-        // initialise instance variables
         this.nombre = nombre;
-        
-        //inicializar estructuras
+        List <Piloto> pilotos   = new ArrayList <Piloto>();
+        List <Coche> coches     = new ArrayList <Coche>();
     }
 
+    
+    //SETTERS
+    /**
+     * Setter de nombre
+     * @param  nombre   Nuevo valor del campo nombre
+     */
+    private void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * Setter de pilotos
+     * @param  pilotos   Nuevo valor del campo pilotos
+     */
+    private void setPilotos(List <Piloto> pilotos){this.pilotos = pilotos;}
+    
+    /**
+     * Setter de coches
+     * @param  coches   Nuevo valor del campo coches
+     */
+    private void setCoches(List <Coche> coches){this.coches = coches;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de nombre
+     * @return   nombre
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * Getter de pilotos
+     * @return   pilotos
+     */
+    public List <Piloto> getPilotos(){return pilotos;}
+    
+    /**
+     * Getter de coches
+     * @return   coches
+     */
+    public List <Coche> getCoches(){return coches;}
+    
+    
+    //FUNCIONALIDAD DE ESCUDERÍA
+    /**
+     * Se inscribe en el campeonato gestionado por la Organizacion
+     */
+    public void inscribirse()
+    {
+        //todo       
+    }
+    
+    /**
+     * Ordena la lista de pilotos y coches según el criterio establecido
+     */
+    public void ordenarPilotosyCoches()
+    {
+        //todo       
+    }
+    
+    /**
+     * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
+     *
+     * @return     puntos totales
+     */
+    public int getPuntosPilotosTotal()
+    {
+        //todo
+        return -1;        
+    }
+    
+    /**
+     * Envía el primer piloto y el primer coche disponibles a la carrera
+     * Controla también si un piloto no tiene coche disponible, en cuyo caso
+     * el piloto no puede ser enviado, pero no cuenta como abandono
+     */
+    public void enviarPilotoyCoche()
+    {
+        //todo       
+    }
+    
     
     
     /**

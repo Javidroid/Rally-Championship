@@ -23,28 +23,114 @@ public abstract class Piloto //esta clase es abstract
     protected double destreza; //este campo lo tiene que generar cada subclase 
     //private ? resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
     protected boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
+    
+    //********************************************
+    //REVISAR QUÉ SETTERS/GETTERS SE NECESITAN Y SI SON PUBLIC, PRIVATE, PROTECTED
     /**
      * Constructor de Piloto
      */
     public Piloto(String nombre, Coche cocheAsignado, Concentracion concentracion)
     {
-        this.nombre = nombre;
-        this.cocheAsignado = cocheAsignado;
-        this.concentracion = concentracion;
-        //inicializar resultados
-        descalificado = false;
+        setNombre(nombre);
+        setCocheAsignado(cocheAsignado);
+        setConcentracion(concentracion);
+        //inicializar 'resultados' y hacer su get
+        setDescalificado(false);
+        
         //destreza se inicializa en cada subclase
     }
 
+    
+    //SETTERS
+    /**
+     * Setter de nombre
+     * @param  nombre   Nuevo valor del campo nombre
+     */
+    private void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * Setter de cocheAsignado
+     * @param  cocheAsignado   Nuevo valor del campo cocheAsignado
+     */
+    private void setCocheAsignado(Coche cocheAsignado){this.cocheAsignado = cocheAsignado;}
+    
+    /**
+     * Setter de concentracion
+     * @param  concentracion   Nuevo valor del campo concentracion
+     */
+    private void setConcentracion(Concentracion concentracion){this.concentracion = concentracion;}
+    
+    /**
+     * Setter de destreza
+     * @param  destreza   Nuevo valor del campo destreza
+     */
+    private void setDestreza(double destreza){this.destreza = destreza;}
+    
+    /**
+     * Setter de descalificado
+     * @param  descalificado   Nuevo valor del campo descalificado
+     */
+    private void setDescalificado(boolean descalificado){this.descalificado = descalificado;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de nombre
+     * @return  nombre
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * Getter de cocheAsignado
+     * @return  cocheAsignado
+     */
+    public Coche getCocheAsignado(){return cocheAsignado;}
+    
+    /**
+     * Getter de concentracion
+     * @return  concentracion
+     */
+    public Concentracion getConcentracion(){return concentracion;}
+    
+    /**
+     * Getter de destreza 
+     * @return  destreza
+     */
+    public double getDestreza(){return destreza;}
+    
+    /**
+     * Getter de descalificado
+     * @return  descalificado
+     */
+    public boolean getDescalificado(){return descalificado;}
+    
+    
+    
+    //FUNCIONALIDAD DE PILOTO
     /**
      * Método abstracto que calcula la destreza según la concentracion y el tipo de piloto
      * Cada clase lo implementa de una forma distinta.
-     * 
-     * @return     Devuelve la destreza calculada y también la guarda en el campo destreza
      */
     public abstract double calcularDestreza();   
     
-    
+    /**
+     * Descalifica al piloto instado. Pone el parámetro descalificado a true
+     * 
+     */
+    public void descalificar()
+    {
+        setDescalificado(true);        
+    }
+        
+    /**
+     * Inserta el Coche que la Escuderia le de al Piloto para poder cambiarlo entre carrera y carrera
+     * 
+     * @param  coche   el coche que la escudería le proporcione
+     */
+    public void recibirCoche(Coche coche)
+    {
+        setCocheAsignado(coche);   
+    }
     
     /**
      * Descripción de lo que hace el método

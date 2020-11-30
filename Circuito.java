@@ -14,21 +14,63 @@
  */
 public class Circuito
 {
-    // Campos de cada circuito
     private String nombre;      //Nombre del circuito
     private Complejidad complejidad;  //ENUM: BAJA (1.0), MEDIA (1.25), ALTA (1.5)
     private Distancia distancia;      //ENUM: CORTA (250), INTERMEDIA (275), LARGA (300)
 
+    //********************************************
+    //REVISAR QUÉ SETTERS/GETTERS SE NECESITAN Y SI SON PUBLIC, PRIVATE, PROTECTED
     /**
      * Constructor de Circuito
      */
     public Circuito(String nombre, Complejidad complejidad, Distancia distancia)
     {
-        this.nombre = nombre;
-        this.complejidad = complejidad;
-        this.distancia = distancia;
+        setNombre(nombre);
+        setComplejidad(complejidad);
+        setDistancia(distancia);
     }
-
+    
+    //SETTERS
+    /**
+     * Setter de nombre
+     * @param  nombre   Nuevo valor del campo nombre
+     */
+    private void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * Setter de complejidad
+     * @param  complejidad   Nuevo valor del campo complejidad
+     */
+    private void setComplejidad(Complejidad complejidad){this.complejidad = complejidad;}
+    
+    /**
+     * Setter de distancia
+     * @param  distancia   Nuevo valor del campo distancia
+     */
+    private void setDistancia(Distancia distancia){this.distancia = distancia;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de nombre
+     * @return  nombre
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * Getter de complejidad
+     * @return  complejidad
+     */
+    public Complejidad getComplejidad(){return complejidad;}
+    
+    /**
+     * Getter de distancia
+     * @return  distancia
+     */
+    public Distancia getDistancia(){return distancia;}
+    
+    
+    //FUNCIONALIDAD DE CIRCUITO
     /**
      * Muestra las características del circuito, incluyendo cada complicación
      * 
@@ -36,29 +78,11 @@ public class Circuito
      */
     public void mostrarCaracteristicas()
     {
-        // put your code here
+        //todo
         
     }
     
-    /**
-     * Devuelve la complejidad del circuito
-     * 
-     * @return     Complejidad del circuito instanciado
-     */
-    public double getComplejidad(){
-        return 1.25; //this.complejidad.getValor();
-    }
-    
-    /**
-     * Devuelve la distancia del circuito
-     * 
-     * @return     Distancia del circuito instanciado
-     */
-    public double getDistancia(){
-        return 1.25; //this.distancia.getValor();
-    }
-    
-    
+      
     
     /**
      * Descripción de lo que hace el método
