@@ -56,7 +56,7 @@ TO-DO LIST:
     
     Hacer las clases de prueba
     
-    Hacer los comparators y los equals
+    Hacer los comparators, los toString y los equals EN TODAS LAS CLASES (las necesarias)
     
     Hacer una clase Resultado para almacenar en List los resultados de Piloto
     ¡¡¡¡¡¡IMPORTANTE!!!!!! VER BIEN QUÉ CAMPOS CONTIENE Y SI USAR UN MAP
