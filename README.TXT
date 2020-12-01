@@ -18,6 +18,8 @@ NOTAS:
     Un buen uso del Map sería de Pilotos, Escudería porque
     cuando están en una carrera como que pierden la escudería que les manda
     
+    
+    
     Hay que usar al menos un List, Set Y Map.
     
     ESTRUCTURAS (de collections):
@@ -57,9 +59,14 @@ TO-DO LIST:
     Hacer los comparators y los equals
     
     Hacer una clase Resultado para almacenar en List los resultados de Piloto
+    ¡¡¡¡¡¡IMPORTANTE!!!!!! VER BIEN QUÉ CAMPOS CONTIENE Y SI USAR UN MAP
+    PARA ALMACENAR CADA RESULTADO CON SU CIRCUITO, O QUE EL CIRCUITO SEA UN CAMPO
+    (más encapsulado el map)
     
     Revisar la Doc tanto de las clases como de las interfaces
     
     HACER LA CLASE RESULTADO
+    
+
     
     
