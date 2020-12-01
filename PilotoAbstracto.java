@@ -117,14 +117,31 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
     
     
     /**
-     * Descripción de lo que hace el método
+     * Gestiona y proporciona info sobre los resultados del piloto 
+     * en cualquier circuito donde haya competido
      * 
-     * @param  x   descripción de cada parámetro
-     * @return     lo que devuelve, si devuelve xd
      */
-    public void metodoPlantilla()
-    {
-        // put your code here
+    public void infoResultados(){
         
     }
+    
+    /**
+     * Devuelve los puntos que ha conseguido el piloto
+     * en todas las carreras
+     * 
+     * @return Total de puntos
+     */
+    public int getTotalPuntos(){
+        return -1;
+    }
+    
+    /**
+     * Gestiona todos los métodos necesarios para que el piloto
+     * dispute una carrera 
+     * 
+     */
+    public void conducir(){
+        
+    }
+    
 }

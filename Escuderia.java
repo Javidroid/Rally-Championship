@@ -10,19 +10,19 @@ public interface Escuderia
 {
     //GETTERS
     /**
-     * Getter de nombre
+     * Método que devuelve nombre
      * @return   nombre
      */
     public String getNombre();
     
     /**
-     * Getter de pilotos
+     * Método que devuelve pilotos
      * @return   pilotos
      */
     public List <Piloto> getPilotos();
     
     /**
-     * Getter de coches
+     * Método que devuelve coches
      * @return   coches
      */
     public List <Coche> getCoches();

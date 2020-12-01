@@ -10,25 +10,25 @@ public interface Coche
 {
     //GETTERS
     /**
-     * Getter de nombre
+     * Método que devuelve nombre
      * @return  nombre
      */
     public String getNombre();
     
     /**
-     * Getter de velocidad (teórica)
+     * Método que devuelve velocidad (teórica)
      * @return  velocidad
      */
     public Velocidad getVelocidad();
     
     /**
-     * Getter de combustibleTotal
+     * Método que devuelve combustibleTotal
      * @return  combustibleTotal
      */
     public Combustible getCombustibleTotal();
     
     /**
-     * Getter de deposito
+     * Método que devuelve deposito
      * @return  deposito
      */
     public double getDeposito();

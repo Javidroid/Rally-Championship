@@ -10,19 +10,19 @@ public interface Circuito
 {
     //GETTERS
     /**
-     * Getter de nombre
+     * Método que devuelve nombre
      * @return  nombre
      */
     public String getNombre();
     
     /**
-     * Getter de complejidad
+     * Método que devuelve complejidad
      * @return  complejidad
      */
     public Complejidad getComplejidad();
     
     /**
-     * Getter de distancia
+     * Método que devuelve distancia
      * @return  distancia
      */
     public Distancia getDistancia();
