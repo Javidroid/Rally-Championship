@@ -5,7 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CocheRapido extends Coche
+public class CocheRapido extends CocheNormal
 {
     private double nitro;
 
