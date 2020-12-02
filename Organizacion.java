@@ -8,23 +8,38 @@
  */
 public class Organizacion
 {
-   private int limiteAbandonos;
-   private int limitePilotos;
-   //private ? <Circuito> circuitos; //una estructura que almacene los circuitos
-   //private ? <Escuderia> escuderias; //probablemente set porque no puede haber duplicados
-   //private ? <Piloto> pilotosCarrera; //Probablemente una lista porque van ordenados
+    //SINGLETON
+    private static Organizacion instancia; 
+    
+    private int limiteAbandonos;
+    private int limitePilotos;
+    //private ? <Circuito> circuitos; //una estructura que almacene los circuitos
+    //private ? <Escuderia> escuderias; //probablemente set porque no puede haber duplicados
+    //private ? <Piloto> pilotosCarrera; //Probablemente una lista porque van ordenados
    
-   /**
-     * Constructor de Organizacion
+    /**
+     * Constructor de Organizacion (privado por uso de Singleton
      */
-    public Organizacion()
+    private Organizacion()
     {
         // initialise instance variables
     }
-
     
+    /**
+     * Método de creación estático público para obtener la instancia
+     * Singleton
+     * @return  única instancia de Organization
+     */
+    public synchronized static Organizacion getInstancia(){
+        if (instancia == null){
+            instancia = new Organizacion();
+        }
+        return instancia;
+    }
    
-   /**
+    
+    
+    /**
      * Descripción de lo que hace el método
      * 
      * @param  x   descripción de cada parámetro
