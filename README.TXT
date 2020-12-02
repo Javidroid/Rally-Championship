@@ -18,6 +18,7 @@ NOTAS:
     Un buen uso del Map sería de Pilotos, Escudería porque
     cuando están en una carrera como que pierden la escudería que les manda
     
+    Escudería usa doblemente el patrón Strategy
     
     
     Hay que usar al menos un List, Set Y Map.
