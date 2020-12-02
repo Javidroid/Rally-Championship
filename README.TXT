@@ -20,6 +20,8 @@ NOTAS:
     
     Escudería usa doblemente el patrón Strategy
     
+    Circuito (complicacionesExtra) usa el patrón Decorator
+    
     
     Hay que usar al menos un List, Set Y Map.
     
