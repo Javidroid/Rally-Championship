@@ -1,4 +1,5 @@
 
+import java.util.*;
 /**
  * Interfaz que declara todos los métodos de Piloto
  * 
@@ -26,6 +27,12 @@ public interface Piloto
      * @return  concentracion
      */
     public Concentracion getConcentracion();
+    
+    /**
+     * Método que devuelve resultados
+     * @return  resultados  (es un ARRAYLIST)
+     */
+    public List <Resultado> getListaResultados();
     
     /**
      * Método que devuelve descalificado
@@ -57,6 +64,7 @@ public interface Piloto
     /**
      * Gestiona y proporciona info sobre los resultados del piloto 
      * en cualquier circuito donde haya competido
+     * 
      * 
      */
     public void infoResultados();

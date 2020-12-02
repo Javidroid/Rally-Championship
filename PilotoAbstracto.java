@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Esta clase representa los distintos Pilotos que compiten con sus Coches en el Circuito
  * 
@@ -17,12 +17,12 @@
  */
 public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
 {
-    protected String nombre;
-    protected Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
-    protected Concentracion concentracion;
-    //private List <Resultados> resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
+    private String nombre;
+    private Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
+    private Concentracion concentracion;
+    private List <Resultado> resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
     //resultados es una lista de la clase resultado, que almacena lo necesario
-    protected boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
+    private boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
     
     /**
      * Constructor de Piloto
@@ -32,7 +32,7 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
         setNombre(nombre);
         setCocheAsignado(cocheAsignado);
         setConcentracion(concentracion);
-        //inicializar 'resultados' y hacer su get
+        List <Resultado> resultados = new ArrayList <Resultado>();
         setDescalificado(false);
     }
 
@@ -55,6 +55,12 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * @param  concentracion   Nuevo valor del campo concentracion
      */
     private void setConcentracion(Concentracion concentracion){this.concentracion = concentracion;}
+    
+    /**
+     * Setter de resultados
+     * @param  resultados   Nuevo valor del campo resultados (es un ARRAYLIST)
+     */
+    private void setListaResultados(List <Resultado> resultados){this.resultados = resultados;}
     
     /**
      * Setter de descalificado
@@ -81,6 +87,12 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * @return  concentracion
      */
     public Concentracion getConcentracion(){return concentracion;}
+    
+    /**
+     * Getter de resultados
+     * @return  resultados  (es un ARRAYLIST
+     */
+    public List <Resultado> getListaResultados(){return resultados;}
     
     /**
      * Getter de descalificado
@@ -122,7 +134,13 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * 
      */
     public void infoResultados(){
-        
+        //IMPORTANTE
+        //VER SI AQUÍ HAY QUE PASAR EL CIRCUITO DEL QUE SE QUIEREN SABER LOS DATOS COMO
+        //PARÁMETRO, EN CUYO CASO NO SE PODRÍA SABER SI HAY DOS CARRERAS CON EL MISMO
+        //CIRCUITO
+        //
+        //POSIBILIDAD: DEVOLVER UNA LISTA CON LOS RESULTADOS DE ESOS CIRCUITOS
+        //DEVOLVERÍA UNA LISTA CON UN SOLO ELEMENTO EN CASO DE EXISTIR UN SOLO CIRCUITO
     }
     
     /**

@@ -16,12 +16,20 @@ public class Resultado
     /**
      * Constructor for objects of class Resultado
      */
-    public Resultado()
+    public Resultado(Circuito circuito, double tiempo, int puntos)
     {
-        
+        setCircuito(circuito);
+        setTiempo(tiempo);
+        setPuntos(puntos);
     }
 
     //SETTERS
+    /**
+     * Setter de circuito
+     * @param  circuito   Nuevo valor del campo circuito
+     */
+    private void setCircuito(Circuito circuito){this.circuito = circuito;}
+    
     /**
      * Setter de tiempo
      * @param  tiempo   Nuevo valor del campo tiempo
@@ -35,6 +43,12 @@ public class Resultado
     private void setPuntos(int puntos){this.puntos = puntos;}
     
     //GETTERS
+    /**
+     * Getter de circuito
+     * @return  circuito
+     */
+    public Circuito getCircuito(){return circuito;}
+    
     /**
      * Getter de tiempo
      * @return  tiempo
