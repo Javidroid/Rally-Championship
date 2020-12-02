@@ -27,6 +27,12 @@ public class Resultado
      * @param  tiempo   Nuevo valor del campo tiempo
      */
     private void setTiempo(double tiempo){this.tiempo = tiempo;}
+
+    /**
+     * Setter de puntos
+     * @param  puntos   Nuevo valor del campo puntos
+     */
+    private void setPuntos(int puntos){this.puntos = puntos;}
     
     //GETTERS
     /**
@@ -34,4 +40,10 @@ public class Resultado
      * @return  tiempo
      */
     public double getTiempo(){return tiempo;}
+    
+    /**
+     * Getter de puntos
+     * @return  puntos
+     */
+    public int getPuntos(){return puntos;}
 }
