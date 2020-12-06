@@ -100,6 +100,66 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      */
     public boolean getDescalificado(){return descalificado;}
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de PilotoAbstracto
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getNombre());
+        builder.append('\n');
+        builder.append(getTotalPuntos());
+        builder.append('\n');
+        builder.append(getCocheAsignado());
+        builder.append('\n');
+        builder.append(getConcentracion());
+        builder.append('\n');
+        builder.append(getListaResultados());
+        builder.append('\n');
+        return builder.toString();
+    }
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof PilotoAbstracto)) {
+            return false; 
+        }
+        
+        PilotoAbstracto other = (PilotoAbstracto) obj;
+        
+        return getNombre().equals(other.getNombre()) &&
+                getCocheAsignado().equals(other.getCocheAsignado()) &&
+                getConcentracion().equals(other.getConcentracion()) &&
+                getListaResultados().equals(other.getListaResultados());
+    }
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       int result=17;
+       
+       result = 7 * result + getNombre().hashCode();
+       result = 13 * result + getCocheAsignado().hashCode();
+       result = 17 * result + getConcentracion().hashCode();
+       result = 23 * result + getListaResultados().hashCode();
+       return result;
+    }
     
     //FUNCIONALIDAD DE PILOTO
     /**

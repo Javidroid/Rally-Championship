@@ -72,6 +72,60 @@ public class EscuderiaReal implements Escuderia
      */
     public List <Coche> getCoches(){return coches;}
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de EscuderiaReal
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getNombre());
+        builder.append('\n');
+        builder.append(getCoches());
+        builder.append('\n');
+        builder.append(getPilotos());
+        builder.append('\n');
+        return builder.toString();
+    }
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof EscuderiaReal)) {
+            return false; 
+        }
+        
+        EscuderiaReal other = (EscuderiaReal) obj;
+        
+        return getNombre().equals(other.getNombre()) &&
+                getCoches().equals(other.getCoches()) &&
+                getPilotos().equals(other.getPilotos());
+    }
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       int result=17;
+       
+       result = 7 * result + getNombre().hashCode();
+       result = 13 * result + getCoches().hashCode();
+       result = 17 * result + getPilotos().hashCode();
+       return result;
+    }
     
     //FUNCIONALIDAD DE ESCUDERÍA
     /**

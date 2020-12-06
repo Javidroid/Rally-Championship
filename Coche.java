@@ -16,28 +16,52 @@ public interface Coche
     public String getNombre();
     
     /**
-     * Método que devuelve velocidad (teórica)
+       * Método que devuelve velocidad (teórica)
      * @return  velocidad
      */
     public Velocidad getVelocidad();
     
     /**
-     * Método que devuelve combustibleTotal
+       * Método que devuelve combustibleTotal
      * @return  combustibleTotal
      */
     public Combustible getCombustibleTotal();
     
     /**
      * Método que devuelve deposito
-     * @return  deposito
+       * @return  deposito
      */
     public double getDeposito();
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CocheNormal
+     */
+    @Override
+    public String toString();
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj);
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode();
     
     //FUNCIONALIDADES DE COCHE    
     /**
      * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito
-     * 
+       * 
      * @param  piloto       El piloto que conduce el coche
      * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
      * @return              Velocidad real del coche
@@ -48,7 +72,7 @@ public interface Coche
      * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
      * 
      * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)
-     * @param  circuito     El circuito en el que el coche compite (para usar la distancia)
+       * @param  circuito     El circuito en el que el coche compite (para usar la distancia)
      * @return              Tiempo que tarda el coche en recorrer el circuito
      */
     public double calcularTiempoNecesario(Piloto piloto, Circuito circuito);

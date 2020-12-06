@@ -69,6 +69,60 @@ public class CircuitoReal implements Circuito
      */
     public Distancia getDistancia(){return distancia;}
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CircuitoReal
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getNombre());
+        builder.append('\n');
+        builder.append(getDistancia());
+        builder.append('\n');
+        builder.append(getComplejidad());
+        builder.append('\n');
+        return builder.toString();
+    }
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof CircuitoReal)) {
+            return false; 
+        }
+        
+        CircuitoReal other = (CircuitoReal) obj;
+        
+        return getNombre().equals(other.getNombre()) &&
+                getDistancia().equals(other.getDistancia()) &&
+                getComplejidad().equals(other.getComplejidad());
+    }
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       int result=17;
+       
+       result = 7 * result + getNombre().hashCode();
+       result = 13 * result + getComplejidad().hashCode();
+       result = 17 * result + getDistancia().hashCode();
+       return result;
+    }
     
     //FUNCIONALIDAD DE CIRCUITO
     /**

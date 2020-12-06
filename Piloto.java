@@ -40,6 +40,31 @@ public interface Piloto
      */
     public boolean getDescalificado();
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de PilotoAbstracto
+     */
+    @Override
+    public String toString();
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj);
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode();
+    
     
     //FUNCIONALIDAD DE PILOTO
     /**

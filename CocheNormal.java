@@ -89,6 +89,68 @@ public class CocheNormal implements Coche
     public double getDeposito(){return deposito;}
     
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CocheNormal
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getNombre());
+        builder.append('\n');
+        builder.append(getVelocidad());
+        builder.append('\n');
+        builder.append(getDeposito());
+        builder.append('\n');
+        builder.append(getCombustibleTotal());
+        builder.append('\n');
+        return builder.toString();
+    }
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+      */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof CocheNormal)) {
+            return false; 
+        }
+        
+        CocheNormal other = (CocheNormal) obj;
+        Double depositoDouble = getDeposito();
+       
+        return getNombre().equals(other.getNombre()) &&
+               getVelocidad().equals(other.getVelocidad()) &&
+               depositoDouble.equals(other.getDeposito()) &&
+               getCombustibleTotal().equals(other.getCombustibleTotal());
+    }
+   
+   
+   /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       Double depositoDouble = getDeposito();
+       
+       int result=17;
+       
+       result = 7 * result + getVelocidad().hashCode();
+       result = 13 * result + getVelocidad().hashCode();
+       result = 19 * result + depositoDouble.hashCode();
+       return result;
+    }
+   
     //FUNCIONALIDADES DE COCHE    
     /**
      * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito

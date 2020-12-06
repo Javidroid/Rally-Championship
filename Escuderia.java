@@ -27,6 +27,30 @@ public interface Escuderia
      */
     public List <Coche> getCoches();
     
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de EscuderiaReal
+     */
+    @Override
+    public String toString();
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj);
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode();
     
     //FUNCIONALIDAD DE ESCUDERÍA
     /**

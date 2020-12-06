@@ -33,13 +33,88 @@ public class CocheResistente extends CocheNormal
         tiempoNecesario = calcularTiempoNecesario(piloto, circuito);
         if(reserva > 0 && getDeposito() < tiempoNecesario){
             repostar(reserva);
-            reserva = 0;
+            reserva = 0.0;
         }
         else {
             super.reducirCombustible(piloto, circuito);
         }
     }
 
+    //SETTERS
+    /**
+     * Setter de reserva
+     * 
+     * @param reserva Nuevo valor del campo reserva
+     */
+    public void setReserva(double reserva){
+        this.reserva=reserva;
+    }
+    
+    //GETTERS
+    /**
+     * Getter de reserva 
+     * 
+     * @return reserva
+     */
+    public double getReserva(){
+        return reserva;
+    }
+    
+    //METODOS AUXILIARES
+    
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CocheResistente
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getReserva());
+        builder.append('\n');
+        builder.append(super.toString());
+        return builder.toString();
+    }
+    
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof CocheResistente)) {
+            return false; 
+        }
+        
+        CocheResistente other = (CocheResistente) obj;
+        Double reservaDouble = getReserva();
+        
+        return super.equals(other) &&
+               reservaDouble.equals(other.getReserva());
+    }
+    
+     /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       Double reservaDouble = getReserva();
+       
+       int result=17;
+       
+       result = 7 * result + super.hashCode();
+       result = 13 * result + reservaDouble.hashCode();
+       return result;
+    }
+    
     /**
      * Descripción de lo que hace el método
      * 

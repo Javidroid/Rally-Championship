@@ -60,4 +60,64 @@ public class Resultado
      * @return  puntos
      */
     public int getPuntos(){return puntos;}
+    
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de Resultado
+     */
+    @Override
+    public String toString(){
+        StringBuilder builder= new StringBuilder();
+        builder.append(getCircuito());
+        builder.append('\n');
+        builder.append(getTiempo());
+        builder.append('\n');
+        builder.append(getPuntos());
+        builder.append('\n');
+        return builder.toString();
+    }
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj){ 
+            return true;
+        }
+        if(!(obj instanceof Resultado)) {
+            return false; 
+        }
+        
+        Resultado other = (Resultado) obj;
+        Double tiempoDouble = getTiempo();
+        Integer puntosInteger = getPuntos();
+        
+        return getCircuito().equals(other.getCircuito()) &&
+                tiempoDouble.equals(other.getTiempo()) &&
+                puntosInteger.equals(other.getPuntos());
+    }
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+   @Override
+   public int hashCode(){
+       Double tiempoDouble = getTiempo();
+       Integer puntosInteger = getPuntos();
+       
+       int result=17;
+       
+       result = 7 * result + getCircuito().hashCode();
+       result = 13 * result + tiempoDouble.hashCode();
+       result = 19 * result + puntosInteger.hashCode();
+       return result;
+    }
 }
