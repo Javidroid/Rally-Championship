@@ -41,9 +41,7 @@ NOTAS:
     
 
 TO-DO LIST:
-    
-    Terminar los constructores de las clases.
-    
+  
     Ver cómo hacer las complicacionesExtra en Circuito (patrón Decorator)
     
     Ver estructuras para pilotos y coches en Escuderia
@@ -55,15 +53,19 @@ TO-DO LIST:
     
     Revisar que están todos los métodos definidos en la interface
     
-    Implementar los métodos de arriba
+    Implementar los métodos de las interfaces
     
     Hacer las clases de prueba
     
-    Hacer los comparators, los toString y los equals EN TODAS LAS CLASES (las necesarias)
+    Hacer los toString y los equals EN TODAS LAS CLASES (las necesarias)
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-    Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections
+  Javi:    
+    Terminar los constructores de las clases.
+    
+  Javi:
+    Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
 
     
