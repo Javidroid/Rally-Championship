@@ -41,10 +41,10 @@ NOTAS:
     
 
 TO-DO LIST:
-    Definir estructura y clase para guardar los resultados de Piloto
+    
     Terminar los constructores de las clases.
     
-    Ver cómo hacer las complicacionesExtra en Circuito (patrón)
+    Ver cómo hacer las complicacionesExtra en Circuito (patrón Decorator)
     
     Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
@@ -61,14 +61,9 @@ TO-DO LIST:
     
     Hacer los comparators, los toString y los equals EN TODAS LAS CLASES (las necesarias)
     
-    Hacer una clase Resultado para almacenar en List los resultados de Piloto
-    ¡¡¡¡¡¡IMPORTANTE!!!!!! VER BIEN QUÉ CAMPOS CONTIENE Y SI USAR UN MAP
-    PARA ALMACENAR CADA RESULTADO CON SU CIRCUITO, O QUE EL CIRCUITO SEA UN CAMPO
-    (más encapsulado el map)
-    
     Revisar la Doc tanto de las clases como de las interfaces
     
-    HACER LA CLASE RESULTADO
+    Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections
     
 
     
