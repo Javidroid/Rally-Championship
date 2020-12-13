@@ -117,8 +117,8 @@ public class EscuderiaReal implements Escuderia
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode(){
+    @Override
+    public int hashCode(){
        int result=17;
        
        result = 7 * result + getNombre().hashCode();

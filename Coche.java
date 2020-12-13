@@ -55,8 +55,8 @@ public interface Coche
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode();
+    @Override
+    public int hashCode();
     
     //FUNCIONALIDADES DE COCHE    
     /**

@@ -134,13 +134,13 @@ public class CocheNormal implements Coche
     }
    
    
-   /**
+    /**
     * Metodo sobreescrito hashCode
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode(){
+    @Override
+    public int hashCode(){
        Double depositoDouble = getDeposito();
        
        int result=17;
