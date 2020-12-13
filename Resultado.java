@@ -108,8 +108,8 @@ public class Resultado
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode(){
+    @Override
+    public int hashCode(){
        Double tiempoDouble = getTiempo();
        Integer puntosInteger = getPuntos();
        

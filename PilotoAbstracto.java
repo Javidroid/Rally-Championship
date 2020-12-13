@@ -210,7 +210,53 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * @return Total de puntos
      */
     public int getTotalPuntos(){
-        return -1;
+        int puntos = 0;
+        for (Resultado result: resultados){
+            puntos += result.getPuntos();
+        }
+        return puntos;
+    }
+    
+    /**
+     * Devuelve el nº de carreras (terminadas o no) en las que
+     * ha participado el Piloto
+     * 
+     * @return Nº de carreras participadas
+     */
+    public int getCarrerasParticipadas(){
+        int carreras;
+        carreras = resultados.size();
+        return carreras;
+    }
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha terminado
+     * 
+     * @return Nº de carreras terminadas
+     */
+    public int getCarrerasTerminadas(){
+        int terminadas = 0;
+        for (Resultado result: resultados){
+            if(result.getTiempo() >= 0){
+                terminadas++;
+            }
+        }
+        return terminadas;
+    }
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha abandonado
+     * 
+     * @return Nº de carreras abandonadas
+     */
+    public int getCarrerasAbandonadas(){
+        int abandonadas = 0;
+        for (Resultado result: resultados){
+            if(result.getTiempo() < 0){
+                abandonadas++;
+            }
+        }
+        return abandonadas;
     }
     
     /**

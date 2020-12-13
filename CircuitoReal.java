@@ -14,12 +14,10 @@
  */
 public class CircuitoReal implements Circuito
 {
-    private String nombre;      //Nombre del circuito
+    private String nombre;            //Nombre del circuito
     private Complejidad complejidad;  //ENUM: BAJA (1.0), MEDIA (1.25), ALTA (1.5)
     private Distancia distancia;      //ENUM: CORTA (250), INTERMEDIA (275), LARGA (300)
 
-    //********************************************
-    //REVISAR QUÉ SETTERS/GETTERS SE NECESITAN Y SI SON PUBLIC, PRIVATE, PROTECTED
     /**
      * Constructor de Circuito
      */
@@ -64,10 +62,23 @@ public class CircuitoReal implements Circuito
     public Complejidad getComplejidad(){return complejidad;}
     
     /**
+     * Método que devuelve complejidad
+     * @return  Valor de Complejidad
+     */
+    public double getValorComplejidad(){return complejidad.getValor();}
+    
+    
+    /**
      * Getter de distancia
      * @return  distancia
      */
     public Distancia getDistancia(){return distancia;}
+    
+    /**
+     * Método que devuelve distancia
+     * @return  Valor de la Distancia
+     */
+    public double getValorDistancia(){return distancia.getValor();}
     
     //METODOS AUXILIARES
     /**
@@ -114,8 +125,8 @@ public class CircuitoReal implements Circuito
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode(){
+    @Override
+    public int hashCode(){
        int result=17;
        
        result = 7 * result + getNombre().hashCode();

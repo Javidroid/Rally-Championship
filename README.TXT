@@ -42,7 +42,7 @@ NOTAS:
 
 TO-DO LIST:
   
-    Ver cómo hacer las complicacionesExtra en Circuito (patrón Decorator)
+    Revisar complicacionesExtra en Circuito
     
     Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
@@ -61,11 +61,12 @@ TO-DO LIST:
     
     Revisar la Doc tanto de las clases como de las interfaces
     
+    Implementar método conducir de PilotoAbstracto:
+      
   Javi:    
     Terminar los constructores de las clases.
-    
-  Javi:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
+    HECHO: !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
     
 
     

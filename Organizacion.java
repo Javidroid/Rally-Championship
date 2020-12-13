@@ -8,8 +8,7 @@
  */
 public class Organizacion
 {
-    //SINGLETON
-    private static Organizacion instancia; 
+    private static Organizacion instancia; //singleton
     
     private int limiteAbandonos;
     private int limitePilotos;

@@ -22,10 +22,23 @@ public interface Circuito
     public Complejidad getComplejidad();
     
     /**
+     * Método que devuelve complejidad
+     * @return  Valor de Complejidad
+     */
+    public double getValorComplejidad();
+    
+    
+    /**
      * Método que devuelve distancia
      * @return  distancia
      */
     public Distancia getDistancia();
+    
+    /**
+     * Método que devuelve distancia
+     * @return  Valor de la Distancia
+     */
+    public double getValorDistancia();
     
     //METODOS AUXILIARES
     /**
@@ -49,8 +62,8 @@ public interface Circuito
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode();
+    @Override
+    public int hashCode();
 
     
     //FUNCIONALIDAD DE CIRCUITO

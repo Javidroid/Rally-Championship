@@ -62,8 +62,8 @@ public interface Piloto
     * 
     * @return hashCode que representa la clase
     */
-   @Override
-   public int hashCode();
+    @Override
+    public int hashCode();
     
     
     //FUNCIONALIDAD DE PILOTO
@@ -90,7 +90,6 @@ public interface Piloto
      * Gestiona y proporciona info sobre los resultados del piloto 
      * en cualquier circuito donde haya competido
      * 
-     * 
      */
     public void infoResultados();
     
@@ -101,6 +100,28 @@ public interface Piloto
      * @return Total de puntos
      */
     public int getTotalPuntos();
+    
+    /**
+     * Devuelve el nº de carreras (terminadas o no) en las que
+     * ha participado el Piloto
+     * 
+     * @return Nº de carreras participadas
+     */
+    public int getCarrerasParticipadas();
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha terminado
+     * 
+     * @return Nº de carreras terminadas
+     */
+    public int getCarrerasTerminadas();
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha abandonado
+     * 
+     * @return Nº de carreras abandonadas
+     */
+    public int getCarrerasAbandonadas();
     
     /**
      * Gestiona todos los métodos necesarios para que el piloto
