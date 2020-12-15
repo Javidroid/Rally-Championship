@@ -64,6 +64,8 @@ TO-DO LIST:
     
     Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
     
+    Hacer método que quite capas del decorator
+    
     Implementar método conducir de PilotoAbstracto:
         conducir
         
