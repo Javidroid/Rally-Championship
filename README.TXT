@@ -18,10 +18,7 @@ NOTAS:
     Un buen uso del Map sería de Pilotos, Escudería porque
     cuando están en una carrera como que pierden la escudería que les manda
     
-    Escudería usa doblemente el patrón Strategy
-    
-    Circuito (complicacionesExtra) usa el patrón Decorator
-    
+    Escudería usa doblemente el patrón Strategy    
     
     Hay que usar al menos un List, Set Y Map.
     
@@ -39,6 +36,13 @@ NOTAS:
         ***usar sort y, por tanto, habrá que usar el Comparator
             
     
+        En piloto.infoResultados hay que hacer una serie de métodos donde, 
+        dado un circuito te da su tiempo para que el organizador calcule los puntos
+        y se los asigne
+        Los puntos no pueden darse sin que la clase organizadora los asigne porque depende
+        del resto de pilotos. Entonces hay que tener otro método que lo asigne
+        Para asignar los puntos la organización tiene que buscar el circuito
+        que coincida con el de los resultados del piloto Y COMPARAR CON EQUALS
 
 TO-DO LIST:
   
@@ -46,25 +50,27 @@ TO-DO LIST:
     
     Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
-    
-    Terminar constructores de las clases (revisar)
-    
-    Revisar los elementos public y private
-    
+        
     Revisar que están todos los métodos definidos en la interface
     
     Implementar los métodos de las interfaces
     
     Hacer las clases de prueba
     
-    Hacer los toString y los equals EN TODAS LAS CLASES (las necesarias)
-    
     Revisar la Doc tanto de las clases como de las interfaces
     
+    Añadir la función Math de redondeo a los métodos que devuelvan 
+    directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)
+    
+    Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
+    
     Implementar método conducir de PilotoAbstracto:
+        conducir
+        
       
   Javi:    
-    Terminar los constructores de las clases.
+    Clase Comparator:
+        
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     HECHO: !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
     

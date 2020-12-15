@@ -16,11 +16,13 @@ public class Resultado
     /**
      * Constructor for objects of class Resultado
      */
-    public Resultado(Circuito circuito, double tiempo, int puntos)
+    public Resultado(Circuito circuito, double tiempo)
     {
         setCircuito(circuito);
         setTiempo(tiempo);
-        setPuntos(puntos);
+        setPuntos(-1); //Los puntos reales los tiene que asignar la clase Organizacion
+                       //Inicializamos a -1 para indicar que aún no se ha asignado
+                       //puntuación
     }
 
     //SETTERS
@@ -40,7 +42,7 @@ public class Resultado
      * Setter de puntos
      * @param  puntos   Nuevo valor del campo puntos
      */
-    private void setPuntos(int puntos){this.puntos = puntos;}
+    public void setPuntos(int puntos){this.puntos = puntos;}
     
     //GETTERS
     /**

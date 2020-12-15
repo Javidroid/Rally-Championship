@@ -27,6 +27,11 @@ public interface Piloto
      * @return  concentracion
      */
     public Concentracion getConcentracion();
+    /**
+     * Método que devuelve el valor de concentracion
+     * @return  double  valor de concentracion
+     */
+    public double getValorConcentracion();
     
     /**
      * Método que devuelve resultados
@@ -39,31 +44,6 @@ public interface Piloto
      * @return  descalificado
      */
     public boolean getDescalificado();
-    
-    //METODOS AUXILIARES
-    /**
-     * Método sobreescrito  toString
-     * @return Representacion de PilotoAbstracto
-     */
-    @Override
-    public String toString();
-    
-    /**
-     * Método sobreescrito equals
-     * 
-     * @param  obj Objeto con el que se quiere comparar la igualdad   
-     * @return True si se cumple la igualdad, False en el caso contrario    
-     */
-    @Override
-    public boolean equals(Object obj);
-    
-    /**
-    * Metodo sobreescrito hashCode
-    * 
-    * @return hashCode que representa la clase
-    */
-    @Override
-    public int hashCode();
     
     
     //FUNCIONALIDAD DE PILOTO
@@ -87,11 +67,19 @@ public interface Piloto
     public void recibirCoche(Coche coche);
     
     /**
-     * Gestiona y proporciona info sobre los resultados del piloto 
-     * en cualquier circuito donde haya competido
+     * Devuelve el tiempo que el piloto ha conseguido en el 
+     * circuito dado por parámetro
+     * 
+     * return double tiempo que ha tardado en acabar el circuito
+     */
+    public double getTiempoEnCircuito(Circuito circuito);
+    
+    /**
+     * Pone los puntos que la clase Organizacion le asigne
+     * según el tiempo conseguido entre todos los pilotos
      * 
      */
-    public void infoResultados();
+    public void setPuntosEnCircuito(Circuito circuito, int puntos);
     
     /**
      * Devuelve los puntos que ha conseguido el piloto
@@ -129,4 +117,30 @@ public interface Piloto
      * 
      */
     public void conducir();
+    
+    
+    //METODOS AUXILIARES
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de PilotoAbstracto
+     */
+    @Override
+    public String toString();
+    
+    /**
+     * Método sobreescrito equals
+     * 
+     * @param  obj Objeto con el que se quiere comparar la igualdad   
+     * @return True si se cumple la igualdad, False en el caso contrario    
+     */
+    @Override
+    public boolean equals(Object obj);
+    
+    /**
+    * Metodo sobreescrito hashCode
+    * 
+    * @return hashCode que representa la clase
+    */
+    @Override
+    public int hashCode();
 }

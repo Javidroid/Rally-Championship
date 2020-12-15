@@ -15,7 +15,7 @@ import java.util.*;
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (27/11/2020)
  */
-public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
+public abstract class PilotoAbstracto implements Piloto//esta clase es abstracta
 {
     private String nombre;
     private Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
@@ -87,10 +87,15 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * @return  concentracion
      */
     public Concentracion getConcentracion(){return concentracion;}
+    /**
+     * Método que devuelve el valor de concentracion
+     * @return  double  valor de concentracion
+     */
+    public double getValorConcentracion(){return concentracion.getValor();}
     
     /**
      * Getter de resultados
-     * @return  resultados  (es un ARRAYLIST
+     * @return  resultados  (es un ARRAYLIST)
      */
     public List <Resultado> getListaResultados(){return resultados;}
     
@@ -99,6 +104,138 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
      * @return  descalificado
      */
     public boolean getDescalificado(){return descalificado;}
+    
+    
+    //FUNCIONALIDAD DE PILOTO
+    /**
+     * Método abstracto que calcula la destreza según la concentracion y el tipo de piloto
+     * Cada clase lo implementa de una forma distinta.
+     */
+    public abstract double calcularDestreza();   
+    
+    /**
+     * Descalifica al piloto instado. Pone el parámetro descalificado a true
+     */
+    public void descalificar()
+    {
+        setDescalificado(true);        
+    }
+        
+    /**
+     * Inserta el Coche que la Escuderia le de al Piloto para poder cambiarlo entre carrera y carrera
+     * 
+     * @param  coche   el coche que la escudería le proporcione
+     */
+    public void recibirCoche(Coche coche)
+    {
+        setCocheAsignado(coche);   
+    }
+    
+    /**
+     * Devuelve el tiempo que el piloto ha conseguido en el 
+     * circuito dado por parámetro
+     * 
+     * return double tiempo que ha tardado en acabar el circuito
+     */
+    public double getTiempoEnCircuito(Circuito circuito){
+        boolean encontrado = false;
+        double tiempo = -1; //-1 en caso de que el piloto no haya competido en ese circuito
+        Iterator<Resultado> it = resultados.iterator();
+        while (!encontrado && it.hasNext()){
+            Resultado res = it.next();
+            if(res.getCircuito().equals(circuito)){
+                encontrado = true;
+                tiempo = res.getTiempo();
+            }
+        }
+        return tiempo;
+    }
+    
+    /**
+     * Pone los puntos que la clase Organizacion le asigne
+     * según el tiempo conseguido entre todos los pilotos
+     * 
+     */
+    public void setPuntosEnCircuito(Circuito circuito, int puntos){
+        boolean encontrado = false;
+        Iterator<Resultado> it = resultados.iterator();
+        while (!encontrado && it.hasNext()){
+            Resultado res = it.next();
+            if(res.getCircuito().equals(circuito)){
+                encontrado = true;
+                res.setPuntos(puntos);
+            }
+        }
+    }
+       
+    
+    /**
+     * Devuelve los puntos que ha conseguido el piloto
+     * en todas las carreras
+     * 
+     * @return Total de puntos
+     */
+    public int getTotalPuntos(){
+        int puntos = 0;
+        for (Resultado result: resultados){
+            if(result.getPuntos() != -1){ //Si puntos -1 es porque no se han asignado
+                puntos += result.getPuntos();
+            }
+        }
+        return puntos;
+    }
+    
+    /**
+     * Devuelve el nº de carreras (terminadas o no) en las que
+     * ha participado el Piloto
+     * 
+     * @return Nº de carreras participadas
+     */
+    public int getCarrerasParticipadas(){
+        int carreras;
+        carreras = resultados.size();
+        return carreras;
+    }
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha terminado
+     * 
+     * @return Nº de carreras terminadas
+     */
+    public int getCarrerasTerminadas(){
+        int terminadas = 0;
+        for (Resultado result: resultados){
+            if(result.getTiempo() >= 0){
+                terminadas++;
+            }
+        }
+        return terminadas;
+    }
+    
+    /**
+     * Devuelve el nº de carreras que el Piloto ha abandonado
+     * 
+     * @return Nº de carreras abandonadas
+     */
+    public int getCarrerasAbandonadas(){
+        int abandonadas = 0;
+        for (Resultado result: resultados){
+            if(result.getTiempo() < 0){
+                abandonadas++;
+            }
+        }
+        return abandonadas;
+    }
+    
+    /**
+     * Gestiona todos los métodos necesarios para que el piloto
+     * dispute una carrera 
+     * 
+     */
+    public void conducir(){
+        
+    }
+    
     
     //METODOS AUXILIARES
     /**
@@ -160,112 +297,4 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstract
        result = 23 * result + getListaResultados().hashCode();
        return result;
     }
-    
-    //FUNCIONALIDAD DE PILOTO
-    /**
-     * Método abstracto que calcula la destreza según la concentracion y el tipo de piloto
-     * Cada clase lo implementa de una forma distinta.
-     */
-    public abstract double calcularDestreza();   
-    
-    /**
-     * Descalifica al piloto instado. Pone el parámetro descalificado a true
-     * 
-     */
-    public void descalificar()
-    {
-        setDescalificado(true);        
-    }
-        
-    /**
-     * Inserta el Coche que la Escuderia le de al Piloto para poder cambiarlo entre carrera y carrera
-     * 
-     * @param  coche   el coche que la escudería le proporcione
-     */
-    public void recibirCoche(Coche coche)
-    {
-        setCocheAsignado(coche);   
-    }
-    
-    
-    /**
-     * Gestiona y proporciona info sobre los resultados del piloto 
-     * en cualquier circuito donde haya competido
-     * 
-     */
-    public void infoResultados(){
-        //IMPORTANTE
-        //VER SI AQUÍ HAY QUE PASAR EL CIRCUITO DEL QUE SE QUIEREN SABER LOS DATOS COMO
-        //PARÁMETRO, EN CUYO CASO NO SE PODRÍA SABER SI HAY DOS CARRERAS CON EL MISMO
-        //CIRCUITO
-        //
-        //POSIBILIDAD: DEVOLVER UNA LISTA CON LOS RESULTADOS DE ESOS CIRCUITOS
-        //DEVOLVERÍA UNA LISTA CON UN SOLO ELEMENTO EN CASO DE EXISTIR UN SOLO CIRCUITO
-    }
-    
-    /**
-     * Devuelve los puntos que ha conseguido el piloto
-     * en todas las carreras
-     * 
-     * @return Total de puntos
-     */
-    public int getTotalPuntos(){
-        int puntos = 0;
-        for (Resultado result: resultados){
-            puntos += result.getPuntos();
-        }
-        return puntos;
-    }
-    
-    /**
-     * Devuelve el nº de carreras (terminadas o no) en las que
-     * ha participado el Piloto
-     * 
-     * @return Nº de carreras participadas
-     */
-    public int getCarrerasParticipadas(){
-        int carreras;
-        carreras = resultados.size();
-        return carreras;
-    }
-    
-    /**
-     * Devuelve el nº de carreras que el Piloto ha terminado
-     * 
-     * @return Nº de carreras terminadas
-     */
-    public int getCarrerasTerminadas(){
-        int terminadas = 0;
-        for (Resultado result: resultados){
-            if(result.getTiempo() >= 0){
-                terminadas++;
-            }
-        }
-        return terminadas;
-    }
-    
-    /**
-     * Devuelve el nº de carreras que el Piloto ha abandonado
-     * 
-     * @return Nº de carreras abandonadas
-     */
-    public int getCarrerasAbandonadas(){
-        int abandonadas = 0;
-        for (Resultado result: resultados){
-            if(result.getTiempo() < 0){
-                abandonadas++;
-            }
-        }
-        return abandonadas;
-    }
-    
-    /**
-     * Gestiona todos los métodos necesarios para que el piloto
-     * dispute una carrera 
-     * 
-     */
-    public void conducir(){
-        
-    }
-    
 }

@@ -23,8 +23,6 @@ public class CocheNormal implements Coche
     private Combustible combustibleTotal;   //deposito lleno, combustible original, no es modificable
     private double deposito; //es variable con cada carrera, hasta que llega a 0
     
-    //********************************************
-    //REVISAR QUÉ SETTERS/GETTERS SE NECESITAN Y SI SON PUBLIC, PRIVATE, PROTECTED
     /**
      * Constructor de Coche
      */
@@ -61,34 +59,108 @@ public class CocheNormal implements Coche
      * @param  nuevoDeposito   Nuevo valor del campo deposito (que es variable)
      */
     private void setDeposito(double nuevoDeposito){deposito = nuevoDeposito;}
-    
+
     
     //GETTERS
     /**
      * Getter de nombre
-     * @return  nombre
+     * @return  String nombre
      */
     public String getNombre(){return nombre;}
     
     /**
      * Getter de velocidad (teórica)
-     * @return  velocidad
+     * @return  Velocidad velocidad
      */
     public Velocidad getVelocidad(){return velocidad;}
+    /**
+     * Método que devuelve el valor de velocidad (teórica)
+     * @return  Double Valor de velocidad
+     */
+    public double getValorVelocidad(){return velocidad.getValor();}
     
     /**
      * Getter de combustibleTotal
-     * @return  combustibleTotal
+     * @return  Combustible combustibleTotal
      */
     public Combustible getCombustibleTotal(){return combustibleTotal;}
+    /**
+     * Método que devuelve el valor de combustibleTotal
+     * @return  double Valor de combustibleTotal
+     */
+    public double getValorCombustibleTotal(){return combustibleTotal.getValor();}
     
     /**
      * Getter de deposito
-     * @return  deposito
+     * @return  double deposito
      */
     public double getDeposito(){return deposito;}
+
+        
+    //FUNCIONALIDADES DE COCHE    
+    /**
+     * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito
+     * 
+     * @param  piloto       El piloto que conduce el coche
+     * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
+     * @return              Velocidad real del coche
+     */
+    public double calcularVelocidadReal(Piloto piloto, Circuito circuito)
+    {
+        double velocidadReal;
+        velocidadReal = (getValorVelocidad() * piloto.calcularDestreza()) / circuito.getValorComplejidad();
+        return velocidadReal;
+    }
     
+    /**
+     * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
+     * 
+     * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)
+     * @param  circuito     El circuito en el que el coche compite (para usar la distancia)
+     * @return              Tiempo que tarda el coche en recorrer el circuito
+     */
+    public double calcularTiempoNecesario(Piloto piloto, Circuito circuito)
+    {
+        double tiempo;
+        double velocidadReal; 
+        velocidadReal = calcularVelocidadReal(piloto, circuito);
+        
+        tiempo = circuito.getValorDistancia() / velocidadReal * 60;
+        return tiempo;
+    }
     
+    /**
+     * Reduce la cantidad de combustible que le queda en coche en función a lo que tarde
+     * el piloto en el circuito indicado
+     * 
+     * @param  piloto       El piloto que conduce el coche (para calcular el tiempo)
+     * @param  circuito     El circuito en el que el coche compite (para calcular el tiempo)
+     */
+    public void reducirCombustible(Piloto piloto, Circuito circuito)
+    {
+        double minutos;
+        minutos = calcularTiempoNecesario(piloto, circuito);
+        setDeposito(deposito-minutos);
+    }
+    
+    /**
+     * Aumenta el depósito la cantidad indicada.
+     * Actualmente sólo sirve para CocheResistente y su funcionalidad de
+     * depósito de reserva. Pero podría servir para
+     * futuros cambios donde cualquier coche pueda repostar.
+     * 
+     * @param  cantidad   La cantidad que se AÑADE al depósito
+     */
+    //La funcionalidad de este método podría sustituirse cambiando a 
+    //protected el método setDeposito para que se pueda modificar desde
+    //CocheResistente directamente, pero podría romper un poco la 
+    //encapsulación
+    public void repostar(double cantidad)
+    {
+        setDeposito(deposito+cantidad);
+    }
+    
+
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
@@ -149,81 +221,5 @@ public class CocheNormal implements Coche
        result = 13 * result + getVelocidad().hashCode();
        result = 19 * result + depositoDouble.hashCode();
        return result;
-    }
-   
-    //FUNCIONALIDADES DE COCHE    
-    /**
-     * Calcula la velocidad real del coche en función del piloto y la complejidad del circuito
-     * 
-     * @param  piloto       El piloto que conduce el coche
-     * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
-     * @return              Velocidad real del coche
-     */
-    public double calcularVelocidadReal(Piloto piloto, Circuito circuito)
-    {
-        double velocidadReal;
-        velocidadReal = (velocidad.getValor() * piloto.calcularDestreza()) / circuito.getComplejidad().getValor();
-        return velocidadReal;
-    }
-    
-    /**
-     * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
-     * 
-     * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)
-     * @param  circuito     El circuito en el que el coche compite (para usar la distancia)
-     * @return              Tiempo que tarda el coche en recorrer el circuito
-     */
-    public double calcularTiempoNecesario(Piloto piloto, Circuito circuito)
-    {
-        double tiempo;
-        double velocidadReal; 
-        velocidadReal = calcularVelocidadReal(piloto, circuito);
-        
-        tiempo = circuito.getDistancia().getValor() / velocidadReal * 60;
-        return tiempo;
-    }
-    
-    /**
-     * Reduce la cantidad de combustible que le queda en coche en función a lo que tarde
-     * el piloto en el circuito indicado
-     * 
-     * @param  piloto       El piloto que conduce el coche (para calcular el tiempo)
-     * @param  circuito     El circuito en el que el coche compite (para calcular el tiempo)
-     */
-    public void reducirCombustible(Piloto piloto, Circuito circuito)
-    {
-        double minutos;
-        minutos = calcularTiempoNecesario(piloto, circuito);
-        setDeposito(deposito-minutos);
-    }
-    
-    /**
-     * Aumenta el depósito la cantidad indicada.
-     * Actualmente sólo sirve para CocheResistente y su funcionalidad de
-     * depósito de reserva. Pero podría servir para
-     * futuras implementaciones
-     * 
-     * @param  cantidad   La cantidad que se AÑADE al depósito
-     */
-    //La funcionalidad de este método podría sustituirse cambiando a 
-    //protected el método setDeposito para que se pueda modificar desde
-    //CocheResistente directamente, pero podría romper un poco la 
-    //encapsulación
-    public void repostar(double cantidad)
-    {
-        setDeposito(deposito+cantidad);
-    }
-    
-    
-    /**
-     * Descripción de lo que hace el método
-     * 
-     * @param  x   descripción de cada parámetro
-     * @return     lo que devuelve, si devuelve xd
-     */
-    public void metodoPlantilla()
-    {
-        // put your code here
-        
     }
 }
