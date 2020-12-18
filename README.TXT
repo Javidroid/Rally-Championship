@@ -46,8 +46,6 @@ NOTAS:
 
 TO-DO LIST:
   
-    Revisar complicacionesExtra en Circuito
-    
     Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
         
@@ -59,7 +57,8 @@ TO-DO LIST:
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-    Añadir la función Math de redondeo a los métodos que devuelvan 
+    REVISAR EN SUBCLASES DE PILOTO:
+    Función Math de redondeo a los métodos que devuelvan 
     directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)
     
     Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
@@ -72,8 +71,8 @@ TO-DO LIST:
       
   Javi:    
     Clase Comparator:
-        
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
+    
     HECHO: !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
     
 

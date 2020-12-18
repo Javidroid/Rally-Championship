@@ -80,6 +80,20 @@ public class CircuitoReal implements Circuito
      */
     public double getValorDistancia(){return distancia.getValor();}
     
+    
+    //FUNCIONALIDAD DE CIRCUITO
+    /**
+     * Muestra las características del circuito, incluyendo cada complicación
+     * 
+     * @return      Muestra por pantalla las características del circuito
+     */
+    public void mostrarCaracteristicas()
+    {
+        System.out.println("Características del circuito " + getNombre() + ": \n");
+        this.toString();
+        
+    }
+    
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
@@ -89,11 +103,11 @@ public class CircuitoReal implements Circuito
     public String toString(){
         StringBuilder builder= new StringBuilder();
         builder.append(getNombre());
-        builder.append('\n');
+        builder.append("\n");
         builder.append(getDistancia());
-        builder.append('\n');
+        builder.append("\n");
         builder.append(getComplejidad());
-        builder.append('\n');
+        builder.append("\n");
         return builder.toString();
     }
     
@@ -133,31 +147,5 @@ public class CircuitoReal implements Circuito
        result = 13 * result + getComplejidad().hashCode();
        result = 17 * result + getDistancia().hashCode();
        return result;
-    }
-    
-    //FUNCIONALIDAD DE CIRCUITO
-    /**
-     * Muestra las características del circuito, incluyendo cada complicación
-     * 
-     * @return      Muestra por pantalla las características del circuito
-     */
-    public void mostrarCaracteristicas()
-    {
-        //todo
-        
-    }
-    
-      
-    
-    /**
-     * Descripción de lo que hace el método
-     * 
-     * @param  x   descripción de cada parámetro
-     * @return     lo que devuelve, si devuelve xd
-     */
-    public void metodoPlantilla()
-    {
-        // put your code here
-        
     }
 }
