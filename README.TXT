@@ -45,6 +45,8 @@ NOTAS:
         que coincida con el de los resultados del piloto Y COMPARAR CON EQUALS
 
 TO-DO LIST:
+
+
   
     Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
@@ -66,14 +68,20 @@ TO-DO LIST:
     Hacer método que quite capas del decorator
     
     Implementar método conducir de PilotoAbstracto:
-        conducir
+    REVISAR
+        Dudas: cómo se calcula el tiempo que tarda ese piloto (desde dentro) si para 
+        calcular el tiempo hay que mandar el piloto por parámetro
         
       
   Javi:    
     Clase Comparator:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
-    HECHO: !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
+    
+    
+HECHO: 
+
+    !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
     
 
     

@@ -64,13 +64,13 @@ public interface Coche
     public double calcularTiempoNecesario(Piloto piloto, Circuito circuito);
     
     /**
-     * Reduce la cantidad de combustible que le queda en coche en función a lo que tarde
-     * el piloto en el circuito indicado
+     * Reduce la cantidad de combustible indicada por parámetro.
+     * Controlado por piloto en el método conducir. Puede reducir el combustible necesario
+     * para un circuito, o el combustible usado antes de abandonar por concentracion o combustible.
      * 
-     * @param  piloto       El piloto que conduce el coche (para calcular el tiempo)
-     * @param  circuito     El circuito en el que el coche compite (para calcular el tiempo)
+     * @param  double cantidad: la cantidad de combustible que hay que reducir
      */
-    public void reducirCombustible(Piloto piloto, Circuito circuito);
+    public void reducirCombustible(double cantidad);
     
     /**
      * Aumenta el depósito la cantidad indicada.

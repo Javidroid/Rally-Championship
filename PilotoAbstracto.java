@@ -15,7 +15,7 @@ import java.util.*;
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (27/11/2020)
  */
-public abstract class PilotoAbstracto implements Piloto//esta clase es abstracta
+public abstract class PilotoAbstracto implements Piloto //esta clase es abstracta
 {
     private String nombre;
     private Coche cocheAsignado; //asignado por Escudería. Puede ser null y hay que mostrar mensaje
@@ -231,9 +231,41 @@ public abstract class PilotoAbstracto implements Piloto//esta clase es abstracta
      * Gestiona todos los métodos necesarios para que el piloto
      * dispute una carrera 
      * 
+     * @param Coche coche
+     * @param Circuito circuito
+     * 
      */
-    public void conducir(){
+    public void conducir(Circuito circuito){
+        Resultado resNuevaCarrera;
         
+        double tiempoParaAcabar; //tiempo necesario para finalizar el circuito
+        tiempoParaAcabar = cocheAsignado.calcularTiempoNecesario(this, circuito);
+        
+        double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
+                                //Además, es el valor que hay que restarle al depósito
+        
+        if(getValorConcentracion() < tiempoParaAcabar){ //abandona por falta de concentración
+            tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
+            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+        }
+        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){ //abandona por falta de combustible
+            tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
+            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+        }
+        else{ //No abandona ni por concentración ni por combustible
+            tiempoConducido = tiempoParaAcabar;
+            resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+        }
+        
+        cocheAsignado.reducirCombustible(tiempoConducido);
+        //el combustible siempre se reduce la misma cantidad que minutos ha conducido el piloto
+        //la diferencia es el valor que se le asigne en cada condición.
+                
+        resultados.add(resNuevaCarrera); //Añadimos a la lista el resultado de esta carrera
+        //Siempre que se llame a este método, se ha de añadir un resultado a la lista.
+        //Es por esto por lo que hemos optado por inicializar el objeto resultado en cada
+        //condición y, al final, ya añadirla a la lista.
+        //Otra opción sería añadirla justo después de inicializar cada objeto pero se ahorra código
     }
     
     
