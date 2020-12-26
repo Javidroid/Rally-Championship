@@ -19,8 +19,6 @@ public class EscuderiaReal implements Escuderia
     private String nombre;
     private List <Piloto> pilotos;
     private List <Coche> coches;
-    //Revisar si la Collection es una lista (probablemente sí porque se requiere orden)
-    //Hay que usar el Comparator para ordenar por distintos criterios
 
     /**
      * Constructor de Escuderia
@@ -32,6 +30,44 @@ public class EscuderiaReal implements Escuderia
         List <Coche> coches     = new ArrayList <Coche>();
     }
 
+    
+    //FUNCIONALIDAD DE ESCUDERÍA
+    /**
+     * Se inscribe en el campeonato gestionado por la Organizacion
+     */
+    public void inscribirse()
+    {
+        //todo       
+    }
+    
+    /**
+     * Ordena la lista de pilotos y coches según el criterio establecido
+     */
+    public void ordenarPilotosyCoches()
+    {
+        //todo       
+    }
+    
+    /**
+     * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
+     *
+     * @return     puntos totales
+     */
+    public int getPuntosPilotosTotal()
+    {
+        //todo
+        return -1;        
+    }
+    
+    /**
+     * Envía el primer piloto y el primer coche disponibles a la carrera
+     * Controla también si un piloto no tiene coche disponible, en cuyo caso
+     * el piloto no puede ser enviado, pero no cuenta como abandono
+     */
+    public void enviarPilotoyCoche()
+    {
+        //todo       
+    }
     
     //SETTERS
     /**
@@ -125,57 +161,5 @@ public class EscuderiaReal implements Escuderia
        result = 13 * result + getCoches().hashCode();
        result = 17 * result + getPilotos().hashCode();
        return result;
-    }
-    
-    //FUNCIONALIDAD DE ESCUDERÍA
-    /**
-     * Se inscribe en el campeonato gestionado por la Organizacion
-     */
-    public void inscribirse()
-    {
-        //todo       
-    }
-    
-    /**
-     * Ordena la lista de pilotos y coches según el criterio establecido
-     */
-    public void ordenarPilotosyCoches()
-    {
-        //todo       
-    }
-    
-    /**
-     * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
-     *
-     * @return     puntos totales
-     */
-    public int getPuntosPilotosTotal()
-    {
-        //todo
-        return -1;        
-    }
-    
-    /**
-     * Envía el primer piloto y el primer coche disponibles a la carrera
-     * Controla también si un piloto no tiene coche disponible, en cuyo caso
-     * el piloto no puede ser enviado, pero no cuenta como abandono
-     */
-    public void enviarPilotoyCoche()
-    {
-        //todo       
-    }
-    
-    
-    
-    /**
-     * Descripción de lo que hace el método
-     * 
-     * @param  x   descripción de cada parámetro
-     * @return     lo que devuelve, si devuelve xd
-     */
-    public void metodoPlantilla()
-    {
-        // put your code here
-        
     }
 }

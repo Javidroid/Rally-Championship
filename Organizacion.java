@@ -35,18 +35,4 @@ public class Organizacion
         }
         return instancia;
     }
-   
-    
-    
-    /**
-     * Descripción de lo que hace el método
-     * 
-     * @param  x   descripción de cada parámetro
-     * @return     lo que devuelve, si devuelve xd
-     */
-    public void metodoPlantilla()
-    {
-        // put your code here
-        
-    }
 }

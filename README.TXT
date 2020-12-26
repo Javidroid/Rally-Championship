@@ -20,18 +20,18 @@ NOTAS:
     
     Escudería usa doblemente el patrón Strategy    
     
-    Hay que usar al menos un List, Set Y Map.
+    Hay que usar al menos un //List, Set (escuderias de organizacion) Y Map (piloto,escuderia).
     
     ESTRUCTURAS (de collections):
-        Piloto.resultados es un ArrayList de clase Resultado
+        //Piloto.resultados es un ArrayList de clase Resultado
         
         Organizacion.circuitos requiere orden (List)
         Organizacion.escuderias puede ser un Set (para que no se repitan)
         Organizacion.pilotos (cada piloto podría ser un Map<Piloto,Escuderia>)
             y este a su vez un Set de estos Map
         
-        Escuderia.pilotos: Importa el orden así que probablemente List
-        Escuderia.coches: igual que arriba
+        //Escuderia.pilotos: Importa el orden así que probablemente List
+        //Escuderia.coches: igual que arriba
         ***Para estos dos últimos, se requiere orden, por tanto habrá que
         ***usar sort y, por tanto, habrá que usar el Comparator
             
@@ -45,43 +45,43 @@ NOTAS:
         que coincida con el de los resultados del piloto Y COMPARAR CON EQUALS
 
 TO-DO LIST:
-
-
-  
-    Ver estructuras para pilotos y coches en Escuderia
-        (probablemente List para usar el Sort y el iterator)
         
     Revisar que están todos los métodos definidos en la interface
     
-    Implementar los métodos de las interfaces
+    Usar el patrón Strategy en Escudería para mandar pilotos y coches
+    
+    Implementar los métodos de las interfaces (FALTA: Escuderia)
     
     Hacer las clases de prueba
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-    REVISAR EN SUBCLASES DE PILOTO:
-    Función Math de redondeo a los métodos que devuelvan 
-    directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)
+    Función MATH.ROUND en las operaciones matemáticas
     
     Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
     
     Hacer método que quite capas del decorator
-    
-    Implementar método conducir de PilotoAbstracto:
-    REVISAR
-        Dudas: cómo se calcula el tiempo que tarda ese piloto (desde dentro) si para 
-        calcular el tiempo hay que mandar el piloto por parámetro
-        
-      
-  Javi:    
+       
     Clase Comparator:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
     
     
+    
 HECHO: 
 
-    !!!REVISAR!!!: Hacer el patrón decorator en circuito (complicacionesExtra)
+    !!!REVISAR!!!: 
+    -Hacer el patrón decorator en circuito (complicacionesExtra)
+    -Implementar método conducir de PilotoAbstracto  
+    -Ver estructuras para pilotos y coches en Escuderia
+        (probablemente List para usar el Sort y el iterator)
+    -REVISAR EN SUBCLASES DE PILOTO:
+    Función Math de redondeo a los métodos que devuelvan 
+    directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)   
+     
+                    
+    
+    
     
 
     
