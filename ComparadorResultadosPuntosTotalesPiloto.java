@@ -3,8 +3,8 @@ import java.util.Comparator;
 /**
  * Write a description of class ComparadorPuntosPiloto here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
+ * @version v1 (28/12/2020)
  */
 
 public class ComparadorResultadosPuntosTotalesPiloto implements Comparator <Piloto>
