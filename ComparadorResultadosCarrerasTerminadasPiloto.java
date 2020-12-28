@@ -1,5 +1,5 @@
 
-import java.util.Comparator;
+import java.util.*;
 /**
  * Write a description of class ComparadorResultadosTerminadosPiloto here.
  * 
