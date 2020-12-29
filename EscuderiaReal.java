@@ -27,7 +27,10 @@ public class EscuderiaReal implements Escuderia
     {
         this.nombre = nombre;
         List <Piloto> pilotos   = new ArrayList <Piloto>();
-        List <Coche> coches     = new ArrayList <Coche>();
+        List <Coche>  coches     = new ArrayList <Coche>();
+        
+        //Asignar el orden de la lista
+        //coches.sort([la mierda con la que haya que ordenar])
     }
 
     
@@ -43,7 +46,7 @@ public class EscuderiaReal implements Escuderia
     /**
      * Ordena la lista de pilotos y coches según el criterio establecido
      */
-    public void ordenarPilotosyCoches()
+    public void ordenarPilotosyCoches(/* criterio de ordenación*/)
     {
         //todo       
     }
@@ -56,6 +59,8 @@ public class EscuderiaReal implements Escuderia
     public int getPuntosPilotosTotal()
     {
         //todo
+        //Crear un iterador con los pilotos
+        //De cada piloto acumulamos los puntos
         return -1;        
     }
     
@@ -63,10 +68,18 @@ public class EscuderiaReal implements Escuderia
      * Envía el primer piloto y el primer coche disponibles a la carrera
      * Controla también si un piloto no tiene coche disponible, en cuyo caso
      * el piloto no puede ser enviado, pero no cuenta como abandono
+     * 
+     * Se utiliza el patrón Strategy
      */
     public void enviarPilotoyCoche()
     {
-        //todo       
+        //todo      
+        //condicional según si el piloto tiene coche o no
+        //asignar el primer coche de la lista al primer piloto con:
+        //      instanciaPiloto.asignarCoche(instanciaCoche);
+        //  ver cómo hacer para no enviar el piloto sin que cuente como abandono
+        
+        //HAY QUE USAR EL PATRÓN STRATEGY AQUÍ (¿doblemente?)
     }
     
     //SETTERS

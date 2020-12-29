@@ -22,89 +22,26 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     private Concentracion concentracion;
     private List <Resultado> resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
     //resultados es una lista de la clase resultado, que almacena lo necesario
+    
     private boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
     
     /**
      * Constructor de Piloto
+     * 
+     * Siempre se va a inicializar SIN coche asignado y el piloto SIN descalificar
+     * Además, se crea el espacio para la lista de resultados
+     * 
+     * @param nombre            El nombre asignado al piloto
+     * @param concentracion     La concentracion que tenga el piloto
      */
-    public PilotoAbstracto(String nombre, Coche cocheAsignado, Concentracion concentracion)
+    public PilotoAbstracto(String nombre, Concentracion concentracion)
     {
         setNombre(nombre);
-        setCocheAsignado(cocheAsignado);
+        setCocheAsignado(null);
         setConcentracion(concentracion);
         List <Resultado> resultados = new ArrayList <Resultado>();
         setDescalificado(false);
     }
-
-    
-    //SETTERS
-    /**
-     * Setter de nombre
-     * @param  nombre   Nuevo valor del campo nombre
-     */
-    private void setNombre(String nombre){this.nombre = nombre;}
-    
-    /**
-     * Setter de cocheAsignado
-     * @param  cocheAsignado   Nuevo valor del campo cocheAsignado
-     */
-    private void setCocheAsignado(Coche cocheAsignado){this.cocheAsignado = cocheAsignado;}
-    
-    /**
-     * Setter de concentracion
-     * @param  concentracion   Nuevo valor del campo concentracion
-     */
-    private void setConcentracion(Concentracion concentracion){this.concentracion = concentracion;}
-    
-    /**
-     * Setter de resultados
-     * @param  resultados   Nuevo valor del campo resultados (es un ARRAYLIST)
-     */
-    private void setListaResultados(List <Resultado> resultados){this.resultados = resultados;}
-    
-    /**
-     * Setter de descalificado
-     * @param  descalificado   Nuevo valor del campo descalificado
-     */
-    private void setDescalificado(boolean descalificado){this.descalificado = descalificado;}
-    
-    
-    //GETTERS
-    /**
-     * Getter de nombre
-     * @return  nombre
-     */
-    public String getNombre(){return nombre;}
-    
-    /**
-     * Getter de cocheAsignado
-     * @return  cocheAsignado
-     */
-    public Coche getCocheAsignado(){return cocheAsignado;}
-    
-    /**
-     * Getter de concentracion
-     * @return  concentracion
-     */
-    public Concentracion getConcentracion(){return concentracion;}
-    /**
-     * Método que devuelve el valor de concentracion
-     * @return  double  valor de concentracion
-     */
-    public double getValorConcentracion(){return concentracion.getValor();}
-    
-    /**
-     * Getter de resultados
-     * @return  resultados  (es un ARRAYLIST)
-     */
-    public List <Resultado> getListaResultados(){return resultados;}
-    
-    /**
-     * Getter de descalificado
-     * @return  descalificado
-     */
-    public boolean getDescalificado(){return descalificado;}
-    
     
     //FUNCIONALIDAD DE PILOTO
     /**
@@ -130,6 +67,15 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public void recibirCoche(Coche coche)
     {
         setCocheAsignado(coche);   
+    }
+    
+    /**
+     * Pone a NULL el cocheAsignado al piloto para tenerlo listo para la siguiente carrera
+     * 
+     * @param  coche   el coche que la escudería le proporcione
+     */
+    public void devolverCoche(){
+        setCocheAsignado(null);
     }
     
     /**
@@ -268,6 +214,75 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         //condición y, al final, ya añadirla a la lista.
         //Otra opción sería añadirla justo después de inicializar cada objeto pero se ahorra código
     }
+    
+    
+    //SETTERS
+    /**
+     * Setter de nombre
+     * @param  nombre   Nuevo valor del campo nombre
+     */
+    private void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * Setter de cocheAsignado
+     * @param  cocheAsignado   Nuevo valor del campo cocheAsignado
+     */
+    private void setCocheAsignado(Coche cocheAsignado){this.cocheAsignado = cocheAsignado;}
+    
+    /**
+     * Setter de concentracion
+     * @param  concentracion   Nuevo valor del campo concentracion
+     */
+    private void setConcentracion(Concentracion concentracion){this.concentracion = concentracion;}
+    
+    /**
+     * Setter de resultados
+     * @param  resultados   Nuevo valor del campo resultados (es un ARRAYLIST)
+     */
+    private void setListaResultados(List <Resultado> resultados){this.resultados = resultados;}
+    
+    /**
+     * Setter de descalificado
+     * @param  descalificado   Nuevo valor del campo descalificado
+     */
+    private void setDescalificado(boolean descalificado){this.descalificado = descalificado;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de nombre
+     * @return  nombre
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * Getter de cocheAsignado
+     * @return  cocheAsignado
+     */
+    public Coche getCocheAsignado(){return cocheAsignado;}
+    
+    /**
+     * Getter de concentracion
+     * @return  concentracion
+     */
+    public Concentracion getConcentracion(){return concentracion;}
+    /**
+     * Método que devuelve el valor de concentracion
+     * @return  double  valor de concentracion
+     */
+    public double getValorConcentracion(){return concentracion.getValor();}
+    
+    /**
+     * Getter de resultados
+     * @return  resultados  (es un ARRAYLIST)
+     */
+    public List <Resultado> getListaResultados(){return resultados;}
+    
+    /**
+     * Getter de descalificado
+     * @return  descalificado
+     */
+    public boolean getDescalificado(){return descalificado;}
     
     
     //METODOS AUXILIARES

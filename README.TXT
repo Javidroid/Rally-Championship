@@ -13,12 +13,28 @@ USER INSTRUCTIONS:
 
 
 NOTAS:
+    
+****DONE:
+
+    CIRCUITO        ESTÁ COMPLETAMENTE TERMINADO Y (salvo excepción) NO HAY QUE TOCAR NADA
+    
+    COCHE           ESTÁ COMPLETAMENTE TERMINADO Y (salvo excepción) NO HAY QUE TOCAR NADA
+    
+    PILTO           ESTÁ COMPLETAMENTE TERMINADO Y (salvo añadir métodos) NO HAY QUE TOCAR NADA
+    
+    ESCUDERÍA       - (Faltan métodos por implementar)
+    
+    ORGANIZACIÓN    - (Faltan métodos por definir e implementar)
+    
+****
+    
+
     instanceof sólo se usa en el método equals
     
     Un buen uso del Map sería de Pilotos, Escudería porque
     cuando están en una carrera como que pierden la escudería que les manda
     
-    Escudería usa doblemente el patrón Strategy    
+    Escudería usa doblemente el patrón Strategy
     
     Hay que usar al menos un //List, Set (escuderias de organizacion) Y Map (piloto,escuderia).
     
@@ -54,18 +70,21 @@ TO-DO LIST:
     
     Hacer las clases de prueba
     
+    Hacer la clase RallyDemo
+    
     Revisar la Doc tanto de las clases como de las interfaces
     
     Función MATH.ROUND en las operaciones matemáticas
     
     Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
+  **De esto hay que buscar para qué hay que borrar una carrera por descalificación  
     
     Hacer método que quite capas del decorator
        
     Clase Comparator:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
-    
+    BajarseDelCoche: pone a nulo el coche del piloto.
     
     
 HECHO: 
