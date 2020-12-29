@@ -119,7 +119,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public void descalificar()
     {
         setDescalificado(true);  
-        System.out.println(this.getNombre()+"ha sido descalificado");
+        System.out.println(this.getNombre()+" ha sido descalificado");
     }
         
     /**
