@@ -1,4 +1,5 @@
 
+import java.util.*;
 /**
  * Esta clase es la "principal" ya que es la que gestiona y controla todas las competiciones.
  * De esta clase sólo puede existir una instancia
@@ -12,16 +13,25 @@ public class Organizacion
     
     private int limiteAbandonos;
     private int limitePilotos;
-    //private ? <Circuito> circuitos; //una estructura que almacene los circuitos
-    //private ? <Escuderia> escuderias; //probablemente set porque no puede haber duplicados
-    //private ? <Piloto> pilotosCarrera; //Probablemente una lista porque van ordenados
-   
+    
+    //TreeSet porque los Circuitos son únicos y tienen orden.
+    //Este orden es estático: se asigna al inicio y no se modifica en RunTime
+    private Set <Circuito> circuitos;    
+    
+    //HashSet porque no se repiten ni tienen orden.
+    private Set <Escuderia> escuderias;  
+    
+    //HashMap para que cada Piloto nunca pierda su Escudería y la tenga siempre asignada
+    //Habría que hacer un método getKey y getValue
+    private Map <Piloto, Escuderia> pilotosCarrera;
     /**
-     * Constructor de Organizacion (privado por uso de Singleton
+     * Constructor de Organizacion (privado por uso de Singleton)
      */
     private Organizacion()
     {
-        // initialise instance variables
+        circuitos       = new TreeSet <Circuito>();
+        escuderias      = new HashSet <Escuderia>();
+        pilotosCarrera  = new HashMap <Piloto, Escuderia>();
     }
     
     /**
@@ -35,4 +45,29 @@ public class Organizacion
         }
         return instancia;
     }
+    
+    //SETTERS
+    /**
+     * Setter de limiteAbandonos
+     * @param    limiteAbandonos    Nuevo valor del campo limiteAbandonos
+     */
+    public void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
+    /**
+     * Setter de limitePilotos
+     * @param    limitePilotos      Nuevo valor del campo limitePilotos
+     */
+    public void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
+    
+    
+    //GETTERS
+    /**
+     * Getter de limiteAbandonos
+     * @return   limiteAbandonos
+     */
+    public int getLimiteAbandonos(){return limiteAbandonos;}
+    /**
+     * Getter de limitePilotos
+     * @return   limitePilotos
+     */
+    public int getLimitePilotos()  {return limitePilotos;}
 }

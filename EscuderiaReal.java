@@ -26,10 +26,14 @@ public class EscuderiaReal implements Escuderia
     public EscuderiaReal(String nombre)
     {
         this.nombre = nombre;
-        List <Piloto> pilotos   = new ArrayList <Piloto>();
+        List <Piloto> pilotos    = new ArrayList <Piloto>();
         List <Coche>  coches     = new ArrayList <Coche>();
         
         //Asignar el orden de la lista
+        //ver si hay que crear un campo comparator para establecer con qué criterio se ordena
+        //en ese caso, habría que establecerlo en este constructor
+        //Para saber si es ascendente o descendente, se puede usar un boolean
+        
         //coches.sort([la mierda con la que haya que ordenar])
     }
 
@@ -40,7 +44,8 @@ public class EscuderiaReal implements Escuderia
      */
     public void inscribirse()
     {
-        //todo       
+        //todo     
+        //puede ser que sea añadiendo la escudería en el SET de Organizacion
     }
     
     /**
@@ -54,14 +59,15 @@ public class EscuderiaReal implements Escuderia
     /**
      * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
      *
-     * @return     puntos totales
+     * @return     puntos totales de todos los Pilotos de la Escudería
      */
     public int getPuntosPilotosTotal()
     {
-        //todo
-        //Crear un iterador con los pilotos
-        //De cada piloto acumulamos los puntos
-        return -1;        
+        int puntos = 0;
+        for (Piloto pilot : pilotos){
+            puntos += pilot.getTotalPuntos();
+        }
+        return puntos;
     }
     
     /**

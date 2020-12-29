@@ -39,7 +39,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         setNombre(nombre);
         setCocheAsignado(null);
         setConcentracion(concentracion);
-        List <Resultado> resultados = new ArrayList <Resultado>();
+        resultados = new ArrayList <Resultado>();
         setDescalificado(false);
     }
     

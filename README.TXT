@@ -65,12 +65,12 @@ TO-DO LIST:
     Revisar que están todos los métodos definidos en la interface
     
     Usar el patrón Strategy en Escudería para mandar pilotos y coches
+    Mirar si hay que hacer un campo comparator de pilotos??
     
     Implementar los métodos de las interfaces (FALTA: Escuderia)
     
-    Hacer las clases de prueba
-    
-    Hacer la clase RallyDemo
+    Hacer la clase RallyDemo (está en el pseudocódigo)
+  **Buscar lo de cómo meter el MAIN en blueJ
     
     Revisar la Doc tanto de las clases como de las interfaces
     
@@ -85,6 +85,30 @@ TO-DO LIST:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
     BajarseDelCoche: pone a nulo el coche del piloto.
+    
+    Traducir pseudocódigo de archivos para estudiantes
+    Luego hay que meterlo en la carpeta del proyecto
+    
+    Hacer las pruebas con JUnit de cada método público (interface) de:
+        -Circuito
+        -Coche
+        -Piloto
+        -Escuderia
+        -Organizacion
+        **Usar Fixtures    
+    
+    
+    
+    
+INFORMARSE: 
+    cómo se haría el comparador por cada parámetro sin llenar de clases el proyecto
+    
+    cómo van los datos de entrada, cuándo se crean los pilotos y los coches porque me resulta
+    raro que se creen desde la propia escudería
+    
+    Si en pilotosCarrera se puede hacer un Set de Map o sería contraproducente porque
+    Map en sí ya es una colección de key única
+            
     
     
 HECHO: 
