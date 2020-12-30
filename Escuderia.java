@@ -8,6 +8,47 @@ import java.util.*;
 
 public interface Escuderia
 {
+   //FUNCIONALIDAD DE ESCUDERÍA
+   /**
+    * Se inscribe en el campeonato gestionado por la Organizacion
+    */
+   public void inscribirse();
+   
+   /**
+    * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
+    * según el parámetro
+    * 
+    * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
+    */
+   public void ordenarPilotos(boolean ASC);
+   
+   /**
+    * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
+    * según el parámetro
+    * 
+    * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
+    */
+   public void ordenarCoches(boolean ASC);
+   
+   /**
+    * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
+    *
+    * @return     puntos totales
+    */
+   public int getPuntosPilotosTotal();
+   
+   /**
+    * Envía el primer piloto con el primer coche disponible asignado a la carrera
+    * Controla también si un piloto no tiene coche disponible, en cuyo caso
+    * el piloto no puede ser enviado, pero no cuenta como abandono
+    * 
+    * Si devuelve null, significa que la escudería no tiene pilotos disponibles
+    * 
+    * @return Piloto    Piloto que participa en la siguiente carrera
+    */
+   public Piloto enviarPiloto();
+    
+    
    //GETTERS
    /**
     * Método que devuelve nombre
@@ -39,6 +80,8 @@ public interface Escuderia
     */
    public CMPStrategyCoche getCriterioCoche();
    
+   
+   
    //GETTERS STRATEGY
    /**
     * Setter de criterioPiloto.    Público para poder elegir la estrategia.
@@ -48,7 +91,7 @@ public interface Escuderia
     
    /**
     * Setter de criterioCoche.     Público para poder elegir la estrategia.
-    * @param  CMPStrategyCoche    Nuevo valor del campo criterioCoche
+    * @param  CMPStrategyCoche     Nuevo valor del campo criterioCoche
     */
    public void setCriterioCoche(CMPStrategyCoche criterio);
    
@@ -77,38 +120,4 @@ public interface Escuderia
    */
    @Override
    public int hashCode();
-
-   //FUNCIONALIDAD DE ESCUDERÍA
-   /**
-    * Se inscribe en el campeonato gestionado por la Organizacion
-    */
-   public void inscribirse();
-   
-   /**
-    * Ordena la lista de pilotos según el criterio establecido
-    */
-   public void ordenarPilotos();
-   
-   /**
-    * Ordena la lista de coches según el criterio establecido
-    */
-   public void ordenarCoches();
-   
-   /**
-    * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
-    *
-    * @return     puntos totales
-    */
-   public int getPuntosPilotosTotal();
-   
-   /**
-    * Envía el primer piloto con el primer coche disponible asignado a la carrera
-    * Controla también si un piloto no tiene coche disponible, en cuyo caso
-    * el piloto no puede ser enviado, pero no cuenta como abandono
-    * 
-    * Si devuelve null, significa que la escudería no tiene pilotos disponibles
-    * 
-    * @return Piloto    Piloto que participa en la siguiente carrera
-    */
-   public Piloto enviarPiloto();
 }

@@ -1,13 +1,12 @@
 
 import java.util.*;
 /**
- * Interfaz para implementar cada estrategia de ordenación de Pilotos en cada Escudería.
+ * Sirve para ordenar la lista de Pilotos por nombre
  * 
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (30/12/2020)
  */
-
-public interface CMPStrategyPiloto
+public class SortByNombre implements CMPStrategyPiloto
 {
     /**
      * Método común de todas las estrategias para ordenar la lista de pilotos
@@ -15,5 +14,12 @@ public interface CMPStrategyPiloto
      * @param pilotos   La lista de pilotos que se quiere ordenar
      * @param ASC       True si se quiere ordenar ascendentemente. False para descendentemente
      */
-    public void ordenarPilotos(List <Piloto> pilotos, boolean ASC);
+    public void ordenarPilotos(List <Piloto> pilotos, boolean ASC){
+        if(ASC){
+            Collections.sort(pilotos, new CMPNombre());
+        }
+        else{
+            Collections.sort(pilotos, Collections.reverseOrder(new CMPNombre()));
+        }
+    }
 }

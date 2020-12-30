@@ -24,14 +24,13 @@ public class EscuderiaReal implements Escuderia
     private List <Coche> coches;
 
     private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
-    private boolean ASCpiloto; //valor booleano true si se quiere ordenar ASCendentemente el criterio de piloto
-
+    
     private CMPStrategyCoche  criterioCoche; //campo que referencia la Strategy usada para ordenar coches
-    private boolean ASCcoche; //valor booleano true si se quiere ordenar ASCendentemente el criterio de coche
     /**
      * Constructor de Escuderia
      */
-    public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, CMPStrategyCoche criterioCoche)
+    public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, CMPStrategyCoche criterioCoche,
+                         boolean ASCpiloto, boolean ASCcoche)
     {
         setNombre(nombre);
         pilotos = new ArrayList <Piloto>();
@@ -40,9 +39,9 @@ public class EscuderiaReal implements Escuderia
         setCriterioPiloto(criterioPiloto);
         setCriterioCoche(criterioCoche);
 
-        ordenarPilotos();
-        ordenarCoches();
-        //revisar si se puede mandar por parámetro el booleano que controla si es ASC o DESC
+        ordenarPilotos(ASCpiloto);
+        
+        ordenarCoches(ASCcoche);
     }
 
     //FUNCIONALIDAD DE ESCUDERÍA
@@ -56,19 +55,25 @@ public class EscuderiaReal implements Escuderia
     }
 
     /**
-     * Ordena la lista de pilotos según el criterio establecido según criteroComparacion
+     * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
+     * según el parámetro
+     * 
+     * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
      */
-    public void ordenarPilotos()
+    public void ordenarPilotos(boolean ASC)
     {
-        criterioPiloto.ordenarPilotos(pilotos); //mandamos la lista de pilotos para que se ordene
+        criterioPiloto.ordenarPilotos(pilotos, ASC); //mandamos la lista de pilotos para que se ordene
     }
 
     /**
-     * Ordena la lista de coches según el criterio establecido según criteroComparacion
+     * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
+     * según el parámetro
+     * 
+     * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
      */
-    public void ordenarCoches()
+    public void ordenarCoches(boolean ASC)
     {
-        criterioCoche.ordenarCoches(coches);    //mandamos la lista de coches para que se ordene
+        criterioCoche.ordenarCoches(coches, ASC);    //mandamos la lista de coches para que se ordene
     }
 
     /**
@@ -165,7 +170,7 @@ public class EscuderiaReal implements Escuderia
      * Setter de criterioCoche.     Público para poder elegir la estrategia.
      * @param  CMPStrategyCoche    Nuevo valor del campo criterioCoche
      */
-    public void setCriterioCoche(CMPStrategyCoche criterio){criterioCoche = criterio;}  
+    public void setCriterioCoche(CMPStrategyCoche criterio){criterioCoche = criterio;}
 
     //GETTERS
     /**

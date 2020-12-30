@@ -64,8 +64,7 @@ TO-DO LIST:
         
     Revisar que están todos los métodos definidos en la interface
     
-    Usar el patrón Strategy en Escudería para mandar pilotos y coches
-    Mirar si hay que hacer un campo comparator de pilotos??
+    Usar el patrón Strategy en Escudería para ordenar pilotos y coches
     
     Implementar los métodos de las interfaces (FALTA: Escuderia)
     
@@ -84,12 +83,12 @@ TO-DO LIST:
     Clase Comparator:
     Repasar apuntes de la clase Comparator, Sort y demás para ordenar Collections e implementar
     
-    BajarseDelCoche: pone a nulo el coche del piloto.
-    
     Traducir pseudocódigo de archivos para estudiantes
     Luego hay que meterlo en la carpeta del proyecto
     
     Rellenar el formato de salida a partir de la plantilla en donde corresponda
+    
+    Método que inscribe a la escudería en el campeonato (???)
     
     Hacer las pruebas con JUnit de cada método público (interface) de:
         -Circuito
@@ -99,6 +98,8 @@ TO-DO LIST:
         -Organizacion
         **Usar Fixtures    
     
+     
+     Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
     
     
     
@@ -110,6 +111,9 @@ INFORMARSE:
     
     Si en pilotosCarrera se puede hacer un Set de Map o sería contraproducente porque
     Map en sí ya es una colección de key única
+    
+    En el Strategy de Escudería: se pueden tener el comparador y el método que ordena en la misma clase
+    o habría que hacer las clases comparadoras totalmente aparte, y luego cada estrategia de ordenación aparte
             
     
     
@@ -117,12 +121,17 @@ HECHO:
 
     !!!REVISAR!!!: 
     -Hacer el patrón decorator en circuito (complicacionesExtra)
+    
     -Implementar método conducir de PilotoAbstracto  
+    
     -Ver estructuras para pilotos y coches en Escuderia
         (probablemente List para usar el Sort y el iterator)
-    -REVISAR EN SUBCLASES DE PILOTO:
+    
+        -REVISAR EN SUBCLASES DE PILOTO:
     Función Math de redondeo a los métodos que devuelvan 
-    directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)   
+    directamente un valor (usandolo razonablemente, por ejemplo en getDestreza)
+    
+    -BajarseDelCoche: pone a nulo el coche del piloto.
      
                     
     
