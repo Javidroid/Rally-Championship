@@ -6,7 +6,7 @@ import java.util.*;
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (30/12/2020)
  */
-public class SortByNombre implements CMPStrategyPiloto
+public class SortByNombrePiloto implements CMPStrategyPiloto
 {
     /**
      * Método común de todas las estrategias para ordenar la lista de pilotos
@@ -16,10 +16,10 @@ public class SortByNombre implements CMPStrategyPiloto
      */
     public void ordenarPilotos(List <Piloto> pilotos, boolean ASC){
         if(ASC){
-            Collections.sort(pilotos, new CMPNombre());
+            Collections.sort(pilotos, new CMPNombrePiloto());
         }
         else{
-            Collections.sort(pilotos, Collections.reverseOrder(new CMPNombre()));
+            Collections.sort(pilotos, Collections.reverseOrder(new CMPNombrePiloto()));
         }
     }
 }
