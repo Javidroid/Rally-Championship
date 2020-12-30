@@ -89,6 +89,8 @@ TO-DO LIST:
     Traducir pseudocódigo de archivos para estudiantes
     Luego hay que meterlo en la carpeta del proyecto
     
+    Rellenar el formato de salida a partir de la plantilla en donde corresponda
+    
     Hacer las pruebas con JUnit de cada método público (interface) de:
         -Circuito
         -Coche

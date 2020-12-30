@@ -11,33 +11,40 @@ import java.util.*;
  * Cada instancia de Escudería se diferencia de otras por tener distintos criterios de ordenación
  * de las estructuras de sus Pilotos/Coches
  * 
+ * Además, es la clase "Contexto" para el Patrón "Strategy" usado para establecer un criterio
+ * de ordenación de pilotos y coches.
+ * 
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (27/11/2020)
  */
-public class EscuderiaReal implements Escuderia
+public class EscuderiaReal implements Escuderia 
 {
     private String nombre;
     private List <Piloto> pilotos;
     private List <Coche> coches;
 
+    private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
+    private boolean ASCpiloto; //valor booleano true si se quiere ordenar ASCendentemente el criterio de piloto
+
+    private CMPStrategyCoche  criterioCoche; //campo que referencia la Strategy usada para ordenar coches
+    private boolean ASCcoche; //valor booleano true si se quiere ordenar ASCendentemente el criterio de coche
     /**
      * Constructor de Escuderia
      */
-    public EscuderiaReal(String nombre)
+    public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, CMPStrategyCoche criterioCoche)
     {
-        this.nombre = nombre;
-        List <Piloto> pilotos    = new ArrayList <Piloto>();
-        List <Coche>  coches     = new ArrayList <Coche>();
-        
-        //Asignar el orden de la lista
-        //ver si hay que crear un campo comparator para establecer con qué criterio se ordena
-        //en ese caso, habría que establecerlo en este constructor
-        //Para saber si es ascendente o descendente, se puede usar un boolean
-        
-        //coches.sort([la mierda con la que haya que ordenar])
+        setNombre(nombre);
+        pilotos = new ArrayList <Piloto>();
+        coches  = new ArrayList <Coche>();
+
+        setCriterioPiloto(criterioPiloto);
+        setCriterioCoche(criterioCoche);
+
+        ordenarPilotos();
+        ordenarCoches();
+        //revisar si se puede mandar por parámetro el booleano que controla si es ASC o DESC
     }
 
-    
     //FUNCIONALIDAD DE ESCUDERÍA
     /**
      * Se inscribe en el campeonato gestionado por la Organizacion
@@ -47,15 +54,23 @@ public class EscuderiaReal implements Escuderia
         //todo     
         //puede ser que sea añadiendo la escudería en el SET de Organizacion
     }
-    
+
     /**
-     * Ordena la lista de pilotos y coches según el criterio establecido
+     * Ordena la lista de pilotos según el criterio establecido según criteroComparacion
      */
-    public void ordenarPilotosyCoches(/* criterio de ordenación*/)
+    public void ordenarPilotos()
     {
-        //todo       
+        criterioPiloto.ordenarPilotos(pilotos); //mandamos la lista de pilotos para que se ordene
     }
-    
+
+    /**
+     * Ordena la lista de coches según el criterio establecido según criteroComparacion
+     */
+    public void ordenarCoches()
+    {
+        criterioCoche.ordenarCoches(coches);    //mandamos la lista de coches para que se ordene
+    }
+
     /**
      * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
      *
@@ -69,25 +84,58 @@ public class EscuderiaReal implements Escuderia
         }
         return puntos;
     }
-    
+
     /**
-     * Envía el primer piloto y el primer coche disponibles a la carrera
+     * Envía el primer piloto con el primer coche disponible asignado a la carrera
      * Controla también si un piloto no tiene coche disponible, en cuyo caso
      * el piloto no puede ser enviado, pero no cuenta como abandono
      * 
-     * Se utiliza el patrón Strategy
+     * Si devuelve null, significa que la escudería no tiene pilotos disponibles
+     * 
+     * @return Piloto    Piloto que participa en la siguiente carrera
      */
-    public void enviarPilotoyCoche()
+    public Piloto enviarPiloto()
     {
-        //todo      
-        //condicional según si el piloto tiene coche o no
-        //asignar el primer coche de la lista al primer piloto con:
-        //      instanciaPiloto.asignarCoche(instanciaCoche);
-        //  ver cómo hacer para no enviar el piloto sin que cuente como abandono
-        
-        //HAY QUE USAR EL PATRÓN STRATEGY AQUÍ (¿doblemente?)
+        //iterator que escoge el primer piloto no descalificado de la lista y le asigna
+        //el primer coche con combustible de la lista
+        boolean pilotoEncontrado = false;
+        boolean cocheEncontrado  = false;
+        Iterator <Piloto> itPil = pilotos.iterator();   //iterador de la lista de pilotos
+        Iterator <Coche> itCoch = coches.iterator();    //iterador de la lista de coches
+
+        Coche cocheAsignable = null; //variable que almacena el primer coche disponible para ser asignado
+        Piloto pilotoEnviable = null; //almacena el primer piloto enviable en la lista
+
+        //Buscamos el primer coche con combustible en la lista
+        while(itCoch.hasNext() && !cocheEncontrado){
+            cocheAsignable = itCoch.next();
+            if(cocheAsignable.getDeposito() > 0){
+                cocheEncontrado = true;
+            }
+        }
+
+        //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
+        //piloto no descalificado de la lista.
+        while(itPil.hasNext() && !pilotoEncontrado){
+            pilotoEnviable = itPil.next();
+            if(!pilotoEnviable.getDescalificado()){
+                pilotoEncontrado = true;
+                pilotoEnviable.recibirCoche(cocheAsignable);
+            }
+        }
+
+        if(pilotoEnviable.getCocheAsignado() == null){
+            pilotoEnviable = null; //Revisar si esto se pone así para que no se mande ningún piloto
+                                   //o si no se pone y en organización se controla que el piloto
+                                   //tenga coche asignado
+            
+            System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
+            "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
+        }
+
+        return pilotoEnviable;
     }
-    
+
     //SETTERS
     /**
      * Setter de nombre
@@ -100,33 +148,56 @@ public class EscuderiaReal implements Escuderia
      * @param  pilotos   Nuevo valor del campo pilotos
      */
     private void setPilotos(List <Piloto> pilotos){this.pilotos = pilotos;}
-    
+
     /**
      * Setter de coches
      * @param  coches   Nuevo valor del campo coches
      */
     private void setCoches(List <Coche> coches){this.coches = coches;}
-    
-    
+
+    /**
+     * Setter de criterioPiloto.    Público para poder elegir la estrategia.
+     * @param  CMPStrategyPiloto   Nuevo valor del campo criterioPiloto
+     */
+    public void setCriterioPiloto(CMPStrategyPiloto criterio){criterioPiloto = criterio;}
+
+    /**
+     * Setter de criterioCoche.     Público para poder elegir la estrategia.
+     * @param  CMPStrategyCoche    Nuevo valor del campo criterioCoche
+     */
+    public void setCriterioCoche(CMPStrategyCoche criterio){criterioCoche = criterio;}  
+
     //GETTERS
     /**
      * Getter de nombre
      * @return   nombre
      */
     public String getNombre(){return nombre;}
-    
+
     /**
      * Getter de pilotos
      * @return   pilotos
      */
     public List <Piloto> getPilotos(){return pilotos;}
-    
+
     /**
      * Getter de coches
      * @return   coches
      */
     public List <Coche> getCoches(){return coches;}
-    
+
+    /**
+     * Getter de criterioPiloto
+     * @return  CMPStrategyPiloto   criterioPiloto
+     */
+    public CMPStrategyPiloto getCriterioPiloto(){return criterioPiloto;}
+
+    /**
+     * Getter de criterioCoche
+     * @return  CMPStrategyCoche   criterioCoche
+     */
+    public CMPStrategyCoche getCriterioCoche(){return criterioCoche;}   
+
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
@@ -143,7 +214,7 @@ public class EscuderiaReal implements Escuderia
         builder.append('\n');
         return builder.toString();
     }
-    
+
     /**
      * Método sobreescrito equals
      * 
@@ -159,26 +230,26 @@ public class EscuderiaReal implements Escuderia
         if(!(obj instanceof EscuderiaReal)) {
             return false; 
         }
-        
+
         EscuderiaReal other = (EscuderiaReal) obj;
-        
+
         return getNombre().equals(other.getNombre()) &&
-                getCoches().equals(other.getCoches()) &&
-                getPilotos().equals(other.getPilotos());
+        getCoches().equals(other.getCoches()) &&
+        getPilotos().equals(other.getPilotos());
     }
-    
+
     /**
-    * Metodo sobreescrito hashCode
-    * 
-    * @return hashCode que representa la clase
-    */
+     * Metodo sobreescrito hashCode
+     * 
+     * @return hashCode que representa la clase
+     */
     @Override
     public int hashCode(){
-       int result=17;
-       
-       result = 7 * result + getNombre().hashCode();
-       result = 13 * result + getCoches().hashCode();
-       result = 17 * result + getPilotos().hashCode();
-       return result;
+        int result=17;
+
+        result = 7 * result + getNombre().hashCode();
+        result = 13 * result + getCoches().hashCode();
+        result = 17 * result + getPilotos().hashCode();
+        return result;
     }
 }
