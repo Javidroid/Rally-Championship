@@ -7,7 +7,6 @@ import java.util.*;
  * @version v1 (28/12/2020)
  */
 
-
 public class ComparadorResultadosCarrerasTerminadasPiloto implements Comparator<Piloto>
 {
     public int compare (Piloto piloto1, Piloto piloto2){

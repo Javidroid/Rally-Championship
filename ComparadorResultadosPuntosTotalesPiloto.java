@@ -16,6 +16,5 @@ public class ComparadorResultadosPuntosTotalesPiloto implements Comparator <Pilo
             return 1;
         else 
             return -1;
-        }
-    
+    }
 }
