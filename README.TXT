@@ -43,8 +43,7 @@ NOTAS:
         
         Organizacion.circuitos requiere orden (List)
         Organizacion.escuderias puede ser un Set (para que no se repitan)
-        Organizacion.pilotos (cada piloto podría ser un Map<Piloto,Escuderia>)
-            y este a su vez un Set de estos Map
+        Organizacion.pilotosCarrera (Map o List porque hay que ordenar los pilotos)
         
         //Escuderia.pilotos: Importa el orden así que probablemente List
         //Escuderia.coches: igual que arriba
@@ -115,6 +114,17 @@ INFORMARSE:
     En el Strategy de Escudería: se pueden tener el comparador y el método que ordena en la misma clase
     o habría que hacer las clases comparadoras totalmente aparte, y luego cada estrategia de ordenación aparte
             
+    A qué se refiere en la celebración de la carrera de campeonato (al final) que cada piloto se devuelve
+    a su escudería. ¿No sería una referencia lo que almacena?
+    
+    La estructura de organizacion.pilotosCarrera es simplemente un map? o una lista para que se pueda ordenar
+    pero luego, cada elemento de la lista es un Map? cosa que no tendría mucho sentido porque lo que
+    realmente tiene que almacenar es un KeyValue, no un map entero
+    
+    Qué hay que hacer exactamente en el método de organización que "permite" inscribirse a las escuderias
+    y luego que las escuderías tengan un método para inscribirse
+    (supongo que cuando creas la instancia de escuderia, tienes que llamar al método inscribirse y luego
+    la propia organización almacena todos los datos en sus estructuras
     
     
 HECHO: 

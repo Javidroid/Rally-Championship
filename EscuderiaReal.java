@@ -51,7 +51,9 @@ public class EscuderiaReal implements Escuderia
     public void inscribirse()
     {
         //todo     
-        //puede ser que sea añadiendo la escudería en el SET de Organizacion
+        //es algo tal que:
+        //organizacion.getInstancia.inscribirEscuderia(this);
+        //esto sirve para que luego la organización guarde en las estructuras la propia escudería
     }
 
     /**
