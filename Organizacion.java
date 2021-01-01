@@ -20,19 +20,22 @@ public class Organizacion
     
     //HashSet porque no se repiten ni tienen orden.
     private Set <Escuderia> escuderias;  
+
+    //ArrayList porque requiere orden
+    private List <Piloto>   pilotosCarrera;
     
-    
-    //HashMap para que cada Piloto nunca pierda su Escudería y la tenga siempre asignada
-    //Habría que hacer un método getKey y getValue
-    private Map <Piloto, Escuderia> pilotosCarrera;
+    //HashMap para almacenar el valor de la escudería
+    //Esta es una estructura auxiliar para almacenar la escudería a la que pertenece cada piloto
+    private Map <Piloto, Escuderia> mapaPilotosEscuderia;
     /**
      * Constructor de Organizacion (privado por uso de Singleton)
      */
     private Organizacion()
     {
-        circuitos       = new TreeSet <Circuito>();
-        escuderias      = new HashSet <Escuderia>();
-        pilotosCarrera  = new HashMap <Piloto, Escuderia>();
+        circuitos            = new TreeSet <Circuito>();
+        escuderias           = new HashSet <Escuderia>();
+        pilotosCarrera       = new ArrayList <Piloto>();
+        mapaPilotosEscuderia = new HashMap <Piloto, Escuderia>();
     }
     
     /**
@@ -62,6 +65,7 @@ public class Organizacion
      */
     public void inscribirEscuderia(Escuderia escuderia){
         escuderias.add(escuderia);
+        //aqui hay que hacer que cada escudería inscriba a sus pilotos en mapaPilotoEscuderia
     }
     
     /**
@@ -79,14 +83,13 @@ public class Organizacion
      * 
      * Finalmente, se muestran los resultados obtenidos en la carrera y se devuelven
      * los pilotos a su escudería
+     * 
+     * param circuito   El circuito en el que se va a disputar la carrera
      */
-    public void celebrarCarrera(/*Circuito circuito*/){
+    public void celebrarCarrera(Circuito circuito){
         //posibilidad de que sea aquí donde hay que mandar el map con piloto y su escudería
         
-        //poner un Circuito como parámetro?
-        
-        //controlar con if que haya más de un piloto ¿variable de que el campeonato ha terminado?
-        //ordenar con CMPResultadosPuntosTotalesPilotos
+        //ordenar con CMPPuntosTotalesPilotos
         
         //revisar el toString de piloto y coche para que muestre sus características (revisar plantilla)
         //revisar bien todo lo que hay que mostrar de cada piloto en el enunciado
@@ -106,6 +109,11 @@ public class Organizacion
 
         //aquí se controla si al piloto se le descalifica o no mirando en el método propio de piloto
         
+        for (Escuderia escuderia : escuderias) {
+            pilotosCarrera.add(escuderia.enviarPiloto());
+        }
+        Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
+        
     }
     
     /**
@@ -114,9 +122,12 @@ public class Organizacion
      * 
      * Ordena y muestra los circuitos que componen el campeonato
      * Se muestran las escuderías que compiten, realiza las carreras con cada circuito
-     * disponible de la estructura
+     * disponible de la estructura si no se produce una condición de finalización (no hay pilotos o solo queda uno)
      * 
-     * //todo falta por rellenar y explicar lo que hace este método
+     * Cuando finalicen los circuitos, se realiza la "Ceremonia de Entrega de Premios del Campeonato" donde
+     * o se declarará desierto el torneo, o se proclama Piloto y Escudería campeón a aquellos que más puntos tengan
+     * 
+     * Siempre se muestran al final los pilotos sin descalificar, descalificados y escuderías junto sus resultados
      * 
      */
     public void celebrarCompeticion(){

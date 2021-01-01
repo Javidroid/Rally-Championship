@@ -101,6 +101,8 @@ TO-DO LIST:
      Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
      
      ¿Método para añadir coches y pilotos a la escudería?
+     
+     Hacer que, cuando las escuderías se inscriban, se guarden los pilotos en el Mapa
     
     
     
