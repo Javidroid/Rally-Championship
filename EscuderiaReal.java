@@ -21,7 +21,7 @@ public class EscuderiaReal implements Escuderia
 {
     private String nombre;
     private List <Piloto> pilotos;
-    private List <Coche> coches;
+    private List <Coche>  coches;
 
     private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
     
@@ -50,12 +50,30 @@ public class EscuderiaReal implements Escuderia
      */
     public void inscribirse()
     {
-        //todo     
-        //es algo tal que:
-        //organizacion.getInstancia.inscribirEscuderia(this);
-        //esto sirve para que luego la organización guarde en las estructuras la propia escudería
+        //llamamos al método de clase, es decir, sin necesidad de crear una
+        //instancia. Directamente usando el nombre de la clase y sin necesidad
+        //de tener que crear una instancia
+        Organizacion.getInstancia().inscribirEscuderia(this);
     }
 
+     /**
+     * Añade un Piloto a la plantilla de pilotos de la Escudería
+     * 
+     * @param piloto     Piloto que se quiere añadir a la lista
+     */
+    public void añadirPiloto(Piloto piloto){
+        pilotos.add(piloto);        
+    }
+   
+    /**
+     * Añade un Coche a la plantilla de coches de la Escudería
+     * 
+     * @param Coche      Coche que se quiere añadir a la lista
+     */
+    public void añadirCoche(Coche coche){
+        coches.add(coche);
+    }
+    
     /**
      * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
      * según el parámetro

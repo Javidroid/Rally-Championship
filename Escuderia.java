@@ -15,6 +15,20 @@ public interface Escuderia
    public void inscribirse();
    
    /**
+    * Añade un Piloto a la plantilla de pilotos de la Escudería
+    * 
+    * @param piloto     Piloto que se quiere añadir a la lista
+    */
+   public void añadirPiloto(Piloto piloto);
+   
+   /**
+    * Añade un Coche a la plantilla de coches de la Escudería
+    * 
+    * @param Coche      Coche que se quiere añadir a la lista
+    */
+   public void añadirCoche(Coche coche);
+   
+   /**
     * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
     * según el parámetro
     * 

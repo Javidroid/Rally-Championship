@@ -99,6 +99,8 @@ TO-DO LIST:
     
      
      Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
+     
+     ¿Método para añadir coches y pilotos a la escudería?
     
     
     
@@ -125,6 +127,10 @@ INFORMARSE:
     y luego que las escuderías tengan un método para inscribirse
     (supongo que cuando creas la instancia de escuderia, tienes que llamar al método inscribirse y luego
     la propia organización almacena todos los datos en sus estructuras
+    
+    cómo llamar a la instancia de Organizacion desde fuera de esta clase sin que 
+    diga que puede que no se haya inicializado (llamando directamente desde el nombre
+    de la clase?)
     
     
 HECHO: 

@@ -37,7 +37,10 @@ public class Organizacion
     
     /**
      * Método de creación estático público para obtener la instancia
-     * Singleton
+     * Singleton.
+     * Es un método de clase, es decir, para invocarlo hay que usar el nombre
+     * de la clase, y no el de la instancia.
+     * 
      * @return  única instancia de Organization
      */
     public synchronized static Organizacion getInstancia(){
@@ -49,17 +52,16 @@ public class Organizacion
     
     
     //FUNCIONALIDAD DE ORGANIZACIÓN
-    
     /**
      * Método que permite que las Escuderías se inscriban
      * 
+     * Añade la escudería indicada por parámetro al set de escuderias
      * 
+     * @param escuderia     La escudería que se desea añadir a la estructura
      * 
      */
     public void inscribirEscuderia(Escuderia escuderia){
-        //básicamente hay que llamar a este método desde escudería
-        //para pasar todos los datos de la propia escudería y la clase organizadora ya
-        //las va metiendo en la colección
+        escuderias.add(escuderia);
     }
     
     /**
@@ -80,6 +82,8 @@ public class Organizacion
      */
     public void celebrarCarrera(){
         //posibilidad de que sea aquí donde hay que mandar el map con piloto y su escudería
+        
+        //poner un Circuito como parámetro?
         
         //controlar con if que haya más de un piloto ¿variable de que el campeonato ha terminado?
         //ordenar con CMPResultadosPuntosTotalesPilotos
@@ -104,6 +108,20 @@ public class Organizacion
         
     }
     
+    /**
+     * Método que maneja todo el transcurso de la competición una vez se insertan
+     * todos los circuitos y escuderias.
+     * 
+     * Ordena y muestra los circuitos que componen el campeonato
+     * Se muestran las escuderías que compiten, realiza las carreras con cada circuito
+     * disponible de la estructura
+     * 
+     * //todo falta por rellenar y explicar lo que hace este método
+     * 
+     */
+    public void celebrarCompeticion(){
+        //todo
+    }
     
     
     //SETTERS
