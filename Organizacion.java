@@ -80,7 +80,7 @@ public class Organizacion
      * Finalmente, se muestran los resultados obtenidos en la carrera y se devuelven
      * los pilotos a su escudería
      */
-    public void celebrarCarrera(){
+    public void celebrarCarrera(/*Circuito circuito*/){
         //posibilidad de que sea aquí donde hay que mandar el map con piloto y su escudería
         
         //poner un Circuito como parámetro?
