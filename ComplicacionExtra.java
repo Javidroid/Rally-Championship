@@ -32,10 +32,6 @@ public abstract class ComplicacionExtra extends CircuitoReal
      */
     @Override
     public String toString(){
-        return circuitoComplicacion.toString() +
-        "\n + extra: " + getClass().getSimpleName() +
-        "\n >> Nueva complejidad: "   + getValorComplejidad() +
-        "\n >> Nueva distancia: "     + getValorDistancia()   +
-        "\n";
+        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
     }
 }

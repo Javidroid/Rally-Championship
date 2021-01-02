@@ -166,15 +166,11 @@ public class CocheNormal implements Coche
      */
     @Override
     public String toString(){
-        StringBuilder builder= new StringBuilder();
-        builder.append(getNombre());
-        builder.append('\n');
-        builder.append(getVelocidad());
-        builder.append('\n');
-        builder.append(getDeposito());
-        builder.append('\n');
-        builder.append(getCombustibleTotal());
-        builder.append('\n');
+        StringBuilder builder = new StringBuilder();
+        //<coche: nombreCoche> <tipo: tipoCoche> <vel_teó: velocidadCoche> 
+        //<comb: combustibleCoche(valorOriginal)(actual:valorActual)> 
+        //[opcionalmente si tiene reserva->] > <reserva: reservaCoche> 
+        //[opcionalmente si tiene nitro->] > <nitroPendiente: nitroPendiente> 
         return builder.toString();
     }
     

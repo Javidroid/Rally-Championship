@@ -70,7 +70,7 @@ public interface Circuito
     /**
      * Muestra las características del circuito, incluyendo cada complicación
      * 
-     * @return      Muestra por pantalla las características del circuito
+     * @return      String con las características del circuito
      */
-    public void mostrarCaracteristicas();
+    public String mostrarCaracteristicas();
 }

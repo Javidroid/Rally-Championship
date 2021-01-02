@@ -13,6 +13,7 @@ public class Organizacion
     
     private int limiteAbandonos;
     private int limitePilotos;
+    private boolean finalizado; //booleano que indica si el torneo tiene que acabar por tener <= 1 pilotos
     
     //TreeSet porque los Circuitos son únicos y tienen orden.
     //Este orden es estático: se asigna al inicio y no se modifica en RunTime
@@ -28,10 +29,26 @@ public class Organizacion
     //Esta es una estructura auxiliar para almacenar la escudería a la que pertenece cada piloto
     private Map <Piloto, Escuderia> mapaPilotosEscuderia;
     /**
-     * Constructor de Organizacion (privado por uso de Singleton)
+     * Constructor de Organizacion sin parámetros(privado por uso de Singleton)
      */
     private Organizacion()
     {
+        circuitos            = new TreeSet <Circuito>();
+        escuderias           = new HashSet <Escuderia>();
+        pilotosCarrera       = new ArrayList <Piloto>();
+        mapaPilotosEscuderia = new HashMap <Piloto, Escuderia>();
+    }
+    
+    /**
+     * Constructor de Organizacion parametrizado
+     */
+    public Organizacion(int limiteAbandonos, int limitePilotos)
+    {
+        setLimiteAbandonos(limiteAbandonos);
+        setLimitePilotos(limitePilotos);
+        setFinalizado(false);
+        
+        
         circuitos            = new TreeSet <Circuito>();
         escuderias           = new HashSet <Escuderia>();
         pilotosCarrera       = new ArrayList <Piloto>();
@@ -59,13 +76,22 @@ public class Organizacion
      * Método que permite que las Escuderías se inscriban
      * 
      * Añade la escudería indicada por parámetro al set de escuderias
+     * Además, se almacenan los pilotos en mapaPilotosEscuderia para no perder a qué
+     * escudería pertenece cada piloto
      * 
      * @param escuderia     La escudería que se desea añadir a la estructura
      * 
      */
     public void inscribirEscuderia(Escuderia escuderia){
-        escuderias.add(escuderia);
-        //aqui hay que hacer que cada escudería inscriba a sus pilotos en mapaPilotoEscuderia
+        escuderias.add(escuderia); //añadimos la escudería al set de escuderías
+
+        List <Piloto> pilotos;
+        pilotos = escuderia.getPilotos(); 
+        //añadimos cada piloto de la lista de pilotos de la escudería en cuestión al
+        //mapa con key cada piloto y value la escudería en cuestión
+        for (Piloto piloto : pilotos){
+            mapaPilotosEscuderia.put(piloto, escuderia); 
+        }
     }
     
     /**
@@ -87,32 +113,78 @@ public class Organizacion
      * param circuito   El circuito en el que se va a disputar la carrera
      */
     public void celebrarCarrera(Circuito circuito){
-        //posibilidad de que sea aquí donde hay que mandar el map con piloto y su escudería
-        
-        //ordenar con CMPPuntosTotalesPilotos
-        
-        //revisar el toString de piloto y coche para que muestre sus características (revisar plantilla)
-        //revisar bien todo lo que hay que mostrar de cada piloto en el enunciado
-        /*
-         * ■   sus características
-         * ■   las características de su coche
-         * ■   la velocidad que es capaz de alcanzar en ese circuito con ese coche
-         * ■   en caso de terminar la carrera:
-         *      ●   el tiempo obtenido
-         * ■   en caso de no terminar la carrera:
-         *      ●   el motivo del abandono (pérdida de concentración o falta de combustible)
-         *      ●   la cantidad de tiempo que le faltaba para finalizar la carrera
-         *      ●   el tiempo que llevaba en carrera en el momento del abandono
-         *      ●   si el piloto es descalificado por haber superado el límiteAbandonos de la Organización.
-         * ■   el combustible que le queda al coche tras la carrera
-         */
-
-        //aquí se controla si al piloto se le descalifica o no mirando en el método propio de piloto
-        
-        for (Escuderia escuderia : escuderias) {
-            pilotosCarrera.add(escuderia.enviarPiloto());
+        //Iteramos sobre las escuderias para inscribir los posibles pilotos. MÁX: limitePilotos
+        Iterator <Escuderia> it = escuderias.iterator();
+        while(it.hasNext() && pilotosCarrera.size() <= limitePilotos){
+            Escuderia es = it.next();
+            Piloto pilotoCandidato;
+            
+            pilotoCandidato = es.enviarPiloto();
+            if(pilotoCandidato != null){
+                pilotosCarrera.add(pilotoCandidato); //añadimos un piloto no nulo
+            }
         }
-        Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
+
+        if (pilotosCarrera.size() > 1){
+            System.out.println("********************************************************************************************************");
+            System.out.println("******************************** Pilotos que van a competir en "+circuito.getNombre()+" *******************************");
+            System.out.println("********************************************************************************************************");
+        
+            for (Piloto piloto : pilotosCarrera){
+                System.out.println(piloto.toString());
+            }
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("+++++++++++++++++++++++++ Comienza la carrera en "+circuito.getNombre()+" ++++++++++++++++++++++++++");
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            
+            
+            Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
+            
+            int contadorPiloto = 1;
+            for(Piloto piloto : pilotosCarrera){
+                System.out.println("@@@ Piloto " + contadorPiloto + " de " + limitePilotos);
+                
+                System.out.println(piloto.toString() + " con \n"); //mostrarmos las CARACTERÍSTICAS del PILOTO
+                System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
+                
+                System.out.println("+++ Con estas condiciones es capaz de correr a " +
+                + piloto.getCocheAsignado().calcularVelocidadReal(piloto, circuito) +" km/hora +++");
+                
+                piloto.conducir(circuito); //circuito es el Circuito que se ha pasado por parámetro
+                
+                if(piloto.getCarrerasAbandonadas() >= limiteAbandonos){
+                    piloto.descalificar();
+                    
+                    System.out.println("@@@");
+                    System.out.println("¡¡¡ " +piloto.getNombre()+ " es DESCALIFICADO del campeonato por alcanzar "
+                    +"el límite de abandonos("+limiteAbandonos+") !!!");
+                    System.out.println("@@@");
+                }
+                
+            }
+            
+            
+            for (Piloto piloto : pilotosCarrera){
+                if(piloto.getTiempoEnCircuito(circuito) < 0){
+                    piloto.setPuntosEnCircuito(circuito, 0);
+                }
+                else{
+                    //Ordenamos los pilotos según su tiempo obtenido
+                }
+            }
+
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("+++++++++++++++++ Clasificación final de la carrera en "+circuito.getNombre()+" +++++++++++++++++");
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            //mostrar pilotos ordenados por posición
+        }
+        else {
+            finalizarCampeonato(); //llamamos al método que pone el valor finalizado a true para parar de hacer carreras
+            
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+            System.out.println("¡¡¡ No se celebra esta carrera ni la(s) siguiente(s) por no haber pilotos para competir !!!!");
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
         
     }
     
@@ -132,20 +204,101 @@ public class Organizacion
      */
     public void celebrarCompeticion(){
         //todo
+        
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        System.out.println("||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||");
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        
+        //ordenamos los circuitos:
+        //Collections.sort
+        for (Circuito circuito : circuitos){
+            circuito.toString();
+        }
+        
+        //Mostramos cada escudería
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println("%%%%%%%% ESCUDERÍAS DEL CAMPEONATO %%%%%%%%");
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        
+        for (Escuderia escuderia : escuderias){
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("%%% "+escuderia.getNombre()+" %%%");
+            
+            //mostramos los pilotos de cada escudería
+            for (Piloto piloto : escuderia.getPilotos()){
+                System.out.println(piloto.toString());
+            }
+            for (Coche coche : escuderia.getCoches()){
+                System.out.println(coche.toString());
+            }
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        }
+        
+        System.out.println("\n");
+        
+        Iterator <Circuito> itCir = circuitos.iterator();
+        while (itCir.hasNext() && !finalizado){
+            int turno = 1;
+            Circuito circuito = itCir.next();
+            
+            System.out.println("********************************************************************************************************");
+            System.out.println("*** CARRERA<"+turno+"> EN " + circuito.mostrarCaracteristicas() + "***");
+            System.out.println("********************************************************************************************************");
+            
+            celebrarCarrera(circuito);
+            
+            turno++;
+        }
+        
+        //Que comience la Ceremonia de Entrega de Premios del Campeonato
+        entregarPremios();
     }
     
+    /**
+     * Método que se encarga de 
+     * 
+     * @param circuito  El circuito que quiere insertarse
+     */
+    public void entregarPremios(){
+        
+    }
+    
+    /**
+     * Método que permite insertar un circuito indicado por parámetro al Set de circuitos de la organizacion
+     * 
+     * @param circuito  El circuito que quiere insertarse
+     */
+    public void insertarCircuito(Circuito circuito){
+        circuitos.add(circuito);
+    }
+    
+    
+    /**
+     * Método que pone el campo finalizado a true indicando que no se deben disputar más carreras
+     * 
+     * Es privado porque la organización debería ser la única que puede dar por finalizado el circuito
+     */
+    private void finalizarCampeonato(){
+        setFinalizado(true);
+    }
     
     //SETTERS
     /**
      * Setter de limiteAbandonos
      * @param    limiteAbandonos    Nuevo valor del campo limiteAbandonos
      */
-    public void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
+    private void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
     /**
      * Setter de limitePilotos
      * @param    limitePilotos      Nuevo valor del campo limitePilotos
      */
-    public void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
+    private void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
+    /**
+     * Setter de finalizado
+     * @param    finalizado      Nuevo valor del campo finalizado
+     */
+    private void setFinalizado(boolean finalizado){this.finalizado = finalizado;}
+    
     
     
     //GETTERS
@@ -159,4 +312,9 @@ public class Organizacion
      * @return   limitePilotos
      */
     public int getLimitePilotos()  {return limitePilotos;}
+    /**
+     * Getter de finalizado
+     * @return   finalizado
+     */
+    public boolean getFinalizado()  {return finalizado;}
 }

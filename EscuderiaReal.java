@@ -56,7 +56,7 @@ public class EscuderiaReal implements Escuderia
         Organizacion.getInstancia().inscribirEscuderia(this);
     }
 
-     /**
+    /**
      * Añade un Piloto a la plantilla de pilotos de la Escudería
      * 
      * @param piloto     Piloto que se quiere añadir a la lista

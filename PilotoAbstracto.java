@@ -1,3 +1,4 @@
+
 import java.util.*;
 /**
  * Esta clase representa los distintos Pilotos que compiten con sus Coches en el Circuito
@@ -194,19 +195,51 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         if(getValorConcentracion() < tiempoParaAcabar){ //abandona por falta de concentración
             tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
             resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+            
+            cocheAsignado.reducirCombustible(tiempoConducido);
+            
+            System.out.println("¡¡¡ " + nombre + "perdió la concentración a falta de "
+            + (tiempoParaAcabar-tiempoConducido) + " minutos para terminar !!!");
+            
+            System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
+            + tiempoConducido + " minutos !!!");
         }
-        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){ //abandona por falta de combustible
-            tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
-            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){//caso en el que el depósito principal no es suficiente
+            cocheAsignado.reducirCombustible(tiempoParaAcabar);
+            
+            //condicional que controla si el coche era cocheResistente y ha usado la Reserva
+            if(cocheAsignado.getDeposito() >= 0){
+                //entrar aquí significa que el coche no tenía suficiente combustible en el depósito original
+                //pero resulta que es un CocheResistente y ha repostado el depósito con su reserva y puede
+                //terminar la carrera porque el depósito no se ha vaciado
+                
+                tiempoConducido = tiempoParaAcabar;
+                resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+            
+                System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
+            }
+            else{ //caso en el que no sea CocheResistente o si, incluso usando la reserva, se ha quedado sin combustible
+                tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
+                resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+                
+                System.out.println("¡¡¡ El " + cocheAsignado.getNombre() + " se quedó sin combustible a falta de "
+                + (tiempoParaAcabar - tiempoConducido) + " minutos para terminar !!!");
+            
+                System.out.println("¡¡¡ En el momento de quedarse sin combustible llevaba en carrera "
+                + tiempoConducido + "minutos !!!");
+            }
         }
-        else{ //No abandona ni por concentración ni por combustible
+        else{ //Termina la carrera
             tiempoConducido = tiempoParaAcabar;
             resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+            
+            cocheAsignado.reducirCombustible(tiempoConducido);
+            
+            System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
         }
         
-        cocheAsignado.reducirCombustible(tiempoConducido);
-        //el combustible siempre se reduce la misma cantidad que minutos ha conducido el piloto
-        //la diferencia es el valor que se le asigne en cada condición.
+        System.out.println("+++ El combustible del "+ cocheAsignado.getNombre() + " tras la carrera es " 
+        +cocheAsignado.getDeposito() +" +++");
                 
         resultados.add(resNuevaCarrera); //Añadimos a la lista el resultado de esta carrera
         //Siempre que se llame a este método, se ha de añadir un resultado a la lista.
@@ -293,16 +326,9 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     @Override
     public String toString(){
         StringBuilder builder= new StringBuilder();
-        builder.append(getNombre());
-        builder.append('\n');
-        builder.append(getTotalPuntos());
-        builder.append('\n');
-        builder.append(getCocheAsignado());
-        builder.append('\n');
-        builder.append(getConcentracion());
-        builder.append('\n');
-        builder.append(getListaResultados());
-        builder.append('\n');
+        //no hay nada que rellenar porque cada subclase hace su toString() de su propia manera
+        //y como es una clase abstracta, nunca se va a llamar a PilotoAbstracto.toString, sino al de 
+        //cualquiera de su subclase
         return builder.toString();
     }
     

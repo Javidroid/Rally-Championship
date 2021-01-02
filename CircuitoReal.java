@@ -85,30 +85,36 @@ public class CircuitoReal implements Circuito
     /**
      * Muestra las características del circuito, incluyendo cada complicación
      * 
-     * @return      Muestra por pantalla las características del circuito
+     * @return      String con las características del circuito
      */
-    public void mostrarCaracteristicas()
+    public String mostrarCaracteristicas()
     {
-        System.out.println("Características del circuito " + getNombre() + ": \n");
-        this.toString();
-        
+        StringBuilder builder = new StringBuilder();
+        builder.append("<circuito: ");
+        builder.append(getNombre());
+        builder.append("> <cond: ");
+        builder.append(this.toString()); //complicaciones extra separadas por un espacio
+        builder.append("> <comp: complejidad(original:");
+        builder.append(this.getComplejidad().getValor());
+        builder.append(")(actual:");
+        builder.append(this.getValorComplejidad());
+        builder.append(")> <dist: distancia(original:");
+        builder.append(this.getDistancia().getValor());
+        builder.append(")(actual:");
+        builder.append(this.getValorDistancia());
+        builder.append(")>");
+                
+        return builder.toString();
     }
     
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
-     * @return Representacion de CircuitoReal
+     * @return Devuelve un string listando las complicaciones extra separadas por un espacio en blanco
      */
     @Override
     public String toString(){
-        StringBuilder builder= new StringBuilder();
-        builder.append(getNombre());
-        builder.append("\n");
-        builder.append(getDistancia());
-        builder.append("\n");
-        builder.append(getComplejidad());
-        builder.append("\n");
-        return builder.toString();
+        return "";
     }
     
     /**
