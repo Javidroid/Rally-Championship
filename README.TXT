@@ -52,6 +52,11 @@ TO-DO LIST:
      
      Comparadores de circuito y ordenar estos por el criterio que se indica
      tal vez se pueda llamar a un collection.sort.(lista, [instancia_del_comparador_pasada_por_parámetro]);
+     
+     Hacer que cuando se mande un piloto a la carrera, salga de la lista de pilotos en escudería para prevenir nosequé
+     Luego, cuando se termine la carrera, la organización mande de nuevo a los pilotos y coche a su escudería.
+     Por tanto, también habrá que quitar el coche de la lista y devolverlo cuando el piloto se baje del coche
+     en piloto.bajarseDelCoche();
     
     
     
