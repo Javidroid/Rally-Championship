@@ -61,6 +61,8 @@ TO-DO LIST:
      ver si es buena idea hacer métodos SortBy para ordenar la lista que sea
      
      revisar el metodo enviarPiloto() en escudería para que ponga a null el piloto/coche si no encuentra
+     
+     Rehacer el decorator de circuito con una interfaz
     
     
 INFORMARSE: 

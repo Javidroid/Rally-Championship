@@ -27,7 +27,6 @@ public interface Circuito
      */
     public double getValorComplejidad();
     
-    
     /**
      * Método que devuelve distancia
      * @return  distancia
