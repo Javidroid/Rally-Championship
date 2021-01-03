@@ -57,7 +57,10 @@ TO-DO LIST:
      Luego, cuando se termine la carrera, la organización mande de nuevo a los pilotos y coche a su escudería.
      Por tanto, también habrá que quitar el coche de la lista y devolverlo cuando el piloto se baje del coche
      en piloto.bajarseDelCoche();
-    
+     
+     ver si es buena idea hacer métodos SortBy para ordenar la lista que sea
+     
+     revisar el metodo enviarPiloto() en escudería para que ponga a null el piloto/coche si no encuentra
     
     
 INFORMARSE: 

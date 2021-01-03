@@ -57,7 +57,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public void descalificar()
     {
         setDescalificado(true);  
-        System.out.println(this.getNombre()+" ha sido descalificado");
+        //System.out.println(this.getNombre()+" ha sido descalificado");
     }
         
     /**
@@ -76,6 +76,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * @param  coche   el coche que la escudería le proporcione
      */
     public void devolverCoche(){
+        //Cambiar este método para que lo devuelva a la lista de la escudería
         setCocheAsignado(null);
     }
     
@@ -97,6 +98,26 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             }
         }
         return tiempo;
+    }
+    
+    /**
+     * Devuelve los puntos que el piloto ha conseguido en el 
+     * circuito dado por parámetro
+     * 
+     * return int  Puntos que ha conseguido el piloto en la carrera
+     */
+    public int getPuntosEnCircuito(Circuito circuito){
+        boolean encontrado = false;
+        int puntos = -1; //en caso de que no haya participado en ese circuito
+        Iterator<Resultado> it = resultados.iterator();
+        while (!encontrado && it.hasNext()){
+            Resultado res = it.next();
+            if(res.getCircuito().equals(circuito)){
+                encontrado = true;
+                puntos = res.getPuntos();
+            }
+        }
+        return puntos;
     }
     
     /**
@@ -173,6 +194,16 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             }
         }
         return abandonadas;
+    }
+    
+    /**
+     * Devuelve el tiempo obtenido en el último resultado del Piloto
+     * Esto sirve para que la clase Organización pueda ordenarlos por puntos
+     * 
+     * @return Tiempo del ultimo resultado
+     */
+    public double getTiempoUltimoResultado(){
+        return resultados.get(resultados.size()-1).getTiempo();
     }
     
     /**

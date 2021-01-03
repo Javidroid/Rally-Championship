@@ -137,6 +137,9 @@ public class EscuderiaReal implements Escuderia
             if(cocheAsignable.getDeposito() > 0){
                 cocheEncontrado = true;
             }
+            else {
+                cocheAsignable = null;
+            }
         }
 
         //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
@@ -146,6 +149,9 @@ public class EscuderiaReal implements Escuderia
             if(!pilotoEnviable.getDescalificado()){
                 pilotoEncontrado = true;
                 pilotoEnviable.recibirCoche(cocheAsignable);
+            }
+            else {
+                pilotoEnviable = null; //revisar
             }
         }
 

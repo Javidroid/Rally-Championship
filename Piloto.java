@@ -9,7 +9,7 @@ import java.util.*;
 
 public interface Piloto
 {
-    //GETTERS
+    //GETTERS (de los campos de Piloto)
     /**
      * Método que devuelve nombre
      * @return  nombre
@@ -82,6 +82,14 @@ public interface Piloto
     public double getTiempoEnCircuito(Circuito circuito);
     
     /**
+     * Devuelve los puntos que el piloto ha conseguido en el 
+     * circuito dado por parámetro
+     * 
+     * return int  Puntos que ha conseguido el piloto en la carrera
+     */
+    public int getPuntosEnCircuito(Circuito circuito);
+    
+    /**
      * Pone los puntos que la clase Organizacion le asigne
      * según el tiempo conseguido entre todos los pilotos
      * 
@@ -117,6 +125,14 @@ public interface Piloto
      * @return Nº de carreras abandonadas
      */
     public int getCarrerasAbandonadas();
+    
+    /**
+     * Devuelve el tiempo obtenido en el último resultado del Piloto
+     * Esto sirve para que la clase Organización pueda ordenarlos por puntos
+     * 
+     * @return Tiempo del ultimo resultado
+     */
+    public double getTiempoUltimoResultado();
     
     /**
      * Gestiona todos los métodos necesarios para que el piloto
