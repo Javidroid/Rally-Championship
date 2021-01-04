@@ -171,6 +171,19 @@ public class CocheNormal implements Coche
         //<comb: combustibleCoche(valorOriginal)(actual:valorActual)> 
         //[opcionalmente si tiene reserva->] > <reserva: reservaCoche> 
         //[opcionalmente si tiene nitro->] > <nitroPendiente: nitroPendiente> 
+        builder.append("<coche: ");
+        builder.append(getNombre());
+        builder.append(" > ");
+        builder.append("<tipo: normal > ");
+        builder.append("<vel_teó:");
+        builder.append(getValorVelocidad());
+        builder.append("> ");
+        builder.append("<comb: (");
+        builder.append(getValorCombustibleTotal());
+        builder.append(") (actual: ");
+        builder.append(getDeposito());
+        builder.append(") > ");
+        builder.append("\n");
         return builder.toString();
     }
     
