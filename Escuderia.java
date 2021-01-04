@@ -19,30 +19,27 @@ public interface Escuderia
     * 
     * @param piloto     Piloto que se quiere añadir a la lista
     */
-   public void añadirPiloto(Piloto piloto);
+   public void insertarPiloto(Piloto piloto);
    
    /**
     * Añade un Coche a la plantilla de coches de la Escudería
     * 
     * @param Coche      Coche que se quiere añadir a la lista
     */
-   public void añadirCoche(Coche coche);
+   public void insertarCoche(Coche coche);
    
    /**
-    * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
-    * según el parámetro
-    * 
-    * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
-    */
-   public void ordenarPilotos(boolean ASC);
+     * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
+     * según ASCpiloto
+     * 
+     */
+    public void ordenarPilotos();
    
    /**
-    * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
-    * según el parámetro
-    * 
-    * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
-    */
-   public void ordenarCoches(boolean ASC);
+     * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
+     * según ASCcoche
+     */
+    public void ordenarCoches();
    
    /**
     * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
@@ -108,6 +105,18 @@ public interface Escuderia
     * @param  CMPStrategyCoche     Nuevo valor del campo criterioCoche
     */
    public void setCriterioCoche(CMPStrategyCoche criterio);
+   
+   /**
+    * Setter de ASCpiloto.      Público para poder elegir la estrategia.
+    * @param  ASCpiloto         Nuevo valor del campo ASCpiloto
+    */
+   public void setASCpiloto(boolean ASCpiloto);
+   
+   /**
+    * Setter de ASCcoche.      Público para poder elegir la estrategia.
+    * @param  ASCcoche         Nuevo valor del campo ASCcoche
+    */
+   public void setASCcoche(boolean ASCcoche);
    
    
    //METODOS AUXILIARES

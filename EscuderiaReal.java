@@ -24,13 +24,15 @@ public class EscuderiaReal implements Escuderia
     private List <Coche>  coches;
 
     private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
+    private boolean ASCpiloto; //booleano que controla si se quiere ordenar ascendente o descendentemente
     
     private CMPStrategyCoche  criterioCoche; //campo que referencia la Strategy usada para ordenar coches
+    private boolean ASCcoche;
     /**
      * Constructor de Escuderia
      */
-    public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, CMPStrategyCoche criterioCoche,
-                         boolean ASCpiloto, boolean ASCcoche)
+    public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, boolean ASCpiloto, 
+                         CMPStrategyCoche criterioCoche, boolean ASCcoche)
     {
         setNombre(nombre);
         pilotos = new ArrayList <Piloto>();
@@ -38,10 +40,12 @@ public class EscuderiaReal implements Escuderia
 
         setCriterioPiloto(criterioPiloto);
         setCriterioCoche(criterioCoche);
-
-        ordenarPilotos(ASCpiloto);
         
-        ordenarCoches(ASCcoche);
+        setASCpiloto(ASCpiloto);
+        setASCcoche(ASCcoche);
+
+        ordenarPilotos();
+        ordenarCoches();
     }
 
     //FUNCIONALIDAD DE ESCUDERÍA
@@ -61,7 +65,7 @@ public class EscuderiaReal implements Escuderia
      * 
      * @param piloto     Piloto que se quiere añadir a la lista
      */
-    public void añadirPiloto(Piloto piloto){
+    public void insertarPiloto(Piloto piloto){
         pilotos.add(piloto);        
     }
    
@@ -70,30 +74,27 @@ public class EscuderiaReal implements Escuderia
      * 
      * @param Coche      Coche que se quiere añadir a la lista
      */
-    public void añadirCoche(Coche coche){
+    public void insertarCoche(Coche coche){
         coches.add(coche);
     }
     
     /**
      * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
-     * según el parámetro
+     * según ASCpiloto
      * 
-     * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
      */
-    public void ordenarPilotos(boolean ASC)
+    public void ordenarPilotos()
     {
-        criterioPiloto.ordenarPilotos(pilotos, ASC); //mandamos la lista de pilotos para que se ordene
+        criterioPiloto.ordenarPilotos(pilotos, ASCpiloto); //mandamos la lista de pilotos para que se ordene
     }
 
     /**
      * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
-     * según el parámetro
-     * 
-     * @param ASC    true si se desea ordenar la lista ascedentemente. False para descendente
+     * según ASCcoche
      */
-    public void ordenarCoches(boolean ASC)
+    public void ordenarCoches()
     {
-        criterioCoche.ordenarCoches(coches, ASC);    //mandamos la lista de coches para que se ordene
+        criterioCoche.ordenarCoches(coches, ASCcoche);    //mandamos la lista de coches para que se ordene
     }
 
     /**
@@ -130,6 +131,11 @@ public class EscuderiaReal implements Escuderia
 
         Coche cocheAsignable = null; //variable que almacena el primer coche disponible para ser asignado
         Piloto pilotoEnviable = null; //almacena el primer piloto enviable en la lista
+        
+        //ordenamos los pilotos y los coches antes de asignarlos
+        ordenarPilotos();
+        ordenarCoches();
+        
 
         //Buscamos el primer coche con combustible en la lista
         while(itCoch.hasNext() && !cocheEncontrado){
@@ -197,6 +203,18 @@ public class EscuderiaReal implements Escuderia
      * @param  CMPStrategyCoche    Nuevo valor del campo criterioCoche
      */
     public void setCriterioCoche(CMPStrategyCoche criterio){criterioCoche = criterio;}
+    
+    /**
+    * Setter de ASCpiloto.      Público para poder elegir la estrategia.
+    * @param  ASCpiloto         Nuevo valor del campo ASCpiloto
+    */
+   public void setASCpiloto(boolean ASCpiloto){this.ASCpiloto=ASCpiloto;}
+   
+   /**
+    * Setter de ASCcoche.      Público para poder elegir la estrategia.
+    * @param  ASCcoche         Nuevo valor del campo ASCcoche
+    */
+   public void setASCcoche(boolean ASCcoche){this.ASCcoche=ASCcoche;}
 
     //GETTERS
     /**
