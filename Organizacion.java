@@ -24,7 +24,6 @@ public class Organizacion
 
     //ArrayList porque requiere orden
     private List <Piloto>   pilotosCarrera;
-    
 
     //HashMap para almacenar el valor de la escudería
     //Esta es una estructura auxiliar para almacenar la escudería a la que pertenece cada piloto
@@ -126,49 +125,18 @@ public class Organizacion
         }
 
         if (pilotosCarrera.size() > 1){
-            System.out.println("********************************************************************************************************");
-            System.out.println("******************************** Pilotos que van a competir en "+circuito.getNombre()+" *******************************");
-            System.out.println("********************************************************************************************************");
+            //Mostramos los pilotos que van a participar en el Circuito
+            mostrarPilotosCarrera(circuito);
 
-            for (Piloto piloto : pilotosCarrera){
-                System.out.println(piloto.toString());
-            }
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println("+++++++++++++++++++++++++ Comienza la carrera en "+circuito.getNombre()+" ++++++++++++++++++++++++++");
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
-            //Ordenamos a los pilotos por puntos totales para la parrilla de salida
-            Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
-
-            int contadorPiloto = 1;
-            for(Piloto piloto : pilotosCarrera){
-                System.out.println("@@@ Piloto " + contadorPiloto + " de " + limitePilotos);
-
-                System.out.println(piloto.toString() + " con \n"); //mostrarmos las CARACTERÍSTICAS del PILOTO
-                System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
-
-                System.out.println("+++ Con estas condiciones es capaz de correr a " +
-                    + piloto.getCocheAsignado().calcularVelocidadReal(piloto, circuito) +" km/hora +++");
-
-                piloto.conducir(circuito); //circuito es el Circuito que se ha pasado por parámetro
-
-                if(piloto.getCarrerasAbandonadas() >= limiteAbandonos){
-                    piloto.descalificar();
-
-                    System.out.println("@@@");
-                    System.out.println("¡¡¡ " +piloto.getNombre()+ " es DESCALIFICADO del campeonato por alcanzar "
-                        +"el límite de abandonos("+limiteAbandonos+") !!!");
-                    System.out.println("@@@");
-                }
-
-            }
+            //Comenzamos la carrera
+            comenzarCarrera(circuito);
 
             //Creamos una lista para los pilotos que han abandonado
-            List <Piloto> pilotosAbandono = new ArrayList <Piloto>();
-            List <Piloto> pilotosTerminado= new ArrayList <Piloto>();
-
+            List <Piloto> pilotosAbandono  = new ArrayList <Piloto>();
+            List <Piloto> pilotosTerminado = new ArrayList <Piloto>();
 
             //Se asigna los puntos correspondientes a cada piloto que ha abandonado
+            //y se separan los pilotos que han abandonado de los que han terminado
             for (Piloto piloto : pilotosCarrera){
                 if (piloto.getTiempoUltimoResultado() < 0){
                     piloto.setPuntosEnCircuito(circuito, 0); //le ponemos 0 a sus puntos
@@ -178,43 +146,16 @@ public class Organizacion
                     pilotosTerminado.add(piloto); //como ha terminado, lo añadimos a la lista de pilotos que han terminado
                 }
             }
-            
-            //Ordenamos a los pilotos QUE HAN TERMINADO por tiempo para asignarle sus puntos 
-            //y mostrar la clasificación en la carrera
-            Collections.sort(pilotosTerminado, new CMPTiempoResultado());
-            for (int i=0; i<pilotosTerminado.size()-1; i++){
-                Piloto piloto = pilotosTerminado.get(i);
-                
-                if (i==0){ //el primer piloto en la lista será el que menor tiempo tenga
-                    piloto.setPuntosEnCircuito(circuito, 10);   //se le asignan 10 puntos al primer piloto
-                }
-                else if (i==1){
-                    piloto.setPuntosEnCircuito(circuito, 8);    //se le asignan 8 puntos al segundo piloto
-                }
-                else if (i==2){
-                    piloto.setPuntosEnCircuito(circuito, 6);    //se le asignan 6 puntos al tercer piloto
-                }
-                else if (i==3){
-                    piloto.setPuntosEnCircuito(circuito, 4);    //se le asignan 4 puntos al cuarto piloto
-                }
-                else{
-                    piloto.setPuntosEnCircuito(circuito, 2);    //se le asignan 2 puntos al resto de pilotos
-                }
-            }
-            
 
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println("+++++++++++++++++ Clasificación final de la carrera en "+circuito.getNombre()+" +++++++++++++++++");
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            
-            //mostramos los pilotos que han terminado por orden de clasificación
-            for (Piloto piloto : pilotosTerminado){
-                int posicion = 1;
-                System.out.println("@@@ Posición("+posicion+"): "+piloto.getNombre()+" - Tiempo: "+
-                piloto.getTiempoEnCircuito(circuito)+" minutos -Puntos: "+piloto.getPuntosEnCircuito(circuito)+" @@@");
-                posicion ++;
-            }
-            
+            //Asignamos los puntos correspondientes a los pilotos que han terminado
+            asignarPuntos(pilotosTerminado, circuito);
+
+            //mostramos la clasificación final de los pilotos tras la carrera (mostrar pilotos
+            //por orden de tiempo y, luego, los que han abandonado)-
+            mostrarClasificacion(pilotosAbandono, pilotosTerminado, circuito);
+
+            //devolvemos los pilotos a su escudería
+            devolverPilotos();
         }
         else {
             finalizarCampeonato(); //llamamos al método que pone el valor finalizado a true para parar de hacer carreras
@@ -240,38 +181,13 @@ public class Organizacion
      * 
      */
     public void celebrarCompeticion(){
-        //todo
-
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-        System.out.println("||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||");
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-
         //ordenamos los circuitos:
         //Collections.sort
-        for (Circuito circuito : circuitos){
-            circuito.toString();
-        }
+        //Mostramos los circuitos
+        mostrarCircuitos();
 
         //Mostramos cada escudería
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println("%%%%%%%% ESCUDERÍAS DEL CAMPEONATO %%%%%%%%");
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
-        for (Escuderia escuderia : escuderias){
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            System.out.println("%%% "+escuderia.getNombre()+" %%%");
-
-            //mostramos los pilotos de cada escudería
-            for (Piloto piloto : escuderia.getPilotos()){
-                System.out.println(piloto.toString());
-            }
-            for (Coche coche : escuderia.getCoches()){
-                System.out.println(coche.toString());
-            }
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        }
-
-        System.out.println("\n");
+        mostrarEscuderias();
 
         Iterator <Circuito> itCir = circuitos.iterator();
         while (itCir.hasNext() && !finalizado){
@@ -292,12 +208,160 @@ public class Organizacion
     }
 
     /**
-     * Método que se encarga de 
+     *  Método que se encarga de 
      * 
      * @param circuito  El circuito que quiere insertarse
      */
     public void entregarPremios(){
         //todo
+    }
+
+    /**
+     *  Método que devuelve los Pilotos de pilotosCarrera a su respectiva escudería
+     */
+    public void devolverPilotos(){
+        //todo
+    }
+
+    /**
+     *  Método que muestra los circuitos de los que se dispone el campeonato
+     */
+    public void mostrarCircuitos(){
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        System.out.println("||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||");
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        for (Circuito circuito : circuitos){
+            circuito.toString();
+        }
+    }
+
+    /**
+     *  Método que muestra las escuderías inscritas en el campeonato
+     */
+    public void mostrarEscuderias(){
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println("%%%%%%%% ESCUDERÍAS DEL CAMPEONATO %%%%%%%%");
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+        for (Escuderia escuderia : escuderias){
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("%%% "+escuderia.getNombre()+" %%%");
+
+            //mostramos los pilotos de cada escudería
+            for (Piloto piloto : escuderia.getPilotos()){
+                System.out.println(piloto.toString());
+            }
+            for (Coche coche : escuderia.getCoches()){
+                System.out.println(coche.toString());
+            }
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        }
+
+        System.out.println("\n");
+    }
+
+    /**
+     *  Método que muestra la información necesaria sobre los pilotos que van a participar en un Circuito
+     */
+    public void mostrarPilotosCarrera(Circuito circuito){
+        System.out.println("********************************************************************************************************");
+        System.out.println("******************************** Pilotos que van a competir en "+circuito.getNombre()+" *******************************");
+        System.out.println("********************************************************************************************************");
+
+        for (Piloto piloto : pilotosCarrera){
+            System.out.println(piloto.toString());
+        }
+    }
+
+    /**
+     * Método que muestra la información de inicio de carrera y hace las operaciones
+     * necesarias para que todos los pilotos en pilotosCarrera conduzcan
+     */
+    public void comenzarCarrera(Circuito circuito){
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++ Comienza la carrera en "+circuito.getNombre()+" ++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        //Ordenamos a los pilotos por puntos totales para la parrilla de salida
+        Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
+
+        int contadorPiloto = 1;
+        for(Piloto piloto : pilotosCarrera){
+            System.out.println("@@@ Piloto " + contadorPiloto + " de " + limitePilotos);
+
+            System.out.println(piloto.toString() + " con \n"); //mostrarmos las CARACTERÍSTICAS del PILOTO
+            System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
+
+            System.out.println("+++ Con estas condiciones es capaz de correr a " +
+                + piloto.getCocheAsignado().calcularVelocidadReal(piloto, circuito) +" km/hora +++");
+
+            piloto.conducir(circuito); //circuito es el Circuito que se ha pasado por parámetro
+
+            if(piloto.getCarrerasAbandonadas() >= limiteAbandonos){
+                piloto.descalificar();
+
+                System.out.println("@@@");
+                System.out.println("¡¡¡ " +piloto.getNombre()+ " es DESCALIFICADO del campeonato por alcanzar "
+                    +"el límite de abandonos("+limiteAbandonos+") !!!");
+                System.out.println("@@@");
+            }
+        }
+    }
+
+    /**
+     * Método que asigna los puntos a los pilotos que han TERMINADO una carrera en un Circuito.
+     * Ordena los pilotos que han terminado y asigna los puntos correspondientes al primero, segundo, tercero...
+     * La verdadera funcionalidad de este método es la limpieza de código de celebrarCarrera
+     */
+    public void asignarPuntos(List <Piloto> pilotosTerminado, Circuito circuito){
+        Collections.sort(pilotosTerminado, new CMPTiempoResultado());
+        for (int i=0; i<pilotosTerminado.size()-1; i++){
+            Piloto piloto = pilotosTerminado.get(i);
+
+            if (i==0){ //el primer piloto en la lista será el que menor tiempo tenga
+                piloto.setPuntosEnCircuito(circuito, 10);   //se le asignan 10 puntos al primer piloto
+            }
+            else if (i==1){
+                piloto.setPuntosEnCircuito(circuito, 8);    //se le asignan 8 puntos al segundo piloto
+            }
+            else if (i==2){
+                piloto.setPuntosEnCircuito(circuito, 6);    //se le asignan 6 puntos al tercer piloto
+            }
+            else if (i==3){
+                piloto.setPuntosEnCircuito(circuito, 4);    //se le asignan 4 puntos al cuarto piloto
+            }
+            else{
+                piloto.setPuntosEnCircuito(circuito, 2);    //se le asignan 2 puntos al resto de pilotos
+            }
+        }
+    }
+
+    /**
+     * Método que muestra los resultados de una carrera en un Circuito
+     * La verdadera funcionalidad de este método es la limpieza de código de celebrarCarrera
+     */
+    public void mostrarClasificacion(List <Piloto> pilotosAbandono, List <Piloto> pilotosTerminado, Circuito circuito){
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++ Clasificación final de la carrera en "+circuito.getNombre()+" +++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        //mostramos los pilotos que han terminado por orden de clasificación
+        for (Piloto piloto : pilotosTerminado){
+            int posicion = 1;
+            System.out.println("@@@ Posición("+posicion+"): "+piloto.getNombre()+" - Tiempo: "+
+                piloto.getTiempoEnCircuito(circuito)+" minutos -Puntos: "+piloto.getPuntosEnCircuito(circuito)+" @@@");
+            posicion ++;
+        }
+
+        //mostramos los pilotos que han abandonado
+        for (Piloto piloto : pilotosAbandono){
+            System.out.println("¡¡¡ Ha abandonado "+piloto.getNombre()+" - Tiempo: "
+                + piloto.getTiempoUltimoResultado() + "- Puntos: 0 ");
+
+            if(piloto.getDescalificado()){
+                System.out.println(" - Además ha sido descalificado para el resto del Campeonato !!!");
+            }
+        }
     }
 
     /**
@@ -337,7 +401,6 @@ public class Organizacion
      */
     private void setFinalizado(boolean finalizado){this.finalizado = finalizado;}
 
-    
     //GETTERS
     /**
      * Getter de limiteAbandonos
