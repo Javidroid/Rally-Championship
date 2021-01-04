@@ -15,6 +15,10 @@ public class Organizacion
     private int limitePilotos;
     private boolean finalizado; //booleano que indica si el torneo tiene que acabar por tener <= 1 pilotos
 
+    private List <Piloto> pilotosDescalificados; //una lista que almacena todos los pilotos que han sido descalificados
+    private List <Piloto> pilotosSinDescalificar;//una lista que almacena todos los pilotos que NO han sido descalificados 
+    private List <Escuderia> escuderiasDescalificadas;
+
     //TreeSet porque los Circuitos son únicos y tienen orden.
     //Este orden es estático: se asigna al inicio y no se modifica en RunTime
     private Set <Circuito> circuitos;    
@@ -33,10 +37,13 @@ public class Organizacion
      */
     private Organizacion()
     {
-        circuitos            = new TreeSet <Circuito>();
-        escuderias           = new HashSet <Escuderia>();
-        pilotosCarrera       = new ArrayList <Piloto>();
-        mapaPilotosEscuderia = new HashMap <Piloto, Escuderia>();
+        pilotosDescalificados   = new ArrayList <Piloto>();
+        pilotosSinDescalificar  = new ArrayList <Piloto>();
+        escuderiasDescalificadas= new ArrayList <Escuderia>();
+        circuitos               = new TreeSet <Circuito>();
+        escuderias              = new HashSet <Escuderia>();
+        pilotosCarrera          = new ArrayList <Piloto>();
+        mapaPilotosEscuderia    = new HashMap <Piloto, Escuderia>();
     }
 
     /**
@@ -48,10 +55,13 @@ public class Organizacion
         setLimitePilotos(limitePilotos);
         setFinalizado(false);
 
-        circuitos            = new TreeSet <Circuito>();
-        escuderias           = new HashSet <Escuderia>();
-        pilotosCarrera       = new ArrayList <Piloto>();
-        mapaPilotosEscuderia = new HashMap <Piloto, Escuderia>();
+        pilotosDescalificados   = new ArrayList <Piloto>();
+        pilotosSinDescalificar  = new ArrayList <Piloto>();
+        escuderiasDescalificadas= new ArrayList <Escuderia>();
+        circuitos               = new TreeSet <Circuito>();
+        escuderias              = new HashSet <Escuderia>();
+        pilotosCarrera          = new ArrayList <Piloto>();
+        mapaPilotosEscuderia    = new HashMap <Piloto, Escuderia>();
     }
 
     /**
@@ -131,7 +141,7 @@ public class Organizacion
             //Comenzamos la carrera
             comenzarCarrera(circuito);
 
-            //Creamos una lista para los pilotos que han abandonado
+            //Creamos una lista para los pilotos que han abandonado y los que no
             List <Piloto> pilotosAbandono  = new ArrayList <Piloto>();
             List <Piloto> pilotosTerminado = new ArrayList <Piloto>();
 
@@ -214,78 +224,105 @@ public class Organizacion
      */
     public void entregarPremios(){
         //todo
-        
+
         System.out.println("****************************************************");
         System.out.println("**************** FIN DEL CAMPEONATO ****************");
         System.out.println("****************************************************");
         System.out.println("********** CLASIFICACIÓN FINAL DE PILOTOS **********");
         System.out.println("****************************************************");
-        
-        
-        //si todos los pilotos descalificados
-        System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
-        System.out.println("¡¡¡ Campeonato de pilotos queda desierto por haber sido descalificados todos los pilotos !!!");
-        System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
-        
-        
-        //si hay pilotos sin descalificar
-        //[for each Piloto sin Descalificar]
-        System.out.println("@@@ Posición("+/*numeroPosicion+*/"): "/*+nombrePiloto*/
-        +" - Puntos Totales: "+/*puntosTotales+*/" @@@");
-        //[for each Carrera in Piloto]
-        System.out.println("Carrera("+/*circuito+*/") - Puntos:"+/*puntosEnCarrera+*/
-        " - Tiempo:"+/*tiempoEnCarrera+*/" minutos \n");
-        
+
+        //si todos los pilotos descalificados (tamañaoListaDescalificados == tamañoMapaDeTodosLosPilotos)
+        if (pilotosDescalificados.size() == mapaPilotosEscuderia.size()){
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+            System.out.println("¡¡¡ Campeonato de pilotos queda desierto por haber sido descalificados todos los pilotos !!!");
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+        }
+        else{
+            //si hay pilotos sin descalificar
+
+            //metemos a los pilotos no descalificados en la lista de pilotosSinDescalificar
+            //lo hacemos en este else para evitar que se itere sobre todas las escuderías indistintamente
+            //en vez sólamente cuando sepamos con certeza que existen pilotos sin descalificar
+            for (Escuderia escuderia : escuderias){
+                List <Piloto> pilotos = escuderia.getPilotos();
+                for(Piloto piloto : pilotos){
+                    if(piloto.getDescalificado() == false){ //si el piloto no está descalificado, lo añadimos
+                        pilotosSinDescalificar.add(piloto);
+                    }
+                }
+            }
+
+            int posicion = 1;
+            for (Piloto piloto : pilotosSinDescalificar){
+                System.out.println("@@@ Posición("+ posicion +"): " + piloto.getNombre()
+                    +" - Puntos Totales: "+piloto.getTotalPuntos()+" @@@");
+
+                for (Resultado result : piloto.getListaResultados()){
+                    System.out.println("Carrera("+result.getCircuito().getNombre()+") - Puntos:"+result.getPuntos()+
+                        " - Tiempo:"+result.getTiempo()+" minutos");
+                }
+                posicion++; //incrementamos la posicion para el siguiente piloto
+            }
+        }
         System.out.println("****************************************************");
         System.out.println("************** PILOTOS DESCALIFICADOS **************");
         System.out.println("****************************************************");
-        
-        //[for each Piloto in sinDescalificar]
-        System.out.println("--- Piloto Descalificado: "+/*nombrePiloto+*/
-        " - Puntos Totales Anulados: "+/*puntosTotales+*/" ---");
-        //[for each Carrera in Piloto]
-        System.out.println("Carrera("+/*circuito+*/") - Puntos:"+/*puntosEnCarrera+*/
-        " - Tiempo:"+/*tiempoEnCarrera+*/" minutos");
-        
-        
+
+        Collections.sort(pilotosDescalificados, Collections.reverseOrder(new CMPPuntosTotalesPiloto()));
+        for (Piloto piloto : pilotosDescalificados){
+            System.out.println("--- Piloto Descalificado: "+ piloto.getNombre()+
+                " - Puntos Totales Anulados: "+piloto.getTotalPuntos()+" ---");
+            for (Resultado result : piloto.getListaResultados()){
+                System.out.println("Carrera("+result.getCircuito().getNombre()+") - Puntos:"+result.getPuntos()+
+                    " - Tiempo:"+result.getTiempo()+" minutos");
+            }
+        }
+
         System.out.println("****************************************************");
         System.out.println("******** CLASIFICACIÓN FINAL DE ESCUDERÍAS *********");
         System.out.println("****************************************************");
-        
-        //[si no hay pilotos sin descalificar]
-        System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
-        System.out.println("¡¡¡ Campeonato de escuderías queda desierto por haber sido descalificados todos los pilotos !!!");
-        System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
-        
-        
-        //[si hay pilotos sin descalificar]
-        //[for each Escudería Con Pilotos Sin Descalificar]
-        System.out.println("@@@ Posición("+/*numeroPosicion+*/") "+
-        /*nombreEscudería+*/" con puntosEscudería puntos @@@");
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println("%%% "+/*nombreEscudería+*/" %%%");
-        
-        //[for each Piloto in Escudería]
-        System.out.println(/*piloto.toString()*/);
-        
-        //[for each Coche in Escudería]
-        System.out.println(/*coche.toString()*/);
-        
+
+        if (pilotosDescalificados.size() == mapaPilotosEscuderia.size()){
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+            System.out.println("¡¡¡ Campeonato de escuderías queda desierto por haber sido descalificados todos los pilotos !!!");
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
+        }
+        else{
+            for (Escuderia escuderia : escuderias){
+                int posicion = 1;
+                boolean encontrado = false; 
+
+                //podríamos usar un iterador para salir del bucle cuando encuentre un piloto sin descalificar
+                //pero la diferencia sería infima y en este caso priorizamos la limpieza de código
+                for(Piloto piloto : escuderia.getPilotos()){
+                    if (piloto.getDescalificado() == false){
+                        encontrado = true;
+                    }
+                }
+                if (encontrado){
+                    System.out.println("@@@ Posición("+ posicion +") "+
+                        escuderia.getNombre()+" con"+ escuderia.getPuntosPilotosTotal() +" puntos @@@");
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                    System.out.println("%%% "+escuderia.getNombre()+" %%%");
+
+                    escuderia.toString(); //Mostramos todos los pilotos y los coches de la escuderia
+                }
+                else {
+                    escuderiasDescalificadas.add(escuderia);
+                }
+            }
+        }
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         System.out.println("****************************************************");
         System.out.println("************ ESCUDERIAS DESCALIFICADAS *************");
         System.out.println("****************************************************");
-        
-        //[for each Escudería Con Todos Los Pilotos Descalificados]
-        System.out.println("¡¡¡ Escudería Descalificada: "+/*nombreEscudería+*/" con 0.0 puntos !!!");
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        System.out.println("%%% "+/*nombreEscudería+*/" %%%");
-        //[for each Piloto in Escudería]
-        System.out.println(/*piloto.toString()*/);
-        
-        //[for each Coche in Escudería]
-        System.out.println(/*coche.toString()*/);
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+        for(Escuderia escuderia : escuderiasDescalificadas){
+            System.out.println("¡¡¡ Escudería Descalificada: "+escuderia.getNombre()+" con 0.0 puntos !!!");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            escuderia.toString();
+        }
+
     }
 
     /**
@@ -293,7 +330,7 @@ public class Organizacion
      */
     public void devolverPilotos(){
         //todo
-        
+
         //en este método hay que ver si se han sacado los pilotos de sus listas en la escudería, en ese caso
         //habría simplemente que llamar a Escudería.insertarPiloto
         pilotosCarrera.clear(); //borramos la lista entera
@@ -375,6 +412,8 @@ public class Organizacion
 
             if(piloto.getCarrerasAbandonadas() >= limiteAbandonos){
                 piloto.descalificar();
+
+                pilotosDescalificados.add(piloto); //añadimos al piloto a la lista de pilotos descalificados
 
                 System.out.println("@@@");
                 System.out.println("¡¡¡ " +piloto.getNombre()+ " es DESCALIFICADO del campeonato por alcanzar "

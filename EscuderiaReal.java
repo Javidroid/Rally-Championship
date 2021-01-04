@@ -255,12 +255,13 @@ public class EscuderiaReal implements Escuderia
     @Override
     public String toString(){
         StringBuilder builder= new StringBuilder();
-        builder.append(getNombre());
-        builder.append('\n');
-        builder.append(getCoches());
-        builder.append('\n');
-        builder.append(getPilotos());
-        builder.append('\n');
+        /*
+         * %%% nombreEscudería %%%
+         * [for each Piloto in Escudería]
+         * piloto.toString
+         * [for each Coche in Escudería]
+         * coche.toString()
+           */
         return builder.toString();
     }
 

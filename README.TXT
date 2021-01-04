@@ -63,6 +63,9 @@ TO-DO LIST:
      revisar el metodo enviarPiloto() en escudería para que ponga a null el piloto/coche si no encuentra
      
      Rehacer el decorator de circuito con una interfaz
+     
+     Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
+     o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
     
     
 INFORMARSE: 
