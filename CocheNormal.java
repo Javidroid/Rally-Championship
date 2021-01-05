@@ -109,6 +109,7 @@ public class CocheNormal implements Coche
     {
         double velocidadReal;
         velocidadReal = (getValorVelocidad() * piloto.calcularDestreza()) / circuito.getValorComplejidad();
+        velocidadReal = Math.round(velocidadReal*100d) / 100d;
         return velocidadReal;
     }
     
@@ -126,6 +127,7 @@ public class CocheNormal implements Coche
         velocidadReal = calcularVelocidadReal(piloto, circuito);
         
         tiempo = circuito.getValorDistancia() / velocidadReal * 60;
+        tiempo = Math.round(tiempo*100d) / 100d;
         return tiempo;
     }
     

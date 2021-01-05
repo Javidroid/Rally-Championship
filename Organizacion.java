@@ -11,8 +11,8 @@ public class Organizacion
 {
     private static Organizacion instancia; //singleton
 
-    private int limiteAbandonos;
-    private int limitePilotos;
+    private int limiteAbandonos; //numero maximo de abandonos
+    private int limitePilotos; //numero maximo de pilotos
     private boolean finalizado; //booleano que indica si el torneo tiene que acabar por tener <= 1 pilotos
 
     private List <Piloto> pilotosDescalificados; //una lista que almacena todos los pilotos que han sido descalificados

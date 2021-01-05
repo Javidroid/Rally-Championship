@@ -297,6 +297,15 @@ public class EscuderiaReal implements Escuderia
          * [for each Coche in Escudería]
          * coche.toString()
          */
+        builder.append("%%% ");
+        builder.append(getNombre());
+        builder.append(" %%%");
+        for (Piloto p : pilotos){
+            p.toString();
+        }
+        for(Coche c : coches){
+            c.toString();
+        }
         return builder.toString();
     }
 

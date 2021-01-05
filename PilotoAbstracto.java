@@ -85,7 +85,8 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * Devuelve el tiempo que el piloto ha conseguido en el 
      * circuito dado por parámetro
      * 
-     * return double tiempo que ha tardado en acabar el circuito
+     * @param circuito del que se quiere saber el tiempo
+     * @return tiempo que ha tardado en acabar el circuito
      */
     public double getTiempoEnCircuito(Circuito circuito){
         boolean encontrado = false;
@@ -105,7 +106,8 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * Devuelve los puntos que el piloto ha conseguido en el 
      * circuito dado por parámetro
      * 
-     * return int  Puntos que ha conseguido el piloto en la carrera
+     * @param circuito del que se quiere saber la puntuacion
+     * @return puntos que ha conseguido el piloto en la carrera
      */
     public int getPuntosEnCircuito(Circuito circuito){
         boolean encontrado = false;
@@ -125,6 +127,8 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * Pone los puntos que la clase Organizacion le asigne
      * según el tiempo conseguido entre todos los pilotos
      * 
+     * @param circuito del que se asignan los puntos
+     * @param puntos asignados por la clase Organizacion
      */
     public void setPuntosEnCircuito(Circuito circuito, int puntos){
         boolean encontrado = false;
@@ -159,7 +163,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * Devuelve el nº de carreras (terminadas o no) en las que
      * ha participado el Piloto
      * 
-     * @return Nº de carreras participadas
+     * @return carreras Nº de carreras participadas
      */
     public int getCarrerasParticipadas(){
         int carreras;
@@ -170,7 +174,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     /**
      * Devuelve el nº de carreras que el Piloto ha terminado
      * 
-     * @return Nº de carreras terminadas
+     * @return terminadas Nº de carreras terminadas
      */
     public int getCarrerasTerminadas(){
         int terminadas = 0;
@@ -185,7 +189,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     /**
      * Devuelve el nº de carreras que el Piloto ha abandonado
      * 
-     * @return Nº de carreras abandonadas
+     * @return abandonadas Nº de carreras abandonadas
      */
     public int getCarrerasAbandonadas(){
         int abandonadas = 0;
