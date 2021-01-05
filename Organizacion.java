@@ -37,13 +37,13 @@ public class Organizacion
      */
     private Organizacion()
     {
-        pilotosDescalificados   = new ArrayList <Piloto>();
-        pilotosSinDescalificar  = new ArrayList <Piloto>();
-        escuderiasDescalificadas= new ArrayList <Escuderia>();
-        circuitos               = new TreeSet <Circuito>();
-        escuderias              = new HashSet <Escuderia>();
-        pilotosCarrera          = new ArrayList <Piloto>();
-        mapaPilotosEscuderia    = new HashMap <Piloto, Escuderia>();
+        pilotosDescalificados    = new ArrayList <Piloto>();
+        pilotosSinDescalificar   = new ArrayList <Piloto>();
+        escuderiasDescalificadas = new ArrayList <Escuderia>();
+        circuitos                = new TreeSet <Circuito>();
+        escuderias               = new HashSet <Escuderia>();
+        pilotosCarrera           = new ArrayList <Piloto>();
+        mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
     }
 
     /**
@@ -55,13 +55,13 @@ public class Organizacion
         setLimitePilotos(limitePilotos);
         setFinalizado(false);
 
-        pilotosDescalificados   = new ArrayList <Piloto>();
-        pilotosSinDescalificar  = new ArrayList <Piloto>();
-        escuderiasDescalificadas= new ArrayList <Escuderia>();
-        circuitos               = new TreeSet <Circuito>();
-        escuderias              = new HashSet <Escuderia>();
-        pilotosCarrera          = new ArrayList <Piloto>();
-        mapaPilotosEscuderia    = new HashMap <Piloto, Escuderia>();
+        pilotosDescalificados    = new ArrayList <Piloto>();
+        pilotosSinDescalificar   = new ArrayList <Piloto>();
+        escuderiasDescalificadas = new ArrayList <Escuderia>();
+        circuitos                = new TreeSet <Circuito>();
+        escuderias               = new HashSet <Escuderia>();
+        pilotosCarrera           = new ArrayList <Piloto>();
+        mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
     }
 
     /**
@@ -122,17 +122,8 @@ public class Organizacion
      * param circuito   El circuito en el que se va a disputar la carrera
      */
     public void celebrarCarrera(Circuito circuito){
-        //Iteramos sobre las escuderias para inscribir los posibles pilotos. MÁX: limitePilotos
-        Iterator <Escuderia> it = escuderias.iterator();
-        while(it.hasNext() && (pilotosCarrera.size() <= limitePilotos)){
-            Escuderia es = it.next();
-            Piloto pilotoCandidato;
-
-            pilotoCandidato = es.enviarPiloto();
-            if(pilotoCandidato != null){
-                pilotosCarrera.add(pilotoCandidato); //añadimos un piloto no nulo
-            }
-        }
+        //cargamos en pilotosCarrera todos los pilotos aspirantes a participar en esta carrera
+        cargarPilotosCarrera();
 
         if (pilotosCarrera.size() > 1){
             //Mostramos los pilotos que van a participar en el Circuito
@@ -326,13 +317,38 @@ public class Organizacion
     }
 
     /**
+     *  Método que inserta los pilotos mandados por las escuderías
+     */
+    public void cargarPilotosCarrera(){
+        //Iteramos sobre las escuderias tantas veces hasta alcanzar limitePilotos o no haya ninguna escudería 
+        //con ningún piloto disponible
+        
+        //TODO
+
+        //boolean hayPilotosDisponibles = true;
+        //while((pilotosCarrera.size() < limitePilotos) && hayPilotosDisponibles){
+        //    Piloto pilotoCandidato;
+        //    Escuderia esc;
+        //    for(int i=0; i<escuderias.size()-1; i++){
+        //        //mal hecho
+        //        pilotoCandidato = esc.enviarPiloto();
+        //        if(pilotoCandidato != null){ //no dejamos que las escuderías manden un piloto nulo
+        //            pilotosCarrera.add(pilotoCandidato); //añadimos un piloto no nulo
+        //        }
+        //    }
+        //}
+    }
+
+    /**
      *  Método que devuelve los Pilotos de pilotosCarrera a su respectiva escudería
      */
     public void devolverPilotos(){
-        //todo
-
-        //en este método hay que ver si se han sacado los pilotos de sus listas en la escudería, en ese caso
-        //habría simplemente que llamar a Escudería.insertarPiloto
+        for(Piloto piloto : pilotosCarrera){
+            Escuderia escuderia = mapaPilotosEscuderia.get(piloto); //obtenemos la escudería a la que pertenece el piloto
+            escuderia.insertarPiloto(piloto); //volvemos a insertar al piloto en la lista de su escuderia
+            escuderia.insertarCoche(piloto.devolverCoche()); //lo mismo que arriba pero con el coche, además de que se
+            //deasigna el coche del piloto
+        }
         pilotosCarrera.clear(); //borramos la lista entera
     }
 

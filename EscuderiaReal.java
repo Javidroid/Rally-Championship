@@ -25,14 +25,14 @@ public class EscuderiaReal implements Escuderia
 
     private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
     private boolean ASCpiloto; //booleano que controla si se quiere ordenar ascendente o descendentemente
-    
+
     private CMPStrategyCoche  criterioCoche; //campo que referencia la Strategy usada para ordenar coches
     private boolean ASCcoche;
     /**
      * Constructor de Escuderia
      */
     public EscuderiaReal(String nombre, CMPStrategyPiloto criterioPiloto, boolean ASCpiloto, 
-                         CMPStrategyCoche criterioCoche, boolean ASCcoche)
+    CMPStrategyCoche criterioCoche, boolean ASCcoche)
     {
         setNombre(nombre);
         pilotos = new ArrayList <Piloto>();
@@ -40,7 +40,7 @@ public class EscuderiaReal implements Escuderia
 
         setCriterioPiloto(criterioPiloto);
         setCriterioCoche(criterioCoche);
-        
+
         setASCpiloto(ASCpiloto);
         setASCcoche(ASCcoche);
 
@@ -68,7 +68,7 @@ public class EscuderiaReal implements Escuderia
     public void insertarPiloto(Piloto piloto){
         pilotos.add(piloto);        
     }
-   
+
     /**
      * Añade un Coche a la plantilla de coches de la Escudería
      * 
@@ -77,7 +77,7 @@ public class EscuderiaReal implements Escuderia
     public void insertarCoche(Coche coche){
         coches.add(coche);
     }
-    
+
     /**
      * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
      * según ASCpiloto
@@ -131,17 +131,17 @@ public class EscuderiaReal implements Escuderia
 
         Coche cocheAsignable = null; //variable que almacena el primer coche disponible para ser asignado
         Piloto pilotoEnviable = null; //almacena el primer piloto enviable en la lista
-        
+
         //ordenamos los pilotos y los coches antes de asignarlos
         ordenarPilotos();
         ordenarCoches();
-        
 
         //Buscamos el primer coche con combustible en la lista
         while(itCoch.hasNext() && !cocheEncontrado){
             cocheAsignable = itCoch.next();
             if(cocheAsignable.getDeposito() > 0){
                 cocheEncontrado = true;
+                coches.remove(cocheAsignable); //sacamos al coche de la lista para evitar que otro piloto la use
             }
             else {
                 cocheAsignable = null;
@@ -149,37 +149,72 @@ public class EscuderiaReal implements Escuderia
         }
 
         //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
-        //piloto no descalificado de la lista.
+        //piloto no descalificado de la lista. 
+        //Se podría hacer para que, si no hay cocheAsignable, ni siquiera buscar piloto, pero hay que mostrar
+        //el mensaje del piloto concreto que no puede participar en la carrera
         while(itPil.hasNext() && !pilotoEncontrado){
             pilotoEnviable = itPil.next();
             if(!pilotoEnviable.getDescalificado()){
                 pilotoEncontrado = true;
                 pilotoEnviable.recibirCoche(cocheAsignable);
+                pilotos.remove(pilotoEnviable); //sacamos al piloto para no mandarlo dos veces a la misma carrera
             }
             else {
-                pilotoEnviable = null; //revisar
+                pilotoEnviable = null; //no hay piloto sin descalificar
+
+                if (cocheAsignable != null){
+                    coches.add(cocheAsignable); //volvemos a añadir el coche porque no se va a mandar ningún piloto
+                }
             }
         }
 
         if(pilotoEnviable.getCocheAsignado() == null){
-            pilotoEnviable = null; //Revisar si esto se pone así para que no se mande ningún piloto
-                                   //o si no se pone y en organización se controla que el piloto
-                                   //tenga coche asignado
-            
+            pilotoEnviable = null; //no hay piloto enviable porque no tiene coche
+
             System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
-            "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
+                "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
         }
 
         return pilotoEnviable;
     }
 
+    /**
+     * Método que devuelve true si aún quedan pilotos enviables por la escudería
+     * 
+     * @return true si hay pilotos, false si no
+     */
+    private boolean quedanPilotos(){
+        boolean quedan = false;
+        for(Piloto piloto : pilotos){
+            if (!piloto.getDescalificado()){
+                quedan = true;
+            }
+        }
+        return quedan;
+    }
+    
+    /**
+     * Método que devuelve true si aún quedan coches asignables a pilotos por la escudería
+     * 
+     * @return true si hay coches, false si no
+     */
+    private boolean quedanCoches(){
+        boolean quedan = false;
+        for(Coche coche : coches){
+            if (coche.getDeposito() > 0){
+                quedan = true;
+            }
+        }
+        return quedan;
+    }
+    
     //SETTERS
     /**
      * Setter de nombre
      * @param  nombre   Nuevo valor del campo nombre
      */
     private void setNombre(String nombre){this.nombre = nombre;}
-    
+
     /**
      * Setter de pilotos
      * @param  pilotos   Nuevo valor del campo pilotos
@@ -203,18 +238,18 @@ public class EscuderiaReal implements Escuderia
      * @param  CMPStrategyCoche    Nuevo valor del campo criterioCoche
      */
     public void setCriterioCoche(CMPStrategyCoche criterio){criterioCoche = criterio;}
-    
+
     /**
-    * Setter de ASCpiloto.      Público para poder elegir la estrategia.
-    * @param  ASCpiloto         Nuevo valor del campo ASCpiloto
-    */
-   public void setASCpiloto(boolean ASCpiloto){this.ASCpiloto=ASCpiloto;}
-   
-   /**
-    * Setter de ASCcoche.      Público para poder elegir la estrategia.
-    * @param  ASCcoche         Nuevo valor del campo ASCcoche
-    */
-   public void setASCcoche(boolean ASCcoche){this.ASCcoche=ASCcoche;}
+     * Setter de ASCpiloto.      Público para poder elegir la estrategia.
+     * @param  ASCpiloto         Nuevo valor del campo ASCpiloto
+     */
+    public void setASCpiloto(boolean ASCpiloto){this.ASCpiloto=ASCpiloto;}
+
+    /**
+     * Setter de ASCcoche.      Público para poder elegir la estrategia.
+     * @param  ASCcoche         Nuevo valor del campo ASCcoche
+     */
+    public void setASCcoche(boolean ASCcoche){this.ASCcoche=ASCcoche;}
 
     //GETTERS
     /**
@@ -261,7 +296,7 @@ public class EscuderiaReal implements Escuderia
          * piloto.toString
          * [for each Coche in Escudería]
          * coche.toString()
-           */
+         */
         return builder.toString();
     }
 

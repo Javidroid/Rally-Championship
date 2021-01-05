@@ -69,9 +69,10 @@ public interface Piloto
     /**
      * Pone a NULL el cocheAsignado al piloto para tenerlo listo para la siguiente carrera
      * 
-     * @param  coche   el coche que la escudería le proporcione
+     * @return  Coche   el coche que el piloto le tenga que devolver a la escuderia
+     * 
      */
-    public void devolverCoche();
+    public Coche devolverCoche();
     
     /**
      * Devuelve el tiempo que el piloto ha conseguido en el 

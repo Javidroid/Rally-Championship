@@ -56,8 +56,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      */
     public void descalificar()
     {
-        setDescalificado(true);  
-        //System.out.println(this.getNombre()+" ha sido descalificado");
+        setDescalificado(true);
     }
         
     /**
@@ -73,11 +72,13 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     /**
      * Pone a NULL el cocheAsignado al piloto para tenerlo listo para la siguiente carrera
      * 
-     * @param  coche   el coche que la escudería le proporcione
+     * @return  coche   el coche que el piloto tenga que devolver a la escuderia
      */
-    public void devolverCoche(){
-        //Cambiar este método para que lo devuelva a la lista de la escudería
-        setCocheAsignado(null);
+    public Coche devolverCoche(){
+        Coche coche = this.cocheAsignado; //objeto auxiliar para devolver el coche
+        setCocheAsignado(null); //quitamos el coche del piloto
+        
+        return coche;
     }
     
     /**

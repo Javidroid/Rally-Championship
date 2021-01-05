@@ -14,16 +14,14 @@ USER INSTRUCTIONS:
 
 TO-DO LIST:
     
-    Implementar los métodos de las interfaces
-    
     Hacer la clase RallyDemo (está en el pseudocódigo)
     
     Revisar la Doc tanto de las clases como de las interfaces
     
     Función MATH.ROUND en las operaciones matemáticas
     
-    Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
-  **De esto hay que buscar para qué hay que borrar una carrera por descalificación  
+    ???Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
+  **De esto hay que buscar para qué hay que borrar una carrera por descalificación  WTF
     
     Hacer método que quite capas del decorator
     
@@ -43,16 +41,8 @@ TO-DO LIST:
      
      Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
      
-     Modificar los toString para que coincidan con las características del fichero de salida
-     
-     Ver cómo se hace para que se reduzca el combustible de reserva sin que de primeras abandone por falta de 
-     combustible (pilotoAbstracto.conducir()
-     
      Ver cómo se hace para que las salidas, en vez de por pantalla sean (también) por un fichero
-     
-     Comparadores de circuito y ordenar estos por el criterio que se indica
-     tal vez se pueda llamar a un collection.sort.(lista, [instancia_del_comparador_pasada_por_parámetro]);
-     
+
      Hacer que cuando se mande un piloto a la carrera, salga de la lista de pilotos en escudería para prevenir nosequé
      Luego, cuando se termine la carrera, la organización mande de nuevo a los pilotos y coche a su escudería.
      Por tanto, también habrá que quitar el coche de la lista y devolverlo cuando el piloto se baje del coche
@@ -67,36 +57,24 @@ TO-DO LIST:
      Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
      o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
     
-    
+     controlar que, una vez se iteren las escuderías y siga habiendo plazas para la carrera, se vuelva a iterar sobre
+     las escuderías para que manden a otro piloto
+     
+     revisar si hay que hacer el hashCode en organización
+     
+     aligerar el método entregarPremios
+     
+     hacer que el método organizacion.cargarPilotosCarrera() itere sobre las escuderías hasta el límite de pilotos
+     o hasta que no haya más pilotos enviables
+     
 INFORMARSE: 
-    cómo se haría el comparador por cada parámetro sin llenar de clases el proyecto
     
-    cómo van los datos de entrada, cuándo se crean los pilotos y los coches porque me resulta
-    raro que se creen desde la propia escudería
-    
-    Si en pilotosCarrera se puede hacer un Set de Map o sería contraproducente porque
-    Map en sí ya es una colección de key única
-    
-    En el Strategy de Escudería: se pueden tener el comparador y el método que ordena en la misma clase
-    o habría que hacer las clases comparadoras totalmente aparte, y luego cada estrategia de ordenación aparte
+    Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.
+    Porque en el pseudocódigo siempre se anida por puntos, destreza y nombre. ¿y si se quisiera
+    anidar por concentracion, nombre y después carreras terminadas?
             
     A qué se refiere en la celebración de la carrera de campeonato (al final) que cada piloto se devuelve
     a su escudería. ¿No sería una referencia lo que almacena?
-    
-    La estructura de organizacion.pilotosCarrera es simplemente un map? o una lista para que se pueda ordenar
-    pero luego, cada elemento de la lista es un Map? cosa que no tendría mucho sentido porque lo que
-    realmente tiene que almacenar es un KeyValue, no un map entero
-    
-    Qué hay que hacer exactamente en el método de organización que "permite" inscribirse a las escuderias
-    y luego que las escuderías tengan un método para inscribirse
-    (supongo que cuando creas la instancia de escuderia, tienes que llamar al método inscribirse y luego
-    la propia organización almacena todos los datos en sus estructuras
-    
-    cómo llamar a la instancia de Organizacion desde fuera de esta clase sin que 
-    diga que puede que no se haya inicializado (llamando directamente desde el nombre
-    de la clase?)
-    
-    Cómo asignar los puntos al piloto y como se ordena por tiempo en la carrera
     
     
 NOTAS:
@@ -111,7 +89,7 @@ NOTAS:
     
     ESCUDERÍA       ESTÁ COMPLETAMENTE TERMINADO Y (salvo excepción) NO HAY QUE TOCAR NADA
     
-    ORGANIZACIÓN    Faltan métodos por implementar
+    ORGANIZACIÓN    ESTÁ COMPLETAMENTE TERMINADO PERO HAY QUE REVISAR QUE ESTÉ TODO BIEN
     
 ****
     
@@ -123,7 +101,7 @@ NOTAS:
     
     Escudería usa doblemente el patrón Strategy
     
-    Hay que usar al menos un //List, Set (escuderias de organizacion) Y Map (piloto,escuderia).
+    Hay que usar al menos un List, Set (escuderias de organizacion) Y Map (piloto,escuderia).
     
     ESTRUCTURAS (de collections):
         //Piloto.resultados es un ArrayList de clase Resultado
@@ -173,10 +151,20 @@ HECHO:
      
     ¿Método para añadir coches y pilotos a la escudería?
     
+    Ver cómo se hace para que se reduzca el combustible de reserva sin que de primeras abandone por falta de 
+    combustible (pilotoAbstracto.conducir()
+    
     Hacer que, cuando las escuderías se inscriban, se guarden los pilotos en el Mapa
     
     Ver cómo se hace para que se reduzca el combustible de reserva sin que de primeras abandone por falta de 
     combustible (pilotoAbstracto.conducir()
+     
+    Modificar los toString para que coincidan con las características del fichero de salida
+    
+    Implementar los métodos de las interfaces
+    
+    Comparadores de circuito y ordenar estos por el criterio que se indica
+    tal vez se pueda llamar a un collection.sort.(lista, [instancia_del_comparador_pasada_por_parámetro]);
      
                     
     
