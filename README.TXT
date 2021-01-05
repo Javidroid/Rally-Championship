@@ -26,9 +26,7 @@ TO-DO LIST:
     Hacer método que quite capas del decorator
     
     Traducir pseudocódigo de archivos para estudiantes
-    Luego hay que meterlo en la carpeta del proyecto
-    
-    Rellenar el formato de salida a partir de la plantilla en donde corresponda
+    Luego hay que meterlo en la carpeta del proyecto    
     
     Hacer las pruebas con JUnit de cada método público (interface) de:
         -Circuito
@@ -41,31 +39,16 @@ TO-DO LIST:
      
      Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
      
-     Ver cómo se hace para que las salidas, en vez de por pantalla sean (también) por un fichero
-
-     Hacer que cuando se mande un piloto a la carrera, salga de la lista de pilotos en escudería para prevenir nosequé
-     Luego, cuando se termine la carrera, la organización mande de nuevo a los pilotos y coche a su escudería.
-     Por tanto, también habrá que quitar el coche de la lista y devolverlo cuando el piloto se baje del coche
-     en piloto.bajarseDelCoche();
-     
-     ver si es buena idea hacer métodos SortBy para ordenar la lista que sea
-     
-     revisar el metodo enviarPiloto() en escudería para que ponga a null el piloto/coche si no encuentra
-     
-     Rehacer el decorator de circuito con una interfaz
-     
      Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
      o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
     
-     controlar que, una vez se iteren las escuderías y siga habiendo plazas para la carrera, se vuelva a iterar sobre
-     las escuderías para que manden a otro piloto
-     
      revisar si hay que hacer el hashCode en organización
      
-     aligerar el método entregarPremios
+     aligerar el método entregarPremios llamando a submétodos
      
-     hacer que el método organizacion.cargarPilotosCarrera() itere sobre las escuderías hasta el límite de pilotos
-     o hasta que no haya más pilotos enviables
+     REVISAR: Método que carga los pilotos que van a conducir: no me convence mucho, es muy forzado
+     
+     Revisar que el formato de plantilla de salida es correcto
      
 INFORMARSE: 
     
@@ -156,6 +139,8 @@ HECHO:
     
     Hacer que, cuando las escuderías se inscriban, se guarden los pilotos en el Mapa
     
+    revisar el metodo enviarPiloto() en escudería para que ponga a null el piloto/coche si no encuentra
+    
     Ver cómo se hace para que se reduzca el combustible de reserva sin que de primeras abandone por falta de 
     combustible (pilotoAbstracto.conducir()
      
@@ -165,6 +150,25 @@ HECHO:
     
     Comparadores de circuito y ordenar estos por el criterio que se indica
     tal vez se pueda llamar a un collection.sort.(lista, [instancia_del_comparador_pasada_por_parámetro]);
+    
+    Hacer que cuando se mande un piloto a la carrera, salga de la lista de pilotos en escudería para prevenir nosequé
+    Luego, cuando se termine la carrera, la organización mande de nuevo a los pilotos y coche a su escudería.
+    Por tanto, también habrá que quitar el coche de la lista y devolverlo cuando el piloto se baje del coche
+    en piloto.bajarseDelCoche();
+        
+    hacer que el método organizacion.cargarPilotosCarrera() itere sobre las escuderías hasta el límite de pilotos
+    o hasta que no haya más pilotos enviables
+     
+    Ver cómo se hace para que las salidas, en vez de por pantalla sean (también) por un fichero
+
+    ver si es buena idea hacer métodos SortBy para ordenar la lista que sea 
+    
+    Rellenar el formato de salida a partir de la plantilla en donde corresponda
+    
+    controlar que, una vez se iteren las escuderías y siga habiendo plazas para la carrera, se vuelva a iterar sobre
+    las escuderías para que manden a otro piloto
+     
+     
      
                     
     
