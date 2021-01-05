@@ -323,8 +323,6 @@ public class Organizacion
         //Iteramos sobre las escuderias tantas veces hasta alcanzar limitePilotos o no haya ninguna escudería 
         //con ningún piloto disponible
 
-        //TODO
-
         Piloto pilotoCandidato;
         Escuderia esc;
         while((pilotosCarrera.size() < limitePilotos) && hayPilotosDisponibles()){
