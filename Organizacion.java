@@ -209,9 +209,9 @@ public class Organizacion
     }
 
     /**
-     *  Método que se encarga de 
+     *  Método que se encarga de asignar los premios a los pilotos segun su clasificacion final
      * 
-     * @param circuito  El circuito que quiere insertarse
+     * @param 
      */
     public void entregarPremios(){
         //todo
