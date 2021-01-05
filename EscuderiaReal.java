@@ -183,7 +183,7 @@ public class EscuderiaReal implements Escuderia
      * 
      * @return true si hay pilotos, false si no
      */
-    private boolean quedanPilotos(){
+    public boolean quedanPilotos(){
         boolean quedan = false;
         for(Piloto piloto : pilotos){
             if (!piloto.getDescalificado()){
@@ -192,13 +192,13 @@ public class EscuderiaReal implements Escuderia
         }
         return quedan;
     }
-    
+
     /**
      * Método que devuelve true si aún quedan coches asignables a pilotos por la escudería
      * 
      * @return true si hay coches, false si no
      */
-    private boolean quedanCoches(){
+    public boolean quedanCoches(){
         boolean quedan = false;
         for(Coche coche : coches){
             if (coche.getDeposito() > 0){
@@ -207,7 +207,7 @@ public class EscuderiaReal implements Escuderia
         }
         return quedan;
     }
-    
+
     //SETTERS
     /**
      * Setter de nombre

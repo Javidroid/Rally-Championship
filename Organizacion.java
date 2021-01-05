@@ -322,21 +322,43 @@ public class Organizacion
     public void cargarPilotosCarrera(){
         //Iteramos sobre las escuderias tantas veces hasta alcanzar limitePilotos o no haya ninguna escudería 
         //con ningún piloto disponible
-        
+
         //TODO
 
-        //boolean hayPilotosDisponibles = true;
-        //while((pilotosCarrera.size() < limitePilotos) && hayPilotosDisponibles){
-        //    Piloto pilotoCandidato;
-        //    Escuderia esc;
-        //    for(int i=0; i<escuderias.size()-1; i++){
-        //        //mal hecho
-        //        pilotoCandidato = esc.enviarPiloto();
-        //        if(pilotoCandidato != null){ //no dejamos que las escuderías manden un piloto nulo
-        //            pilotosCarrera.add(pilotoCandidato); //añadimos un piloto no nulo
-        //        }
-        //    }
-        //}
+        Piloto pilotoCandidato;
+        Escuderia esc;
+        while((pilotosCarrera.size() < limitePilotos) && hayPilotosDisponibles()){
+
+            Iterator <Escuderia> itEsc = escuderias.iterator();
+            while(itEsc.hasNext() && (pilotosCarrera.size() < limitePilotos) && hayPilotosDisponibles()){
+                esc = itEsc.next();
+                pilotoCandidato = esc.enviarPiloto();
+                if(pilotoCandidato != null){ //no dejamos que las escuderías manden un piloto nulo
+                    pilotosCarrera.add(pilotoCandidato); //añadimos un piloto no nulo
+                }
+            }
+        }
+    }
+
+    /**
+     *  Método que comprueba si hay algún piloto candidato para participar en una carrera en todas las escuderías
+     *  
+     *  NOTA:
+     *  Este método se podría optimizar llevando un control de condición de bucle para que pare una vez encuentre
+     *  al menos una escudería con piloto. Pero, por legibilidad y que esta optimización no supondría una mejora
+     *  notable (porque no se va a trabajar con muchos elementos) dejamos que recorra siempre toda la estructura
+     *  en vez de parar cuando encuentre.
+     *  
+     *  @return true si existe un piloto, false si no
+     */
+    public boolean hayPilotosDisponibles(){
+        boolean hay = false;
+        for(Escuderia escuderia : escuderias){
+            if(escuderia.quedanPilotos() && escuderia.quedanCoches()){
+                hay = true;
+            }
+        }
+        return hay;
     }
 
     /**
