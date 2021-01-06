@@ -31,4 +31,13 @@ public class Gravilla extends ComplicacionExtra
     public double getValorDistancia(){
         return circuitoComplicacion.getValorDistancia() * 0.95;
     }
+    
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CircuitoReal con Gravilla
+     */
+    @Override
+    public String toString(){
+        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
+    }
 }

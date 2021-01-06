@@ -92,7 +92,7 @@ public class CircuitoReal implements Circuito
         StringBuilder builder = new StringBuilder();
         builder.append("<circuito: ");
         builder.append(getNombre());
-        builder.append("> <cond: ");
+        builder.append("> <cond:");
         builder.append(this.toString()); //complicaciones extra separadas por un espacio
         builder.append("> <comp: complejidad(original:");
         builder.append(this.getComplejidad().getValor());
@@ -110,7 +110,8 @@ public class CircuitoReal implements Circuito
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
-     * @return Devuelve un string listando las complicaciones extra separadas por un espacio en blanco
+     * @return nada porque en Circuito usamos toString para anidar cómodamente las complicaciones y como esta clase es el
+     * circuito original, pues no hay complicacion
      */
     @Override
     public String toString(){

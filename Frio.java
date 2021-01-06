@@ -31,4 +31,13 @@ public class Frio extends ComplicacionExtra
     public double getValorDistancia(){
         return circuitoComplicacion.getValorDistancia() * 0.9;
     }
+    
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CircuitoReal con Frio
+     */
+    @Override
+    public String toString(){
+        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
+    }
 }

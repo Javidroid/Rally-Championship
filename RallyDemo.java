@@ -14,7 +14,7 @@ public class RallyDemo
         //Descomentar el conjunto de datos de los 3 siguientes que se quiera probar
             
             //Descomentar el siguiente conjunto de datos si se quiere probar simulación del campeonato que termina de forma normal disputándose todas las carreras
-        //DatosCampeonatoCompleto initdata = new DatosCampeonatoCompleto();
+        DatosCampeonatoCompleto initdata = new DatosCampeonatoCompleto();
         
             //Descomentar el siguiente conjunto de datos si se quiere probar simulación del campeonato que termina antes de que se realicen todas las carreras con el único piloto superviviente y su escudería declarados como campeones
         //DatosCampeonatoFinPrematuro initdata = new DatosCampeonatoFinPrematuro();

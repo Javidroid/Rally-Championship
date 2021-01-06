@@ -175,8 +175,8 @@ public class CocheNormal implements Coche
         //[opcionalmente si tiene nitro->] > <nitroPendiente: nitroPendiente> 
         builder.append("<coche: ");
         builder.append(getNombre());
-        builder.append(" > ");
-        builder.append("<tipo: normal > ");
+        builder.append("> ");
+        builder.append("<tipo: normal> ");
         builder.append("<vel_teó:");
         builder.append(getValorVelocidad());
         builder.append("> ");
@@ -184,8 +184,7 @@ public class CocheNormal implements Coche
         builder.append(getValorCombustibleTotal());
         builder.append(") (actual: ");
         builder.append(getDeposito());
-        builder.append(") > ");
-        builder.append("\n");
+        builder.append(")> ");
         return builder.toString();
     }
     

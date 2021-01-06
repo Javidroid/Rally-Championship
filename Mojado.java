@@ -31,4 +31,13 @@ public class Mojado extends ComplicacionExtra
     public double getValorDistancia(){
         return circuitoComplicacion.getValorDistancia() * 0.85;
     }
+    
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CircuitoReal con Mojado
+     */
+    @Override
+    public String toString(){
+        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
+    }
 }

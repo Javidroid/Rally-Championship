@@ -31,4 +31,13 @@ public class Nocturno extends ComplicacionExtra
     public double getValorDistancia(){
         return circuitoComplicacion.getValorDistancia() * 0.8;
     }
+    
+    /**
+     * Método sobreescrito  toString
+     * @return Representacion de CircuitoReal con Nocturno
+     */
+    @Override
+    public String toString(){
+        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
+    }
 }

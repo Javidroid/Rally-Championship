@@ -25,13 +25,4 @@ public abstract class ComplicacionExtra extends CircuitoReal
      * @return  Valor de Distancia
      */
     public double getValorDistancia(){return circuitoComplicacion.getValorDistancia();}
-    
-    /**
-     * Método sobreescrito  toString
-     * @return Representacion de CircuitoReal con ComplicacionesExtra
-     */
-    @Override
-    public String toString(){
-        return circuitoComplicacion.toString() + " " + getClass().getSimpleName();
-    }
 }

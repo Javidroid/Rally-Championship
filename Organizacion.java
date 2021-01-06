@@ -21,7 +21,7 @@ public class Organizacion
 
     //TreeSet porque los Circuitos son únicos y tienen orden.
     //Este orden es estático: se asigna al inicio y no se modifica en RunTime
-    private Set <Circuito> circuitos;    
+    private Set <Circuito> circuitos;
 
     //HashSet porque no se repiten ni tienen orden.
     private Set <Escuderia> escuderias;  
@@ -37,28 +37,11 @@ public class Organizacion
      */
     private Organizacion()
     {
-        pilotosDescalificados    = new ArrayList <Piloto>();
-        pilotosSinDescalificar   = new ArrayList <Piloto>();
-        escuderiasDescalificadas = new ArrayList <Escuderia>();
-        circuitos                = new TreeSet <Circuito>();
-        escuderias               = new HashSet <Escuderia>();
-        pilotosCarrera           = new ArrayList <Piloto>();
-        mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
-    }
-
-    /**
-     * Constructor de Organizacion parametrizado
-     */
-    public Organizacion(int limiteAbandonos, int limitePilotos)
-    {
-        setLimiteAbandonos(limiteAbandonos);
-        setLimitePilotos(limitePilotos);
         setFinalizado(false);
-
         pilotosDescalificados    = new ArrayList <Piloto>();
         pilotosSinDescalificar   = new ArrayList <Piloto>();
         escuderiasDescalificadas = new ArrayList <Escuderia>();
-        circuitos                = new TreeSet <Circuito>();
+        circuitos                = new HashSet <Circuito>();
         escuderias               = new HashSet <Escuderia>();
         pilotosCarrera           = new ArrayList <Piloto>();
         mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
@@ -538,13 +521,13 @@ public class Organizacion
      * Setter de limiteAbandonos
      * @param    limiteAbandonos    Nuevo valor del campo limiteAbandonos
      */
-    private void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
+    public void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
 
     /**
      * Setter de limitePilotos
      * @param    limitePilotos      Nuevo valor del campo limitePilotos
      */
-    private void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
+    public void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
 
     /**
      * Setter de finalizado

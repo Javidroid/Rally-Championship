@@ -141,12 +141,14 @@ public class EscuderiaReal implements Escuderia
             cocheAsignable = itCoch.next();
             if(cocheAsignable.getDeposito() > 0){
                 cocheEncontrado = true;
-                coches.remove(cocheAsignable); //sacamos al coche de la lista para evitar que otro piloto la use
-            }
+                }
             else {
                 cocheAsignable = null;
             }
         }
+        //el coche lo sacamos fuera del bucle porque no se puede modificar una lista mientras se itera
+        coches.remove(cocheAsignable); //sacamos al coche de la lista para evitar que otro piloto la use
+            
 
         //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
         //piloto no descalificado de la lista. 

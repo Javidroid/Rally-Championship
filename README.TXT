@@ -50,6 +50,11 @@ TO-DO LIST:
      
      Revisar que el formato de plantilla de salida es correcto
      
+     IMPORTANTÍSIMO: VOLVER A CAMBIAR LA DEFINICION DE LA ESTRUCTURA DE CIRCUITOS EN ORGANIZACIÓN A TREESET
+     AHORA ES UN HASHMAP PORQUE TREESET DA ERROR (sospecho que porque no se le ha puesto el criterio de ordenacion)
+     
+     ver el método enviarPiloto();
+     
 INFORMARSE: 
     
     Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.
@@ -58,6 +63,9 @@ INFORMARSE:
             
     A qué se refiere en la celebración de la carrera de campeonato (al final) que cada piloto se devuelve
     a su escudería. ¿No sería una referencia lo que almacena?
+    
+    Cómo ordenar los circuitos usando treeMap y cuándo se ordenan. De hecho, al mandar los datos da error gordo
+    
     
     
 NOTAS:

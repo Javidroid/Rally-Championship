@@ -48,6 +48,6 @@ public enum Concentracion
     @Override
     public String toString()
     {
-        return getNombre() + "(Original" + getValor() + ")";
+        return getNombre() + "(" + getValor() + ")";
     }
 }
