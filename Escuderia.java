@@ -27,7 +27,7 @@ public interface Escuderia
      * @param Coche      Coche que se quiere añadir a la lista
      */
     public void insertarCoche(Coche coche);
-    
+
     /**
      * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
      * según ASCpiloto
@@ -48,6 +48,13 @@ public interface Escuderia
      */
     public int getPuntosPilotosTotal();
 
+    /**
+     * Devuelve el número total de carreras terminadas de sus pilotos
+     *
+     * @return     Numero de carreras total entre todos los pilotos de la escuderia
+     */
+    public int getCarrerasTerminadasPilotos();
+    
     /**
      * Envía el primer piloto con el primer coche disponible asignado a la carrera
      * Controla también si un piloto no tiene coche disponible, en cuyo caso
@@ -73,6 +80,16 @@ public interface Escuderia
      */
     public boolean quedanCoches();
 
+    /**
+     * Método que manda a pilotosDescalificados a todos aquellos pilotos en pilotos que estén descalificados
+     */
+    public void separarPilotos();
+
+    /**
+     * Método que manda a cochesSinCombustible todos aquellos coches en coches que no tengan combustible
+     */
+    public void separarCoches();
+
     //GETTERS
     /**
      * Método que devuelve nombre
@@ -85,12 +102,24 @@ public interface Escuderia
      * @return   pilotos
      */
     public List <Piloto> getPilotos();
+    
+    /**
+     * Método que devuelve pilotos descalificados
+     * @return   pilotos descalificados
+     */
+    public List <Piloto> getPilotosDescalificados();
 
     /**
      * Método que devuelve coches
      * @return   coches
      */
     public List <Coche> getCoches();
+    
+    /**
+     * Método que devuelve coches sin combustible
+     * @return   coches sin combustible
+     */
+    public List <Coche> getCochesSinCombustible();
 
     /**
      * Getter de criterioPiloto

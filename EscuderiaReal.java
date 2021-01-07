@@ -113,6 +113,20 @@ public class EscuderiaReal implements Escuderia
         }
         return puntos;
     }
+    
+    /**
+     * Devuelve el número total de carreras terminadas de sus pilotos
+     *
+     * @return     Numero de carreras total entre todos los pilotos de la escuderia
+     */
+    public int getCarrerasTerminadasPilotos()
+    {
+        int carreras = 0;
+        for (Piloto pilot : pilotos){
+            carreras += pilot.getCarrerasTerminadas();
+        }
+        return carreras;
+    }
 
     /**
      * Envía el primer piloto con el primer coche disponible asignado a la carrera
@@ -177,10 +191,13 @@ public class EscuderiaReal implements Escuderia
      * Método que manda a pilotosDescalificados a todos aquellos pilotos en pilotos que estén descalificados
      */
     public void separarPilotos(){
-        for (Piloto piloto : this.pilotos){
-            if(piloto.getDescalificado() == true){
-                pilotos.remove(piloto);
-                pilotosDescalificados.add(piloto);   
+        Iterator <Piloto> it = this.pilotos.iterator();
+        Piloto pil;
+        while (it.hasNext()){
+            pil = it.next();
+            if(pil.getDescalificado() == true){
+                it.remove(); //borramos el elemento de la lista que el iterador indique
+                pilotosDescalificados.add(pil);   
             }
         }
     }
@@ -189,10 +206,13 @@ public class EscuderiaReal implements Escuderia
      * Método que manda a cochesSinCombustible todos aquellos coches en coches que no tengan combustible
      */
     public void separarCoches(){
-        for (Coche coche : this.coches){
-            if(coche.getDeposito() <= 0){
-                coches.remove(coche);
-                cochesSinCombustible.add(coche);
+        Iterator <Coche> it = this.coches.iterator();
+        Coche coch;
+        while (it.hasNext()){
+            coch= it.next();
+            if(coch.getDeposito() <= 0){ //si el depósito está vacío
+                it.remove(); //borramos el elemento de la lista que el iterador indique
+                cochesSinCombustible.add(coch);   
             }
         }
     }
@@ -270,12 +290,24 @@ public class EscuderiaReal implements Escuderia
      * @return   pilotos
      */
     public List <Piloto> getPilotos(){return pilotos;}
+    
+    /**
+     * Método que devuelve pilotos descalificados
+     * @return   pilotos descalificados
+     */
+    public List <Piloto> getPilotosDescalificados(){return this.pilotosDescalificados;}
 
     /**
      * Getter de coches
      * @return   coches
      */
     public List <Coche> getCoches(){return coches;}
+    
+    /**
+     * Método que devuelve coches sin combustible
+     * @return   coches sin combustible
+     */
+    public List <Coche> getCochesSinCombustible(){return this.cochesSinCombustible;}
 
     /**
      * Getter de criterioPiloto
@@ -299,12 +331,22 @@ public class EscuderiaReal implements Escuderia
         StringBuilder builder= new StringBuilder();
         builder.append("%%% ");
         builder.append(getNombre());
-        builder.append(" %%%");
+        builder.append(" %%% \n");
         for (Piloto p : pilotos){
-            p.toString();
+            builder.append(p.toString());
+            builder.append("\n");
         }
-        for(Coche c : coches){
-            c.toString();
+        for (Piloto p : pilotosDescalificados){
+            builder.append(p.toString());
+            builder.append("\n");
+        }
+        for (Coche c : coches){
+            builder.append(c.toString());
+            builder.append("\n");
+        }
+        for (Coche c : cochesSinCombustible){
+             builder.append(c.toString());
+             builder.append("\n");
         }
         return builder.toString();
     }

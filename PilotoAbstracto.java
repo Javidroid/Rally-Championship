@@ -234,7 +234,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             
             cocheAsignado.reducirCombustible(tiempoConducido);
             
-            System.out.println("¡¡¡ " + nombre + "perdió la concentración a falta de "
+            System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
             + (tiempoParaAcabar-tiempoConducido) + " minutos para terminar !!!");
             
             System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "

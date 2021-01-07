@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 /**
  * Clase que inicializa la simulación con datos con los que 
@@ -37,8 +38,8 @@ public class DatosCampeonatoCompleto{
         //Gravilla y Mojado
         //añadir circuito cerdena a circuitos de la organización
         Circuito cerdena = new CircuitoReal("Cerdeña", Complejidad.ALTA, Distancia.CORTA);
-        portugal = new Gravilla(cerdena);
-        portugal = new Mojado(cerdena);
+        cerdena = new Gravilla(cerdena);
+        cerdena = new Mojado(cerdena);
         organizacion.insertarCircuito(cerdena);
 
         //Crear circuito australia con nombre:”Australia" - complejidad:BAJA - distancia:LARGA);
@@ -99,21 +100,21 @@ public class DatosCampeonatoCompleto{
         //ordenaciónPilotos: ASCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: ASCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //peugeot se inscribe en campeonato
-        Escuderia peugeot = new EscuderiaReal("Peugeot", new SortByTotalPuntos(), true, new SortByDeposito(), true);
+        Escuderia peugeot = new EscuderiaReal("PEUGEOT", new SortByTotalPuntos(), true, new SortByDeposito(), true);
 
         //escudería citroen 
         //Crear escuderia citroen con nombre:"Citroen"      
         //ordenaciónPilotos: DESCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: DESCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //citroen se inscribe en campeonato
-        Escuderia citroen = new EscuderiaReal("Citroen", new SortByTotalPuntos(), false, new SortByDeposito(), false);
+        Escuderia citroen = new EscuderiaReal("CITROEN", new SortByTotalPuntos(), false, new SortByDeposito(), false);
 
         //escudería seat       
         //Crear escuderia seat con nombre:"Seat"
         //ordenaciónPilotos: ASCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: ASCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //seat se inscribe en campeonato
-        Escuderia seat = new EscuderiaReal("Seat", new SortByTotalPuntos(), true, new SortByDeposito(), true);
+        Escuderia seat = new EscuderiaReal("SEAT", new SortByTotalPuntos(), true, new SortByDeposito(), true);
 
         // peugeot.toString();
         // citroen.toString();

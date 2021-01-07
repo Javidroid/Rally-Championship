@@ -36,14 +36,9 @@ TO-DO LIST:
      
      revisar si hay que hacer el hashCode en organización
      
-     aligerar el método entregarPremios llamando a submétodos
-     
      REVISAR: Método que carga los pilotos que van a conducir: no me convence mucho, es muy forzado
      
      Revisar que el formato de plantilla de salida es correcto
-     
-     IMPORTANTÍSIMO: VOLVER A CAMBIAR LA DEFINICION DE LA ESTRUCTURA DE CIRCUITOS EN ORGANIZACIÓN A TREESET
-     AHORA ES UN HASHMAP PORQUE TREESET DA ERROR (sospecho que porque no se le ha puesto el criterio de ordenacion)
      
      ver el método enviarPiloto();
      
@@ -62,6 +57,10 @@ TO-DO LIST:
      
      a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
      (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size()-1. entonces se quedaba uno suelto)
+     
+     IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
+     
+     metodo calcularVelocidad, en caso de ser coche rapido reduce la nitro un par de veces y esto hay que corregirlo
      
 INFORMARSE: 
     
@@ -189,7 +188,9 @@ HECHO:
     Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
     o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
     
+    aligerar el método entregarPremios llamando a submétodos
      
+    
     
     
      
