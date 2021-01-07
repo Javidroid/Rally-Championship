@@ -14,14 +14,9 @@ USER INSTRUCTIONS:
 
 TO-DO LIST:
     
-    Hacer la clase RallyDemo (está en el pseudocódigo)
-    
     Revisar la Doc tanto de las clases como de las interfaces
     
     Función MATH.ROUND en las operaciones matemáticas
-    
-    ???Para eliminar el resultado de una carrera (por descalificación) se usa un Iterator
-  **De esto hay que buscar para qué hay que borrar una carrera por descalificación  WTF
     
     Hacer método que quite capas del decorator
     
@@ -39,9 +34,6 @@ TO-DO LIST:
      
      Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
      
-     Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
-     o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
-    
      revisar si hay que hacer el hashCode en organización
      
      aligerar el método entregarPremios llamando a submétodos
@@ -191,6 +183,15 @@ HECHO:
     
     controlar que, una vez se iteren las escuderías y siga habiendo plazas para la carrera, se vuelva a iterar sobre
     las escuderías para que manden a otro piloto
+    
+    Hacer la clase RallyDemo (está en el pseudocódigo)
+    
+    Ver si hace falta eliminar los pilotos y los coches de las escuderias al mandarlos a la organización
+    o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
+    
+     
+    
+    
      
      
      

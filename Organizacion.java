@@ -234,6 +234,17 @@ public class Organizacion
 
         System.out.println("****************************************************");
         System.out.println("**************** FIN DEL CAMPEONATO ****************");
+
+        mostrarClasificacionFinalPilotos(); //mostramos la clasificación de pilotos
+
+        mostrarClasificacionFinalEscuderias();
+
+    }
+
+    /**
+     *  Método que muestra la clasificaicón final de los pilotos
+     */
+    public void mostrarClasificacionFinalPilotos(){
         System.out.println("****************************************************");
         System.out.println("********** CLASIFICACIÓN FINAL DE PILOTOS **********");
         System.out.println("****************************************************");
@@ -271,6 +282,15 @@ public class Organizacion
                 posicion++; //incrementamos la posicion para el siguiente piloto
             }
         }
+
+        //mostramos los pilotos descalificados
+        mostrarPilotosDescalificados();
+    }
+
+    /**
+     * Método que muestra la info de los pilotos descalificados
+     */
+    public void mostrarPilotosDescalificados(){
         System.out.println("****************************************************");
         System.out.println("************** PILOTOS DESCALIFICADOS **************");
         System.out.println("****************************************************");
@@ -284,7 +304,12 @@ public class Organizacion
                     " - Tiempo:"+result.getTiempo()+" minutos");
             }
         }
+    }
 
+    /**
+     *  Método que muestra la clasificaicón final de las escuderias
+     */
+    public void mostrarClasificacionFinalEscuderias(){
         System.out.println("****************************************************");
         System.out.println("******** CLASIFICACIÓN FINAL DE ESCUDERÍAS *********");
         System.out.println("****************************************************");
@@ -319,6 +344,13 @@ public class Organizacion
                 }
             }
         }
+        mostrarEscuderiasDescalificados();
+    }
+
+    /**
+     * Método que muestra la info de las escuderías- descalificadas
+     */
+    public void mostrarEscuderiasDescalificados(){
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         System.out.println("****************************************************");
         System.out.println("************ ESCUDERIAS DESCALIFICADAS *************");
@@ -329,7 +361,6 @@ public class Organizacion
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             escuderia.toString();
         }
-
     }
 
     /**
