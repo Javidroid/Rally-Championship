@@ -21,7 +21,7 @@ public class Mojado extends ComplicacionExtra
      * @return  Valor de Complejidad con ComplicacionExtra Mojado
      */
     public double getValorComplejidad(){
-        return circuitoComplicacion.getValorComplejidad() * 1.15;
+        return Math.round((circuitoComplicacion.getValorComplejidad() * 1.15) *100d)/100d;
     }
     
     /**
@@ -29,7 +29,7 @@ public class Mojado extends ComplicacionExtra
      * @return  Valor de Distancia con la ComplicacionExtra Mojado
      */
     public double getValorDistancia(){
-        return circuitoComplicacion.getValorDistancia() * 0.85;
+        return Math.round((circuitoComplicacion.getValorDistancia() * 0.85) *100d)/100d;
     }
     
     /**

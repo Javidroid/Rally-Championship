@@ -99,6 +99,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
                 tiempo = res.getTiempo();
             }
         }
+        tiempo = Math.round(tiempo*100d)/100d;
         return tiempo;
     }
     
@@ -208,7 +209,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * @return Tiempo del ultimo resultado
      */
     public double getTiempoUltimoResultado(){
-        return resultados.get(resultados.size()-1).getTiempo();
+        return Math.round(resultados.get(resultados.size()-1).getTiempo() * 100d)/100d;
     }
     
     /**
@@ -235,7 +236,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             cocheAsignado.reducirCombustible(tiempoConducido);
             
             System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
-            + (tiempoParaAcabar-tiempoConducido) + " minutos para terminar !!!");
+            + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
             
             System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
             + tiempoConducido + " minutos !!!");
@@ -339,7 +340,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * Método que devuelve el valor de concentracion
      * @return  double  valor de concentracion
      */
-    public double getValorConcentracion(){return concentracion.getValor();}
+    public double getValorConcentracion(){return Math.round(concentracion.getValor() *100d)/100d;}
     
     /**
      * Getter de resultados

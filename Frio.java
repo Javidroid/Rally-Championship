@@ -21,7 +21,7 @@ public class Frio extends ComplicacionExtra
      * @return  Valor de Complejidad con ComplicacionExtra Frio
      */
     public double getValorComplejidad(){
-        return circuitoComplicacion.getValorComplejidad() * 1.1;
+        return Math.round((circuitoComplicacion.getValorComplejidad() * 1.1) *100d)/100d;
     }
     
     /**
@@ -29,7 +29,7 @@ public class Frio extends ComplicacionExtra
      * @return  Valor de Distancia con la ComplicacionExtra Frio
      */
     public double getValorDistancia(){
-        return circuitoComplicacion.getValorDistancia() * 0.9;
+        return Math.round((circuitoComplicacion.getValorDistancia() * 0.9) *100d)/100d;
     }
     
     /**

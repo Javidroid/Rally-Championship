@@ -21,7 +21,7 @@ public class Nocturno extends ComplicacionExtra
      * @return  Valor de Complejidad con ComplicacionExtra Nocturno
      */
     public double getValorComplejidad(){
-        return circuitoComplicacion.getValorComplejidad() * 1.2;
+        return Math.round((circuitoComplicacion.getValorComplejidad() * 1.2) *100d)/100d;
     }
     
     /**
@@ -29,7 +29,7 @@ public class Nocturno extends ComplicacionExtra
      * @return  Valor de Distancia con la ComplicacionExtra Nocturno
      */
     public double getValorDistancia(){
-        return circuitoComplicacion.getValorDistancia() * 0.8;
+        return Math.round((circuitoComplicacion.getValorDistancia() * 0.8) *100d)/100d;
     }
     
     /**

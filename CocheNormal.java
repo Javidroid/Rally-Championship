@@ -77,7 +77,7 @@ public class CocheNormal implements Coche
      * Método que devuelve el valor de velocidad (teórica)
      * @return  Double Valor de velocidad
      */
-    public double getValorVelocidad(){return velocidad.getValor();}
+    public double getValorVelocidad(){return Math.round(velocidad.getValor() *100d)/100d;}
     
     /**
      * Getter de combustibleTotal
@@ -88,13 +88,13 @@ public class CocheNormal implements Coche
      * Método que devuelve el valor de combustibleTotal
      * @return  double Valor de combustibleTotal
      */
-    public double getValorCombustibleTotal(){return combustibleTotal.getValor();}
+    public double getValorCombustibleTotal(){return Math.round(combustibleTotal.getValor() * 100d)/100d;}
     
     /**
      * Getter de deposito
      * @return  double deposito
      */
-    public double getDeposito(){return deposito;}
+    public double getDeposito(){return Math.round(deposito*100d)/100d;}
 
         
     //FUNCIONALIDADES DE COCHE    

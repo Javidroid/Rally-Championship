@@ -65,7 +65,7 @@ public class CircuitoReal implements Circuito
      * Método que devuelve complejidad
      * @return  Valor de Complejidad
      */
-    public double getValorComplejidad(){return complejidad.getValor();}
+    public double getValorComplejidad(){return Math.round(complejidad.getValor() *100d)/100d;}
     
     
     /**
@@ -78,7 +78,7 @@ public class CircuitoReal implements Circuito
      * Método que devuelve distancia
      * @return  Valor de la Distancia
      */
-    public double getValorDistancia(){return distancia.getValor();}
+    public double getValorDistancia(){return Math.round(distancia.getValor() *100d)/100d;}
     
     
     //FUNCIONALIDAD DE CIRCUITO

@@ -21,7 +21,7 @@ public class Gravilla extends ComplicacionExtra
      * @return  Valor de Complejidad con ComplicacionExtra Gravilla
      */
     public double getValorComplejidad(){
-        return circuitoComplicacion.getValorComplejidad() * 1.05;
+        return Math.round((circuitoComplicacion.getValorComplejidad() * 1.05)*100d) /100d;
     }
     
     /**
@@ -29,7 +29,7 @@ public class Gravilla extends ComplicacionExtra
      * @return  Valor de Distancia con la ComplicacionExtra Gravilla
      */
     public double getValorDistancia(){
-        return circuitoComplicacion.getValorDistancia() * 0.95;
+        return Math.round((circuitoComplicacion.getValorDistancia() * 0.95)*100d)/100d;
     }
     
     /**

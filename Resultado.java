@@ -55,7 +55,7 @@ public class Resultado
      * Getter de tiempo
      * @return  tiempo
      */
-    public double getTiempo(){return tiempo;}
+    public double getTiempo(){return Math.round(tiempo *100d)/100;}
     
     /**
      * Getter de puntos
