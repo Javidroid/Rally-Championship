@@ -55,6 +55,22 @@ TO-DO LIST:
      
      ver el método enviarPiloto();
      
+     ERROR: EN ORGANIZACION.DEVOLVERPILOTOS();
+     
+     hacer bien los hashcode en pilotoAbstracto
+     
+     revisar el funcionamiento de la nitro en cocheRapido
+     
+     Errores:
+     Los circuitos no se ordenan correctamente
+     
+     Solucionados:
+     piloto 5 (ogier) de la carrera en australia se le asigna un coche erróneo y hace que no finalice 
+     (comparador mal asignado. Se puso sortByCombustible y se tenia que haber puesto SortByDeposito)
+     
+     a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
+     (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size()-1. entonces se quedaba uno suelto)
+     
 INFORMARSE: 
     
     Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.

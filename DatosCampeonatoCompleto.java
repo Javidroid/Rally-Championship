@@ -19,12 +19,8 @@ public class DatosCampeonatoCompleto{
     private void initData()
     {
         //organizador debe ser una instancia única con la siguiente configuración:
-        Organizacion organizacion = Organizacion.getInstancia();
-
-        organizacion.setLimiteAbandonos(3);
-        organizacion.setLimitePilotos(2);
-
         // Circuitos ordenados de forma descendente de acuerdo a su distancia
+        Organizacion organizacion = Organizacion.getInstancia(Collections.reverseOrder(new CMPDistanciaCircuito()), 3, 6);
 
         //creamos y añadimos los circuitos del campeonato:
         //Crear circuito portugal con nombre:”Portugal" - complejidad:MEDIA - distancia:INTERMEDIA);
@@ -52,7 +48,7 @@ public class DatosCampeonatoCompleto{
         Circuito australia = new CircuitoReal("Australia", Complejidad.BAJA, Distancia.LARGA);
         australia = new Gravilla(australia);
         organizacion.insertarCircuito(australia);
-        
+
         //Crear circuito corcega con nombre:”Córcega" - complejidad:MEDIA - distancia:INTERMEDIA);
         //además, acciones necesarias para que corcega sea un circuito con:
         //Nocturno y Gravilla
@@ -87,48 +83,42 @@ public class DatosCampeonatoCompleto{
         Circuito chile = new CircuitoReal("Chile", Complejidad.ALTA, Distancia.CORTA);
         chile = new Gravilla(chile);
         organizacion.insertarCircuito(chile);
+
         
-        
-        
-        System.out.println(portugal.mostrarCaracteristicas());
-        System.out.println(cerdena.mostrarCaracteristicas());
-        System.out.println(australia.mostrarCaracteristicas());
-        System.out.println(corcega.mostrarCaracteristicas());
-        System.out.println(finlandia.mostrarCaracteristicas());
-        System.out.println(alemania.mostrarCaracteristicas());
-        System.out.println(chile.mostrarCaracteristicas());
-   
-        
+        // System.out.println(portugal.mostrarCaracteristicas());
+        // System.out.println(cerdena.mostrarCaracteristicas());
+        // System.out.println(australia.mostrarCaracteristicas());
+        // System.out.println(corcega.mostrarCaracteristicas());
+        // System.out.println(finlandia.mostrarCaracteristicas());
+        // System.out.println(alemania.mostrarCaracteristicas());
+        // System.out.println(chile.mostrarCaracteristicas());
+
 
         //creamos e inscribimos a las escuderías que participarán en el campeonato:    
         //Crear escuderia peugeot con nombre:"Peugeot"
         //ordenaciónPilotos: ASCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: ASCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //peugeot se inscribe en campeonato
-        Escuderia peugeot = new EscuderiaReal("Peugeot", new SortByTotalPuntos(), true, new SortByCombustible(), true);
-        peugeot.inscribirse();
+        Escuderia peugeot = new EscuderiaReal("Peugeot", new SortByTotalPuntos(), true, new SortByDeposito(), true);
 
         //escudería citroen 
         //Crear escuderia citroen con nombre:"Citroen"      
         //ordenaciónPilotos: DESCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: DESCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //citroen se inscribe en campeonato
-        Escuderia citroen = new EscuderiaReal("Citroen", new SortByTotalPuntos(), true, new SortByCombustible(), true);
-        citroen.inscribirse();
+        Escuderia citroen = new EscuderiaReal("Citroen", new SortByTotalPuntos(), false, new SortByDeposito(), false);
 
         //escudería seat       
         //Crear escuderia seat con nombre:"Seat"
         //ordenaciónPilotos: ASCENDENTE por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
         //ordenaciónCoches: ASCENDENTE por Combustible restante del Coche , en caso de empate por nombre);
         //seat se inscribe en campeonato
-        Escuderia seat = new EscuderiaReal("Seat", new SortByTotalPuntos(), true, new SortByCombustible(), true);
-        seat.inscribirse();
-        
-        peugeot.toString();
-        citroen.toString();
-        seat.toString();
-        
-        
+        Escuderia seat = new EscuderiaReal("Seat", new SortByTotalPuntos(), true, new SortByDeposito(), true);
+
+        // peugeot.toString();
+        // citroen.toString();
+        // seat.toString();
+
 
         //creamos los pilotos y los coches de cada escudería 
         //coches y pilotos de citroen
@@ -139,8 +129,8 @@ public class DatosCampeonatoCompleto{
         //añadir a citroen un PilotoEstrella(nombre:"Makinen" - concentración: ZEN));
         //añadir a citroen un PilotoNovato(nombre:"Auriol" - concentración: NORMAL));
         citroen.insertarCoche(new CocheResistente("Citröen C5", Velocidad.RAPIDO, Combustible.ELEFANTE));
-        citroen.insertarCoche(new CocheRapido("Citröen C4", Velocidad.RAPIDO, Combustible.ELEFANTE));
-        citroen.insertarCoche(new CocheNormal("Citröen C3", Velocidad.RAPIDO, Combustible.ELEFANTE));
+        citroen.insertarCoche(new CocheRapido("Citröen C4", Velocidad.RAPIDO, Combustible.ESCASO));
+        citroen.insertarCoche(new CocheNormal("Citröen C3", Velocidad.RAPIDO, Combustible.ESCASO));
         citroen.insertarPiloto(new PilotoExperimentado("Loeb", Concentracion.NORMAL));
         citroen.insertarPiloto(new PilotoEstrella("Makinen", Concentracion.ZEN));
         citroen.insertarPiloto(new PilotoNovato("Auriol", Concentracion.NORMAL));
@@ -173,6 +163,11 @@ public class DatosCampeonatoCompleto{
         peugeot.insertarPiloto(new PilotoEstrella("Sainz", Concentracion.ZEN));
         peugeot.insertarPiloto(new PilotoNovato("Sordo", Concentracion.DESPISTADO));
 
+        //inscribimos las escuderías al final porque al inscribir se guardan los pilotos en el mapa
+        //y tienen que estar cargados los pilotos en la escuderia
+        peugeot.inscribirse();
+        citroen.inscribirse();
+        seat.inscribirse();
     }
 
 }

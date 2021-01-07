@@ -31,7 +31,7 @@ public class Organizacion
 
     //HashMap para almacenar el valor de la escudería
     //Esta es una estructura auxiliar para almacenar la escudería a la que pertenece cada piloto
-    private Map <Piloto, Escuderia> mapaPilotosEscuderia;
+    protected Map <Piloto, Escuderia> mapaPilotosEscuderia;
     /**
      * Constructor de Organizacion sin parámetros (privado por uso de Singleton)
      */
@@ -41,10 +41,43 @@ public class Organizacion
         pilotosDescalificados    = new ArrayList <Piloto>();
         pilotosSinDescalificar   = new ArrayList <Piloto>();
         escuderiasDescalificadas = new ArrayList <Escuderia>();
-        circuitos                = new HashSet <Circuito>();
+        circuitos                = new TreeSet <Circuito>(); //ordenamos por el comparador asignado
         escuderias               = new HashSet <Escuderia>();
         pilotosCarrera           = new ArrayList <Piloto>();
         mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
+    }
+
+    /**
+     * Constructor de Organizacion con parámetros (privado por uso de Singleton)
+     */
+    private Organizacion(Comparator CMPCircuito, int limiteAbandonos, int limitePilotos)
+    {
+        setLimiteAbandonos(limiteAbandonos);
+        setLimitePilotos(limitePilotos);
+        setFinalizado(false);
+        pilotosDescalificados    = new ArrayList <Piloto>();
+        pilotosSinDescalificar   = new ArrayList <Piloto>();
+        escuderiasDescalificadas = new ArrayList <Escuderia>();
+        circuitos                = new TreeSet <Circuito>(CMPCircuito); //ordenamos por el comparador asignado
+        escuderias               = new HashSet <Escuderia>();
+        pilotosCarrera           = new ArrayList <Piloto>();
+        mapaPilotosEscuderia     = new HashMap <Piloto, Escuderia>();
+    }
+
+    /**
+     * Método de creación estático público para obtener la instancia
+     * Singleton.
+     * Realmente sirve para llamar al constructor parametrizado
+     * Es un método de clase, es decir, para invocarlo hay que usar el nombre
+     * de la clase, y no el de la instancia.
+     * 
+     * @return  única instancia de Organization
+     */
+    public synchronized static Organizacion getInstancia(Comparator CMPCircuito, int limiteAbandonos, int limitePilotos){
+        if (instancia == null){
+            instancia = new Organizacion(CMPCircuito, limiteAbandonos, limitePilotos);
+        }
+        return instancia;
     }
 
     /**
@@ -76,9 +109,7 @@ public class Organizacion
     public void inscribirEscuderia(Escuderia escuderia){
         escuderias.add(escuderia); //añadimos la escudería al set de escuderías
 
-        //Creamos una lista auxiliar de pilotos para poder iterar por ella
-        List <Piloto> pilotos;
-        pilotos = escuderia.getPilotos(); 
+        List <Piloto> pilotos = escuderia.getPilotos();
         //añadimos cada piloto de la lista de pilotos de la escudería en cuestión al
         //mapa con key cada piloto y value la escudería en cuestión
         for (Piloto piloto : pilotos){
@@ -173,9 +204,11 @@ public class Organizacion
         //Mostramos cada escudería
         mostrarEscuderias();
 
+        int turno = 1;
+
         Iterator <Circuito> itCir = circuitos.iterator();
         while (itCir.hasNext() && !finalizado){
-            int turno = 1;
+
             Circuito circuito = itCir.next();
 
             System.out.println("********************************************************************************************************");
@@ -346,8 +379,11 @@ public class Organizacion
      *  Método que devuelve los Pilotos de pilotosCarrera a su respectiva escudería
      */
     public void devolverPilotos(){
-        for(Piloto piloto : pilotosCarrera){
-            Escuderia escuderia = mapaPilotosEscuderia.get(piloto); //obtenemos la escudería a la que pertenece el piloto
+        Escuderia escuderia;
+        for(int i=0; i<pilotosCarrera.size(); i++){
+            Piloto piloto = pilotosCarrera.get(i);
+
+            escuderia = mapaPilotosEscuderia.get(piloto); //obtenemos la escudería a la que pertenece el piloto
             escuderia.insertarPiloto(piloto); //volvemos a insertar al piloto en la lista de su escuderia
             escuderia.insertarCoche(piloto.devolverCoche()); //lo mismo que arriba pero con el coche, además de que se
             //deasigna el coche del piloto
@@ -362,8 +398,8 @@ public class Organizacion
         System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         System.out.println("||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||");
         System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-        for (Circuito circuito : circuitos){
-            circuito.toString();
+        for (Circuito circuito : this.circuitos){
+            System.out.println(circuito.mostrarCaracteristicas());
         }
     }
 
@@ -375,7 +411,7 @@ public class Organizacion
         System.out.println("%%%%%%%% ESCUDERÍAS DEL CAMPEONATO %%%%%%%%");
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
-        for (Escuderia escuderia : escuderias){
+        for (Escuderia escuderia : this.escuderias){
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             System.out.println("%%% "+escuderia.getNombre()+" %%%");
 
@@ -400,7 +436,7 @@ public class Organizacion
         System.out.println("******************************** Pilotos que van a competir en "+circuito.getNombre()+" *******************************");
         System.out.println("********************************************************************************************************");
 
-        for (Piloto piloto : pilotosCarrera){
+        for (Piloto piloto : this.pilotosCarrera){
             System.out.println(piloto.toString());
         }
     }
@@ -418,10 +454,10 @@ public class Organizacion
         Collections.sort(pilotosCarrera, new CMPPuntosTotalesPiloto());
 
         int contadorPiloto = 1;
-        for(Piloto piloto : pilotosCarrera){
+        for(Piloto piloto : this.pilotosCarrera){
             System.out.println("@@@ Piloto " + contadorPiloto + " de " + limitePilotos);
 
-            System.out.println(piloto.toString() + " con \n"); //mostrarmos las CARACTERÍSTICAS del PILOTO
+            System.out.println(piloto.toString() + " con"); //mostrarmos las CARACTERÍSTICAS del PILOTO
             System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
 
             System.out.println("+++ Con estas condiciones es capaz de correr a " +
@@ -439,6 +475,7 @@ public class Organizacion
                     +"el límite de abandonos("+limiteAbandonos+") !!!");
                 System.out.println("@@@");
             }
+            contadorPiloto++;
         }
     }
 
@@ -449,7 +486,7 @@ public class Organizacion
      */
     public void asignarPuntos(List <Piloto> pilotosTerminado, Circuito circuito){
         Collections.sort(pilotosTerminado, new CMPTiempoResultado());
-        for (int i=0; i<pilotosTerminado.size()-1; i++){
+        for (int i=0; i<pilotosTerminado.size(); i++){
             Piloto piloto = pilotosTerminado.get(i);
 
             if (i==0){ //el primer piloto en la lista será el que menor tiempo tenga
@@ -480,10 +517,10 @@ public class Organizacion
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         //mostramos los pilotos que han terminado por orden de clasificación
+        int posicion = 1;
         for (Piloto piloto : pilotosTerminado){
-            int posicion = 1;
             System.out.println("@@@ Posición("+posicion+"): "+piloto.getNombre()+" - Tiempo: "+
-                piloto.getTiempoEnCircuito(circuito)+" minutos -Puntos: "+piloto.getPuntosEnCircuito(circuito)+" @@@");
+                piloto.getTiempoEnCircuito(circuito)+" minutos - Puntos: "+piloto.getPuntosEnCircuito(circuito)+" @@@");
             posicion ++;
         }
 
@@ -521,13 +558,13 @@ public class Organizacion
      * Setter de limiteAbandonos
      * @param    limiteAbandonos    Nuevo valor del campo limiteAbandonos
      */
-    public void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
+    private void setLimiteAbandonos(int limAband){limiteAbandonos = limAband;}
 
     /**
      * Setter de limitePilotos
      * @param    limitePilotos      Nuevo valor del campo limitePilotos
      */
-    public void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
+    private void setLimitePilotos(int limPilot){limitePilotos = limPilot;}
 
     /**
      * Setter de finalizado

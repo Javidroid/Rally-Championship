@@ -11,7 +11,7 @@ public class CMPDestreza implements Comparator <Piloto>//, CMPStrategyPiloto
 {
     public int compare (Piloto piloto1, Piloto piloto2){
         if (piloto1.calcularDestreza() == piloto2.calcularDestreza())
-            return 0;
+            return new CMPNombrePiloto().compare(piloto1, piloto2);
         else if (piloto1.calcularDestreza() > piloto2.calcularDestreza())
             return 1;
         else 

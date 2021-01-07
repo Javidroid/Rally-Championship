@@ -11,7 +11,7 @@ public class CMPTotalPuntos implements Comparator <Piloto>
 {
     public int compare (Piloto piloto1, Piloto piloto2){
         if (piloto1.getTotalPuntos() == piloto2.getTotalPuntos())
-            return 0;
+            return new CMPDestreza().compare(piloto1, piloto2);
         else if (piloto1.getTotalPuntos() > piloto2.getTotalPuntos())
             return 1;
         else 

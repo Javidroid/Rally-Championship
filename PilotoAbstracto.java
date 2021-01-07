@@ -402,9 +402,6 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
        int result=17;
        
        result = 7 * result + getNombre().hashCode();
-       result = 13 * result + getCocheAsignado().hashCode();
-       result = 17 * result + getConcentracion().hashCode();
-       result = 23 * result + getListaResultados().hashCode();
        return result;
     }
 }

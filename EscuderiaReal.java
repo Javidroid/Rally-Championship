@@ -23,6 +23,9 @@ public class EscuderiaReal implements Escuderia
     private List <Piloto> pilotos;
     private List <Coche>  coches;
 
+    private List <Piloto> pilotosDescalificados; //almacenamos los pilotos descalificados para que no estorben
+    private List <Coche>  cochesSinCombustible;  //lo mismo con los coches
+
     private CMPStrategyPiloto criterioPiloto;//campo que referencia la Strategy usada para ordenar pilotos
     private boolean ASCpiloto; //booleano que controla si se quiere ordenar ascendente o descendentemente
 
@@ -38,14 +41,14 @@ public class EscuderiaReal implements Escuderia
         pilotos = new ArrayList <Piloto>();
         coches  = new ArrayList <Coche>();
 
+        pilotosDescalificados = new ArrayList <Piloto>();
+        cochesSinCombustible  = new ArrayList <Coche>();
+
         setCriterioPiloto(criterioPiloto);
         setCriterioCoche(criterioCoche);
 
         setASCpiloto(ASCpiloto);
         setASCcoche(ASCcoche);
-
-        ordenarPilotos();
-        ordenarCoches();
     }
 
     //FUNCIONALIDAD DE ESCUDERÍA
@@ -124,55 +127,44 @@ public class EscuderiaReal implements Escuderia
     {
         //iterator que escoge el primer piloto no descalificado de la lista y le asigna
         //el primer coche con combustible de la lista
-        boolean pilotoEncontrado = false;
-        boolean cocheEncontrado  = false;
-        Iterator <Piloto> itPil = pilotos.iterator();   //iterador de la lista de pilotos
-        Iterator <Coche> itCoch = coches.iterator();    //iterador de la lista de coches
-
+        
         Coche cocheAsignable = null; //variable que almacena el primer coche disponible para ser asignado
         Piloto pilotoEnviable = null; //almacena el primer piloto enviable en la lista
+
+        //quitamos los pilotos y coches que no sirvan de la lista
+        separarPilotos(); //quitamos los pilotos descalificados de pilotos y los ponemos en pilotosDescalificados
+        separarCoches();  //quitamos los coches sin combustibles de coches y los ponemos en cochesSinCombustible
 
         //ordenamos los pilotos y los coches antes de asignarlos
         ordenarPilotos();
         ordenarCoches();
 
         //Buscamos el primer coche con combustible en la lista
-        while(itCoch.hasNext() && !cocheEncontrado){
-            cocheAsignable = itCoch.next();
-            if(cocheAsignable.getDeposito() > 0){
-                cocheEncontrado = true;
-                }
-            else {
-                cocheAsignable = null;
-            }
+        if(!coches.isEmpty()){ //si la lista NO está vacia, asignamos el primer coche
+            cocheAsignable = coches.get(0);
+            coches.remove(0); //sacamos al coche de la lista para evitar que otro piloto lo use
         }
-        //el coche lo sacamos fuera del bucle porque no se puede modificar una lista mientras se itera
-        coches.remove(cocheAsignable); //sacamos al coche de la lista para evitar que otro piloto la use
-            
 
         //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
         //piloto no descalificado de la lista. 
         //Se podría hacer para que, si no hay cocheAsignable, ni siquiera buscar piloto, pero hay que mostrar
         //el mensaje del piloto concreto que no puede participar en la carrera
-        while(itPil.hasNext() && !pilotoEncontrado){
-            pilotoEnviable = itPil.next();
-            if(!pilotoEnviable.getDescalificado()){
-                pilotoEncontrado = true;
-                pilotoEnviable.recibirCoche(cocheAsignable);
-                pilotos.remove(pilotoEnviable); //sacamos al piloto para no mandarlo dos veces a la misma carrera
-            }
-            else {
-                pilotoEnviable = null; //no hay piloto sin descalificar
-
-                if (cocheAsignable != null){
-                    coches.add(cocheAsignable); //volvemos a añadir el coche porque no se va a mandar ningún piloto
-                }
+        if(!pilotos.isEmpty()){
+            pilotoEnviable = pilotos.get(0);
+            pilotoEnviable.recibirCoche(cocheAsignable);
+            if (cocheAsignable != null){ //si el piloto SI tiene coche, también lo borramos de la lista
+                pilotos.remove(0);
             }
         }
+        else{//si no hay piloto disponible, devolvemos el coche
+            coches.add(cocheAsignable);
+        }
 
-        if(pilotoEnviable.getCocheAsignado() == null){
+        //si hay piloto disponible (pilotoEnviable!=null) pero NO hay coche (null) entonces no se puede mandar el piloto
+        if(pilotoEnviable != null && cocheAsignable == null){
+            pilotos.add(pilotoEnviable); //devolvemos al piloto porque no puede participar
             pilotoEnviable = null; //no hay piloto enviable porque no tiene coche
-
+            
             System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
                 "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
         }
@@ -181,18 +173,36 @@ public class EscuderiaReal implements Escuderia
     }
 
     /**
+     * Método que manda a pilotosDescalificados a todos aquellos pilotos en pilotos que estén descalificados
+     */
+    public void separarPilotos(){
+        for (Piloto piloto : this.pilotos){
+            if(piloto.getDescalificado() == true){
+                pilotos.remove(piloto);
+                pilotosDescalificados.add(piloto);   
+            }
+        }
+    }
+
+    /**
+     * Método que manda a cochesSinCombustible todos aquellos coches en coches que no tengan combustible
+     */
+    public void separarCoches(){
+        for (Coche coche : this.coches){
+            if(coche.getDeposito() <= 0){
+                coches.remove(coche);
+                cochesSinCombustible.add(coche);
+            }
+        }
+    }
+
+    /**
      * Método que devuelve true si aún quedan pilotos enviables por la escudería
      * 
      * @return true si hay pilotos, false si no
      */
     public boolean quedanPilotos(){
-        boolean quedan = false;
-        for(Piloto piloto : pilotos){
-            if (!piloto.getDescalificado()){
-                quedan = true;
-            }
-        }
-        return quedan;
+        return pilotos.size() > 0;
     }
 
     /**
@@ -201,13 +211,7 @@ public class EscuderiaReal implements Escuderia
      * @return true si hay coches, false si no
      */
     public boolean quedanCoches(){
-        boolean quedan = false;
-        for(Coche coche : coches){
-            if (coche.getDeposito() > 0){
-                quedan = true;
-            }
-        }
-        return quedan;
+        return coches.size() > 0;
     }
 
     //SETTERS
