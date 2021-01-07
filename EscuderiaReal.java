@@ -163,10 +163,11 @@ public class EscuderiaReal implements Escuderia
         //si hay piloto disponible (pilotoEnviable!=null) pero NO hay coche (null) entonces no se puede mandar el piloto
         if(pilotoEnviable != null && cocheAsignable == null){
             pilotos.add(pilotoEnviable); //devolvemos al piloto porque no puede participar
-            pilotoEnviable = null; //no hay piloto enviable porque no tiene coche
-            
+                       
             System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
                 "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
+                
+            pilotoEnviable = null; //no hay piloto enviable porque no tiene coche    
         }
 
         return pilotoEnviable;

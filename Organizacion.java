@@ -295,8 +295,8 @@ public class Organizacion
             System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡");
         }
         else{
+            int posicion = 1;
             for (Escuderia escuderia : escuderias){
-                int posicion = 1;
                 boolean encontrado = false; 
 
                 //podríamos usar un iterador para salir del bucle cuando encuentre un piloto sin descalificar
@@ -380,9 +380,7 @@ public class Organizacion
      */
     public void devolverPilotos(){
         Escuderia escuderia;
-        for(int i=0; i<pilotosCarrera.size(); i++){
-            Piloto piloto = pilotosCarrera.get(i);
-
+        for(Piloto piloto : this.pilotosCarrera){
             escuderia = mapaPilotosEscuderia.get(piloto); //obtenemos la escudería a la que pertenece el piloto
             escuderia.insertarPiloto(piloto); //volvemos a insertar al piloto en la lista de su escuderia
             escuderia.insertarCoche(piloto.devolverCoche()); //lo mismo que arriba pero con el coche, además de que se
