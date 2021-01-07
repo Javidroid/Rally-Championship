@@ -16,11 +16,11 @@ TO-DO LIST:
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-    Función MATH.ROUND en las operaciones matemáticas
+   
     
     Hacer método que quite capas del decorator
     
-    Traducir pseudocódigo de archivos para estudiantes
+    (Hecho:Traducir pseudocódigo de archivos para estudiantes)
     Luego hay que meterlo en la carpeta del proyecto    
     
     Hacer las pruebas con JUnit de cada método público (interface) de:
@@ -189,7 +189,10 @@ HECHO:
     o si no es necesario llevando un control adecuado. Básicamente saber si se pasan por copia o por referencia los punteros
     
     aligerar el método entregarPremios llamando a submétodos
+    
+    Función MATH.ROUND en las operaciones matemáticas
      
+    Traducir pseudocódigo de archivos para estudiantes 
     
     
     
