@@ -6,17 +6,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * The test class PilotoEstrellaTest.
+ * The test class PilotoExperimentadoTest.
  *
  * @author  (your name)
  * @version (a version number or a date)
  */
-public class PilotoEstrellaTest
+public class PilotoExperimentadoTest
 {
     /**
-     * Default constructor for test class PilotoEstrellaTest
+     * Default constructor for test class PilotoExperimentadoTest
      */
-    public PilotoEstrellaTest()
+    public PilotoExperimentadoTest()
     {
     }
 
@@ -43,10 +43,10 @@ public class PilotoEstrellaTest
     @Test
     public void calcularDestrezaTest()
     {
-        PilotoEstrella pilotoEs1 = new PilotoEstrella("piloto1", Concentracion.NORMAL);
-        assertEquals(0.85, pilotoEs1.calcularDestreza(), 0.2);
-        PilotoEstrella pilotoEs2 = new PilotoEstrella("piloto2", Concentracion.ZEN);
-        assertEquals(1.00, pilotoEs2.calcularDestreza(), 0.2);
+        PilotoExperimentado pilotoEx1 = new PilotoExperimentado("piloto1", Concentracion.NORMAL);
+        assertEquals(0.82, pilotoEx1.calcularDestreza(), 0.1);
+        PilotoExperimentado pilotoEx2 = new PilotoExperimentado("piloto2", Concentracion.ZEN);
+        assertEquals(0.97, pilotoEx2.calcularDestreza(), 0.1);
     }
 }
 
