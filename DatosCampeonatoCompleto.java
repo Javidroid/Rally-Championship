@@ -53,7 +53,7 @@ public class DatosCampeonatoCompleto{
         //Crear circuito corcega con nombre:”Córcega" - complejidad:MEDIA - distancia:INTERMEDIA);
         //además, acciones necesarias para que corcega sea un circuito con:
         //Nocturno y Gravilla
-        //añadir circuito corcega a circuitos de la organización    
+        //añadir circuito corcega a circuitos de la organización
         Circuito corcega = new CircuitoReal("Córcega", Complejidad.MEDIA, Distancia.INTERMEDIA);
         corcega = new Nocturno(corcega);
         corcega = new Gravilla(corcega);
@@ -166,9 +166,10 @@ public class DatosCampeonatoCompleto{
 
         //inscribimos las escuderías al final porque al inscribir se guardan los pilotos en el mapa
         //y tienen que estar cargados los pilotos en la escuderia
+        
+        seat.inscribirse();
         peugeot.inscribirse();
         citroen.inscribirse();
-        seat.inscribirse();
     }
 
 }

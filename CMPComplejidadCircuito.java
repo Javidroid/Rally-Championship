@@ -12,7 +12,7 @@ public class CMPComplejidadCircuito implements Comparator <Circuito>
 {
     public int compare (Circuito c1, Circuito c2){
         if (c1.getValorComplejidad() == c2.getValorComplejidad())
-            return 0;
+            return c1.getNombre().compareTo(c2.getNombre());
         else if (c1.getValorComplejidad() > c2.getValorComplejidad())
             return 1;
         else 

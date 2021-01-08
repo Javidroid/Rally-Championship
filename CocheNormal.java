@@ -114,6 +114,25 @@ public class CocheNormal implements Coche
     }
     
     /**
+     * Muestra por pantalla la velocidad real base del coche (sin tener en cuenta si es rapido)
+     * 
+     * Este método es concretamente útil para los cocheRapido. Porque al mostrar por pantalla su velocidad real
+     * con el método calcularVelocidadReal() y luego calcularTiempoNecesario() se reduce el nitro dos veces
+     * y esto influye en los resultados. Por eso se vuelve a calcular la forma pero de forma base.
+     * 
+     * @param  piloto       El piloto que conduce el coche
+     * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
+     * @return              double Velocidad real del coche
+     */
+    public void imprimirVelocidadReal(Piloto piloto, Circuito circuito){
+        double velocidadReal;
+        velocidadReal = (getValorVelocidad() * piloto.calcularDestreza()) / circuito.getValorComplejidad();
+        velocidadReal = Math.round(velocidadReal*100d) / 100d;
+        
+        System.out.println("+++ Con estas condiciones es capaz de correr a "+velocidadReal+" km/hora +++");
+    }
+    
+    /**
      * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
      * 
      * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)
@@ -178,10 +197,10 @@ public class CocheNormal implements Coche
         builder.append("> ");
         builder.append("<tipo: normal> ");
         builder.append("<vel_teó:");
-        builder.append(getValorVelocidad());
+        builder.append(getVelocidad().toString());
         builder.append("> ");
         builder.append("<comb: (");
-        builder.append(getValorCombustibleTotal());
+        builder.append(getCombustibleTotal().toString());
         builder.append(") (actual: ");
         builder.append(getDeposito());
         builder.append(")> ");

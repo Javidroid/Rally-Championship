@@ -55,6 +55,15 @@ public interface Coche
     public double calcularVelocidadReal(Piloto piloto, Circuito circuito);
     
     /**
+     * Muestra por pantalla la velocidad real base del coche (sin tener en cuenta si es rapido)
+     * 
+     * @param  piloto       El piloto que conduce el coche
+     * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)
+     * @return              double Velocidad real del coche
+     */
+    public void imprimirVelocidadReal(Piloto piloto, Circuito circuito);
+    
+    /**
      * Calcula el tiempo necesario para terminar la carrera según el piloto y el circuito
      * 
      * @param  piloto       El piloto que conduce el coche (para calcular la velocidad real)

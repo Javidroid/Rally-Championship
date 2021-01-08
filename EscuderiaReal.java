@@ -89,6 +89,7 @@ public class EscuderiaReal implements Escuderia
     public void ordenarPilotos()
     {
         criterioPiloto.ordenarPilotos(pilotos, ASCpiloto); //mandamos la lista de pilotos para que se ordene
+        criterioPiloto.ordenarPilotos(pilotosDescalificados, ASCpiloto);
     }
 
     /**
@@ -98,6 +99,7 @@ public class EscuderiaReal implements Escuderia
     public void ordenarCoches()
     {
         criterioCoche.ordenarCoches(coches, ASCcoche);    //mandamos la lista de coches para que se ordene
+        criterioCoche.ordenarCoches(cochesSinCombustible, ASCcoche);
     }
 
     /**
@@ -328,6 +330,9 @@ public class EscuderiaReal implements Escuderia
      */
     @Override
     public String toString(){
+        ordenarPilotos(); //ordenamos los pilotos y coches por si acaso estuvieran desordenados
+        ordenarCoches();
+        
         StringBuilder builder= new StringBuilder();
         builder.append("%%% ");
         builder.append(getNombre());
@@ -384,8 +389,6 @@ public class EscuderiaReal implements Escuderia
         int result=17;
 
         result = 7 * result + getNombre().hashCode();
-        result = 13 * result + getCoches().hashCode();
-        result = 17 * result + getPilotos().hashCode();
         return result;
     }
 }

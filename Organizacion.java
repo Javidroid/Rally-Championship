@@ -23,7 +23,7 @@ public class Organizacion
     //Este orden es estático: se asigna al inicio y no se modifica en RunTime
     private Set <Circuito> circuitos;
 
-    //HashSet porque no se repiten ni tienen orden.
+    //HashSet porque no se repiten.
     private Set <Escuderia> escuderias;  
 
     //ArrayList porque requiere orden
@@ -196,8 +196,6 @@ public class Organizacion
      * 
      */
     public void celebrarCompeticion(){
-        //ordenamos los circuitos: (no se si se ordenan directamente desde RallyDemo
-        //Collections.sort
         //Mostramos los circuitos
         mostrarCircuitos();
 
@@ -336,7 +334,7 @@ public class Organizacion
             for(Escuderia escuderia : this.escuderias){
                 escuderiasOrdenadas.add(escuderia);
             }
-            Collections.sort(escuderiasOrdenadas, new CMPPuntosEscuderia()); //ordenamos las escuderías por puntos
+            Collections.sort(escuderiasOrdenadas, Collections.reverseOrder(new CMPPuntosEscuderia())); //ordenamos las escuderías por puntos
 
             for (Escuderia escuderia : escuderiasOrdenadas){
 
@@ -448,23 +446,7 @@ public class Organizacion
 
         for (Escuderia escuderia : this.escuderias){
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            System.out.println("%%% "+escuderia.getNombre()+" %%%");
-
-            //mostramos los pilotos de cada escudería (también se muestran los pilotos y coches que no sirven para las carreras
-            //en este proyecto no se va a dar ningún caso donde se hagan el segundo y cuarto bucle, pero lo correcto
-            //para que muestre de verdad los datos de cada escudería es este.
-            for (Piloto piloto : escuderia.getPilotos()){
-                System.out.println(piloto.toString());
-            }
-            for (Piloto piloto : escuderia.getPilotosDescalificados()){
-                System.out.println(piloto.toString());
-            }
-            for (Coche coche : escuderia.getCoches()){
-                System.out.println(coche.toString());
-            }
-            for (Coche coche : escuderia.getCochesSinCombustible()){
-                System.out.println(coche.toString());
-            }
+            System.out.println(escuderia.toString());
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         }
 
@@ -503,8 +485,8 @@ public class Organizacion
             System.out.println(piloto.toString() + " con"); //mostrarmos las CARACTERÍSTICAS del PILOTO
             System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
 
-            System.out.println("+++ Con estas condiciones es capaz de correr a " +
-                + piloto.getCocheAsignado().calcularVelocidadReal(piloto, circuito) +" km/hora +++");
+            //Mostramos la velocidad real BASE del coche (sin tener en cuenta si es cocheRapido o no)
+            piloto.getCocheAsignado().imprimirVelocidadReal(piloto, circuito);
 
             piloto.conducir(circuito); //circuito es el Circuito que se ha pasado por parámetro
 

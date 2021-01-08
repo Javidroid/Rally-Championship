@@ -16,8 +16,6 @@ TO-DO LIST:
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-   
-    
     Hacer método que quite capas del decorator
     
     (Hecho:Traducir pseudocódigo de archivos para estudiantes)
@@ -36,22 +34,13 @@ TO-DO LIST:
      
      revisar si hay que hacer el hashCode en organización
      
-     REVISAR: Método que carga los pilotos que van a conducir: no me convence mucho, es muy forzado
-     
      Revisar que el formato de plantilla de salida es correcto
      
-     ver el método enviarPiloto();
-     
-     ERROR: EN ORGANIZACION.DEVOLVERPILOTOS();
-     
-     hacer bien los hashcode en pilotoAbstracto
+     hacer bien los hashcode de escudería
      
      revisar el funcionamiento de la nitro en cocheRapido
      
-     Errores:
-     Los circuitos no se ordenan correctamente
-     
-     Solucionados:
+     Errores Solucionados:
      piloto 5 (ogier) de la carrera en australia se le asigna un coche erróneo y hace que no finalice 
      (comparador mal asignado. Se puso sortByCombustible y se tenia que haber puesto SortByDeposito)
      
@@ -60,7 +49,8 @@ TO-DO LIST:
      
      IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
      
-     metodo calcularVelocidad, en caso de ser coche rapido reduce la nitro un par de veces y esto hay que corregirlo
+     IMPORTANTE: EL TIEMPO SE MUESTRA MUY REDONDEADO Y PUEDE QUE INFLUYA (VER SI ES QUE SE HA TRANSFORMADO A INT O 
+     SE HA REDONDEADO DEMASIADO
      
 INFORMARSE: 
     
@@ -193,6 +183,13 @@ HECHO:
     Función MATH.ROUND en las operaciones matemáticas
      
     Traducir pseudocódigo de archivos para estudiantes 
+    
+    REVISAR: Método que carga los pilotos que van a conducir: no me convence mucho, es muy forzado
+    
+    metodo calcularVelocidad, en caso de ser coche rapido reduce la nitro un par de veces y esto hay que corregirlo
+     
+     
+     
     
     
     

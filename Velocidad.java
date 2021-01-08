@@ -49,6 +49,6 @@ public enum Velocidad
     @Override
     public String toString()
     {
-        return getNombre() + "(Original" + getValor() + ")";
+        return getNombre() + "(" + getValor() + ")";
     }
 }
