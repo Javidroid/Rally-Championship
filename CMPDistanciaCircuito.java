@@ -12,7 +12,7 @@ public class CMPDistanciaCircuito implements Comparator <Circuito>
 {
     public int compare (Circuito c1, Circuito c2){
         if (c1.getValorDistancia() == c2.getValorDistancia())
-            return new CMPComplejidadCircuito().compare(c1, c2);
+            return new CMPNombreCircuito().compare(c1, c2);
         else if (c1.getValorDistancia() > c2.getValorDistancia())
             return 1;
         else 

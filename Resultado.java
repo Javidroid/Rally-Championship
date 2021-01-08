@@ -55,7 +55,7 @@ public class Resultado
      * Getter de tiempo
      * @return  tiempo
      */
-    public double getTiempo(){return Math.round(tiempo *100d)/100;}
+    public double getTiempo(){return tiempo;}
     
     /**
      * Getter de puntos
@@ -71,12 +71,13 @@ public class Resultado
     @Override
     public String toString(){
         StringBuilder builder= new StringBuilder();
-        builder.append(getCircuito());
-        builder.append('\n');
-        builder.append(getTiempo());
-        builder.append('\n');
+        builder.append("Carrera(");
+        builder.append(getCircuito().getNombre());
+        builder.append(") - Puntos: ");
         builder.append(getPuntos());
-        builder.append('\n');
+        builder.append(" - Tiempo: ");
+        builder.append(Math.round((getTiempo())*100d)/100d);
+        builder.append(" minutos");
         return builder.toString();
     }
     

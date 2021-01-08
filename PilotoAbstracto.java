@@ -242,6 +242,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             + tiempoConducido + " minutos !!!");
         }
         else if(cocheAsignado.getDeposito() < tiempoParaAcabar){//caso en el que el depósito principal no es suficiente
+            tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
             cocheAsignado.reducirCombustible(tiempoParaAcabar);
             
             //condicional que controla si el coche era cocheResistente y ha usado la Reserva
@@ -252,18 +253,19 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
                 
                 tiempoConducido = tiempoParaAcabar;
                 resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+                
+                tiempoConducido = Math.round((tiempoConducido)*100d)/100d;
             
                 System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
             }
             else{ //caso en el que no sea CocheResistente o si, incluso usando la reserva, se ha quedado sin combustible
-                tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
                 resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
                 
                 System.out.println("¡¡¡ El " + cocheAsignado.getNombre() + " se quedó sin combustible a falta de "
-                + (tiempoParaAcabar - tiempoConducido) + " minutos para terminar !!!");
+                + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
             
                 System.out.println("¡¡¡ En el momento de quedarse sin combustible llevaba en carrera "
-                + tiempoConducido + "minutos !!!");
+                + tiempoConducido + " minutos !!!");
             }
         }
         else{ //Termina la carrera

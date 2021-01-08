@@ -88,8 +88,12 @@ public class EscuderiaReal implements Escuderia
      */
     public void ordenarPilotos()
     {
-        criterioPiloto.ordenarPilotos(pilotos, ASCpiloto); //mandamos la lista de pilotos para que se ordene
-        criterioPiloto.ordenarPilotos(pilotosDescalificados, ASCpiloto);
+        if(this.pilotos.size() > 1){ //si el tamaño es 1 o menor, no hace falta ordenar nada
+            criterioPiloto.ordenarPilotos(pilotos, ASCpiloto); //mandamos la lista de pilotos para que se ordene
+        }
+        if(this.pilotosDescalificados.size() > 1){
+            criterioPiloto.ordenarPilotos(pilotosDescalificados, ASCpiloto);
+        }
     }
 
     /**
@@ -98,14 +102,18 @@ public class EscuderiaReal implements Escuderia
      */
     public void ordenarCoches()
     {
-        criterioCoche.ordenarCoches(coches, ASCcoche);    //mandamos la lista de coches para que se ordene
-        criterioCoche.ordenarCoches(cochesSinCombustible, ASCcoche);
+        if(this.coches.size() > 1){
+            criterioCoche.ordenarCoches(coches, ASCcoche);    //mandamos la lista de coches para que se ordene
+        }
+        if(this.cochesSinCombustible.size() > 1){
+            criterioCoche.ordenarCoches(cochesSinCombustible, ASCcoche);
+        }
     }
 
     /**
      * Devuelve todos los puntos acumulados que tienen los pilotos de la Escuderia 
      *
-     * @return     puntos totales de todos los Pilotos de la Escudería
+     * @return     puntos totales de todos los Pilotos (no descalificados) de la Escudería
      */
     public int getPuntosPilotosTotal()
     {
@@ -115,7 +123,7 @@ public class EscuderiaReal implements Escuderia
         }
         return puntos;
     }
-    
+
     /**
      * Devuelve el número total de carreras terminadas de sus pilotos
      *
@@ -143,7 +151,7 @@ public class EscuderiaReal implements Escuderia
     {
         //iterator que escoge el primer piloto no descalificado de la lista y le asigna
         //el primer coche con combustible de la lista
-        
+
         Coche cocheAsignable = null; //variable que almacena el primer coche disponible para ser asignado
         Piloto pilotoEnviable = null; //almacena el primer piloto enviable en la lista
 
@@ -179,10 +187,10 @@ public class EscuderiaReal implements Escuderia
         //si hay piloto disponible (pilotoEnviable!=null) pero NO hay coche (null) entonces no se puede mandar el piloto
         if(pilotoEnviable != null && cocheAsignable == null){
             pilotos.add(pilotoEnviable); //devolvemos al piloto porque no puede participar
-                       
+
             System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
                 "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
-                
+
             pilotoEnviable = null; //no hay piloto enviable porque no tiene coche    
         }
 
@@ -211,7 +219,7 @@ public class EscuderiaReal implements Escuderia
         Iterator <Coche> it = this.coches.iterator();
         Coche coch;
         while (it.hasNext()){
-            coch= it.next();
+            coch = it.next();
             if(coch.getDeposito() <= 0){ //si el depósito está vacío
                 it.remove(); //borramos el elemento de la lista que el iterador indique
                 cochesSinCombustible.add(coch);   
@@ -292,7 +300,7 @@ public class EscuderiaReal implements Escuderia
      * @return   pilotos
      */
     public List <Piloto> getPilotos(){return pilotos;}
-    
+
     /**
      * Método que devuelve pilotos descalificados
      * @return   pilotos descalificados
@@ -304,7 +312,7 @@ public class EscuderiaReal implements Escuderia
      * @return   coches
      */
     public List <Coche> getCoches(){return coches;}
-    
+
     /**
      * Método que devuelve coches sin combustible
      * @return   coches sin combustible
@@ -332,7 +340,7 @@ public class EscuderiaReal implements Escuderia
     public String toString(){
         ordenarPilotos(); //ordenamos los pilotos y coches por si acaso estuvieran desordenados
         ordenarCoches();
-        
+
         StringBuilder builder= new StringBuilder();
         builder.append("%%% ");
         builder.append(getNombre());
@@ -350,8 +358,8 @@ public class EscuderiaReal implements Escuderia
             builder.append("\n");
         }
         for (Coche c : cochesSinCombustible){
-             builder.append(c.toString());
-             builder.append("\n");
+            builder.append(c.toString());
+            builder.append("\n");
         }
         return builder.toString();
     }

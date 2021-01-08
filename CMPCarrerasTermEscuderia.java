@@ -11,7 +11,7 @@ public class CMPCarrerasTermEscuderia implements Comparator <Escuderia>
 {
     public int compare (Escuderia e1, Escuderia e2){
         if (e1.getCarrerasTerminadasPilotos() == e2.getCarrerasTerminadasPilotos())
-            return e1.getNombre().compareTo(e1.getNombre());
+            return e1.getNombre().compareTo(e2.getNombre());
         else if (e1.getCarrerasTerminadasPilotos() > e2.getCarrerasTerminadasPilotos())
             return 1;
         else 

@@ -45,18 +45,36 @@ TO-DO LIST:
      (comparador mal asignado. Se puso sortByCombustible y se tenia que haber puesto SortByDeposito)
      
      a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
-     (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size()-1. entonces se quedaba uno suelto)
+     (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size(). entonces se quedaba uno suelto)
      
      IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
      
      IMPORTANTE: EL TIEMPO SE MUESTRA MUY REDONDEADO Y PUEDE QUE INFLUYA (VER SI ES QUE SE HA TRANSFORMADO A INT O 
      SE HA REDONDEADO DEMASIADO
      
+     hacer que escuderías se ordene
+     
+     cambiar la responsabilidad de mostrar cosas
+     
+     usar el getClassName para los pilotos y coches subclase
+     
+     arreglar el bug que guarda los resultados con numeros redondeados
+     
+     Kankunnen se guarda dos veces en peugeot
+     
+     en algún punto se guarda un coche nulo en peugeot
+     
+     breakpoint en linea 421 de organizacion para ver cuándo se inserta un coche nulo y un piloto doble
+     (dentro del metodo de devolverPilotos)
+     
+     
 INFORMARSE: 
     
     Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.
     Porque en el pseudocódigo siempre se anida por puntos, destreza y nombre. ¿y si se quisiera
     anidar por concentracion, nombre y después carreras terminadas?
+    
+    Tengo muchos comparadores y SortBy, pero porque el enunciado lo pide y no se si es correcto o qué
             
     Cómo ordenar los circuitos usando treeMap y cuándo se ordenan. De hecho, al mandar los datos da error gordo
     
