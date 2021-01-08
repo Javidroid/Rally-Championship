@@ -58,9 +58,6 @@ INFORMARSE:
     Porque en el pseudocódigo siempre se anida por puntos, destreza y nombre. ¿y si se quisiera
     anidar por concentracion, nombre y después carreras terminadas?
             
-    A qué se refiere en la celebración de la carrera de campeonato (al final) que cada piloto se devuelve
-    a su escudería. ¿No sería una referencia lo que almacena?
-    
     Cómo ordenar los circuitos usando treeMap y cuándo se ordenan. De hecho, al mandar los datos da error gordo
     
     
