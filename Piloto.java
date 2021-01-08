@@ -140,8 +140,7 @@ public interface Piloto
      * dispute una carrera 
      * 
      */
-    public void conducir(Circuito circuito);
-    
+    public void conducir(Circuito circuito);    
     
     //METODOS AUXILIARES
     /**

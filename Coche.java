@@ -82,6 +82,16 @@ public interface Coche
     public void reducirCombustible(double cantidad);
     
     /**
+     * Método que devuelve cómo quedaría el depósito si se aplicase la reducción de combustible
+     * Pero no lo modifica
+     * Sirve principalmente para, en el método Piloto.conducir(), controlar el caso en el que se use la reserva
+     * y además se quede sin concentración el piloto (para reducir la concentración y no el total)
+     * 
+     * @param  double cantidad: la cantidad de combustible que hay que reducir
+     */
+    public double calcularReduccionCombustible(double cantidad);
+    
+    /**
      * Aumenta el depósito la cantidad indicada.
      * Actualmente sólo sirve para CocheResistente y su funcionalidad de
      * depósito de reserva. Pero podría servir para

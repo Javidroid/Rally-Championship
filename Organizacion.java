@@ -421,8 +421,10 @@ public class Organizacion
         for(Piloto piloto : this.pilotosCarrera){
             escuderia = mapaPilotosEscuderia.get(piloto); //obtenemos la escudería a la que pertenece el piloto
             escuderia.insertarPiloto(piloto); //volvemos a insertar al piloto en la lista de su escuderia
-            escuderia.insertarCoche(piloto.devolverCoche()); //lo mismo que arriba pero con el coche, además de que se
-            //deasigna el coche del piloto
+            if(piloto.getCocheAsignado() != null){
+                escuderia.insertarCoche(piloto.devolverCoche()); //lo mismo que arriba pero con el coche, además de que se
+                //deasigna el coche del piloto
+            }
         }
         pilotosCarrera.clear(); //borramos la lista entera
     }
@@ -481,7 +483,7 @@ public class Organizacion
 
         int contadorPiloto = 1;
         for(Piloto piloto : this.pilotosCarrera){
-            System.out.println("@@@ Piloto " + contadorPiloto + " de " + limitePilotos);
+            System.out.println("@@@ Piloto " + contadorPiloto + " de " + pilotosCarrera.size());
 
             System.out.println(piloto.toString() + " con"); //mostrarmos las CARACTERÍSTICAS del PILOTO
             System.out.println(piloto.getCocheAsignado().toString()); //mostrarmos las CARACTERÍSTICAS del COCHE
@@ -555,7 +557,7 @@ public class Organizacion
 
         //mostramos los pilotos que han abandonado
         //ordenamos de mayor a menor porque el que el mayor tiempo negativo tenga, más cerca habrá estado de terminar
-        Collections.sort(pilotosAbandono, Collections.reverseOrder(new CMPTiempoResultado()));
+        Collections.sort(pilotosAbandono, new CMPTiempoResultado());
         for (Piloto piloto : pilotosAbandono){
             System.out.println("¡¡¡ Ha abandonado "+piloto.getNombre()+" - Tiempo: "
                 + piloto.getTiempoUltimoResultado() + "- Puntos: 0 !!!");

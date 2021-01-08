@@ -23,9 +23,9 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     private Concentracion concentracion;
     private List <Resultado> resultados; //Registro de tiempo y puntos en cada circuito que haya disputado una carrera
     //resultados es una lista de la clase resultado, que almacena lo necesario
-    
+
     private boolean descalificado; //true si ha superado los abandonos permitidos por Organizacion
-    
+
     /**
      * Constructor de Piloto
      * 
@@ -43,14 +43,14 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         resultados = new ArrayList <Resultado>();
         setDescalificado(false);
     }
-    
+
     //FUNCIONALIDAD DE PILOTO
     /**
      * Método abstracto que calcula la destreza según la concentracion y el tipo de piloto
      * Cada clase lo implementa de una forma distinta.
      */
     public abstract double calcularDestreza();   
-    
+
     /**
      * Descalifica al piloto instado. Pone el parámetro descalificado a true
      */
@@ -58,7 +58,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     {
         setDescalificado(true);
     }
-        
+
     /**
      * Inserta el Coche que la Escuderia le de al Piloto para poder cambiarlo entre carrera y carrera
      * 
@@ -68,7 +68,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     {
         setCocheAsignado(coche);   
     }
-    
+
     /**
      * Pone a NULL el cocheAsignado al piloto para tenerlo listo para la siguiente carrera
      * 
@@ -77,10 +77,10 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public Coche devolverCoche(){
         Coche coche = this.cocheAsignado; //objeto auxiliar para devolver el coche
         setCocheAsignado(null); //quitamos el coche del piloto
-        
+
         return coche;
     }
-    
+
     /**
      * Devuelve el tiempo que el piloto ha conseguido en el 
      * circuito dado por parámetro
@@ -102,7 +102,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         tiempo = Math.round(tiempo*100d)/100d;
         return tiempo;
     }
-    
+
     /**
      * Devuelve los puntos que el piloto ha conseguido en el 
      * circuito dado por parámetro
@@ -123,7 +123,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         }
         return puntos;
     }
-    
+
     /**
      * Pone los puntos que la clase Organizacion le asigne
      * según el tiempo conseguido entre todos los pilotos
@@ -142,8 +142,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
             }
         }
     }
-       
-    
+
     /**
      * Devuelve los puntos que ha conseguido el piloto
      * en todas las carreras
@@ -159,7 +158,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         }
         return puntos;
     }
-    
+
     /**
      * Devuelve el nº de carreras (terminadas o no) en las que
      * ha participado el Piloto
@@ -171,7 +170,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         carreras = resultados.size();
         return carreras;
     }
-    
+
     /**
      * Devuelve el nº de carreras que el Piloto ha terminado
      * 
@@ -186,7 +185,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         }
         return terminadas;
     }
-    
+
     /**
      * Devuelve el nº de carreras que el Piloto ha abandonado
      * 
@@ -201,7 +200,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         }
         return abandonadas;
     }
-    
+
     /**
      * Devuelve el tiempo obtenido en el último resultado del Piloto
      * Esto sirve para que la clase Organización pueda ordenarlos por puntos
@@ -211,152 +210,168 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public double getTiempoUltimoResultado(){
         return Math.round(resultados.get(resultados.size()-1).getTiempo() * 100d)/100d;
     }
-    
+
     /**
-     * Gestiona todos los métodos necesarios para que el piloto
-     * dispute una carrera 
+     * Gestiona todos los métodos necesarios para que el piloto dispute una carrera 
      * 
-     * @param Coche coche
      * @param Circuito circuito
      * 
      */
     public void conducir(Circuito circuito){
         Resultado resNuevaCarrera;
-        
+
         double tiempoParaAcabar; //tiempo necesario para finalizar el circuito
         tiempoParaAcabar = cocheAsignado.calcularTiempoNecesario(this, circuito);
-        
+
         double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
-                                //Además, es el valor que hay que restarle al depósito
-        
-        if(getValorConcentracion() < tiempoParaAcabar){ //abandona por falta de concentración
+        //Además, es el valor que hay que restarle al depósito
+
+        if((getValorConcentracion() < tiempoParaAcabar) && (getValorConcentracion() < cocheAsignado.getDeposito())){ //abandona por falta de concentración
             tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
             resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
-            
+
             cocheAsignado.reducirCombustible(tiempoConducido);
-            
+
             System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
-            + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
-            
+                + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+
             System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
-            + tiempoConducido + " minutos !!!");
-        }
-        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){//caso en el que el depósito principal no es suficiente
-            tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
-            cocheAsignado.reducirCombustible(tiempoParaAcabar);
-            
+                + tiempoConducido + " minutos !!!");
+        }   
+        //caso en el que el depósito principal no es suficiente
+        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){
             //condicional que controla si el coche era cocheResistente y ha usado la Reserva
-            if(cocheAsignado.getDeposito() >= 0){
+            if(cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar) >= 0){
                 //entrar aquí significa que el coche no tenía suficiente combustible en el depósito original
                 //pero resulta que es un CocheResistente y ha repostado el depósito con su reserva y puede
-                //terminar la carrera porque el depósito no se ha vaciado
-                
-                tiempoConducido = tiempoParaAcabar;
-                resNuevaCarrera = new Resultado(circuito, tiempoConducido);
-                
-                tiempoConducido = Math.round((tiempoConducido)*100d)/100d;
-            
-                System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
+                //terminar la carrera porque el depósito no se ha vaciado (si tiene concentración)
+                if((getValorConcentracion() < tiempoParaAcabar)){
+                    //Si llega aquí es que el coche ha repostado de su reserva, pero el piloto no tiene tanta
+                    //concentración como para acabar (p. ej: 200 para acabar, 100 de conc y 60 de comb (+100 reserva)
+
+                    tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
+                    resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+
+                    cocheAsignado.reducirCombustible(tiempoConducido);
+
+                    System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
+                        + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+
+                    System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
+                        + tiempoConducido + " minutos !!!");
+                }
+                else{
+                    tiempoConducido = tiempoParaAcabar;
+                    resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+
+                    tiempoConducido = Math.round((tiempoConducido)*100d)/100d;
+                    
+                    //cocheAsignado.reducirCombustible(tiempoConducido);
+
+                    System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
+                }   
             }
             else{ //caso en el que no sea CocheResistente o si, incluso usando la reserva, se ha quedado sin combustible
+                tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
                 resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
-                
+
                 System.out.println("¡¡¡ El " + cocheAsignado.getNombre() + " se quedó sin combustible a falta de "
-                + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
-            
+                    + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+
                 System.out.println("¡¡¡ En el momento de quedarse sin combustible llevaba en carrera "
-                + tiempoConducido + " minutos !!!");
+                    + tiempoConducido + " minutos !!!");
             }
         }
         else{ //Termina la carrera
             tiempoConducido = tiempoParaAcabar;
             resNuevaCarrera = new Resultado(circuito, tiempoConducido);
-            
-            cocheAsignado.reducirCombustible(tiempoConducido);
-            
+
+            //cocheAsignado.reducirCombustible(tiempoConducido);
+
             System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
         }
+
+        //reducimos el combustible
+        cocheAsignado.reducirCombustible(tiempoConducido);
         
         System.out.println("+++ El combustible del "+ cocheAsignado.getNombre() + " tras la carrera es " 
-        +cocheAsignado.getDeposito() +" +++");
-                
+            +cocheAsignado.getDeposito() +" +++");
+
         resultados.add(resNuevaCarrera); //Añadimos a la lista el resultado de esta carrera
         //Siempre que se llame a este método, se ha de añadir un resultado a la lista.
         //Es por esto por lo que hemos optado por inicializar el objeto resultado en cada
         //condición y, al final, ya añadirla a la lista.
         //Otra opción sería añadirla justo después de inicializar cada objeto pero se ahorra código
     }
-    
-    
+
     //SETTERS
     /**
      * Setter de nombre
      * @param  nombre   Nuevo valor del campo nombre
      */
     private void setNombre(String nombre){this.nombre = nombre;}
-    
+
     /**
      * Setter de cocheAsignado
      * @param  cocheAsignado   Nuevo valor del campo cocheAsignado
      */
     private void setCocheAsignado(Coche cocheAsignado){this.cocheAsignado = cocheAsignado;}
-    
+
     /**
      * Setter de concentracion
      * @param  concentracion   Nuevo valor del campo concentracion
      */
     private void setConcentracion(Concentracion concentracion){this.concentracion = concentracion;}
-    
+
     /**
      * Setter de resultados
      * @param  resultados   Nuevo valor del campo resultados (es un ARRAYLIST)
      */
     private void setListaResultados(List <Resultado> resultados){this.resultados = resultados;}
-    
+
     /**
      * Setter de descalificado
      * @param  descalificado   Nuevo valor del campo descalificado
      */
     private void setDescalificado(boolean descalificado){this.descalificado = descalificado;}
-    
-    
+
     //GETTERS
     /**
      * Getter de nombre
      * @return  nombre
      */
     public String getNombre(){return nombre;}
-    
+
     /**
      * Getter de cocheAsignado
      * @return  cocheAsignado
      */
     public Coche getCocheAsignado(){return cocheAsignado;}
-    
+
     /**
      * Getter de concentracion
      * @return  concentracion
      */
     public Concentracion getConcentracion(){return concentracion;}
+
     /**
      * Método que devuelve el valor de concentracion
      * @return  double  valor de concentracion
      */
     public double getValorConcentracion(){return Math.round(concentracion.getValor() *100d)/100d;}
-    
+
     /**
      * Getter de resultados
      * @return  resultados  (es un ARRAYLIST)
      */
     public List <Resultado> getListaResultados(){return resultados;}
-    
+
     /**
      * Getter de descalificado
      * @return  descalificado
      */
     public boolean getDescalificado(){return descalificado;}
-    
-    
+
     //METODOS AUXILIARES
     /**
      * Método sobreescrito  toString
@@ -365,12 +380,24 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     @Override
     public String toString(){
         StringBuilder builder= new StringBuilder();
-        //no hay nada que rellenar porque cada subclase hace su toString() de su propia manera
-        //y como es una clase abstracta, nunca se va a llamar a PilotoAbstracto.toString, sino al de 
-        //cualquiera de su subclase
+        builder.append("<piloto: ");
+        builder.append(getNombre());
+        builder.append("> ");
+        builder.append("<tipo: ");
+        builder.append(getClass().getSimpleName());
+        builder.append("> ");
+        builder.append("<dest: ");
+        builder.append(calcularDestreza());
+        builder.append("> ");
+        builder.append("<conc: ");
+        builder.append(getConcentracion());
+        builder.append("> ");
+        builder.append("<descalificado: ");
+        builder.append(getDescalificado());
+        builder.append(">");
         return builder.toString();
     }
-    
+
     /**
      * Método sobreescrito equals
      * 
@@ -386,25 +413,25 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         if(!(obj instanceof PilotoAbstracto)) {
             return false; 
         }
-        
+
         PilotoAbstracto other = (PilotoAbstracto) obj;
-        
+
         return getNombre().equals(other.getNombre()) &&
-                getCocheAsignado().equals(other.getCocheAsignado()) &&
-                getConcentracion().equals(other.getConcentracion()) &&
-                getListaResultados().equals(other.getListaResultados());
+        getCocheAsignado().equals(other.getCocheAsignado()) &&
+        getConcentracion().equals(other.getConcentracion()) &&
+        getListaResultados().equals(other.getListaResultados());
     }
-    
+
     /**
-    * Metodo sobreescrito hashCode
-    * 
-    * @return hashCode que representa la clase
-    */
+     * Metodo sobreescrito hashCode
+     * 
+     * @return hashCode que representa la clase
+     */
     @Override
     public int hashCode(){
-       int result=17;
-       
-       result = 7 * result + getNombre().hashCode();
-       return result;
+        int result=17;
+
+        result = 7 * result + getNombre().hashCode();
+        return result;
     }
 }

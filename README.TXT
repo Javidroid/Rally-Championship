@@ -16,10 +16,7 @@ TO-DO LIST:
     
     Revisar la Doc tanto de las clases como de las interfaces
     
-    Hacer método que quite capas del decorator
-    
-    (Hecho:Traducir pseudocódigo de archivos para estudiantes)
-    Luego hay que meterlo en la carpeta del proyecto    
+    Hacer método que quite capas del decorator    
     
     Hacer las pruebas con JUnit de cada método público (interface) de:
         -Circuito
@@ -30,22 +27,7 @@ TO-DO LIST:
         **Usar Fixtures    
     
      
-     Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
-     
-     revisar si hay que hacer el hashCode en organización
-     
      Revisar que el formato de plantilla de salida es correcto
-     
-     hacer bien los hashcode de escudería
-     
-     revisar el funcionamiento de la nitro en cocheRapido
-     
-     Errores Solucionados:
-     piloto 5 (ogier) de la carrera en australia se le asigna un coche erróneo y hace que no finalice 
-     (comparador mal asignado. Se puso sortByCombustible y se tenia que haber puesto SortByDeposito)
-     
-     a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
-     (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size(). entonces se quedaba uno suelto)
      
      IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
      
@@ -55,10 +37,6 @@ TO-DO LIST:
      hacer que escuderías se ordene
      
      cambiar la responsabilidad de mostrar cosas
-     
-     usar el getClassName para los pilotos y coches subclase
-     
-     arreglar el bug que guarda los resultados con numeros redondeados
      
      Kankunnen se guarda dos veces en peugeot
      
@@ -202,6 +180,33 @@ HECHO:
     REVISAR: Método que carga los pilotos que van a conducir: no me convence mucho, es muy forzado
     
     metodo calcularVelocidad, en caso de ser coche rapido reduce la nitro un par de veces y esto hay que corregirlo
+    
+    Repasar que la doc de las clases SortBy___ y CMP___ está totalmente correcta
+    
+    revisar el funcionamiento de la nitro en cocheRapido
+    
+    (Hecho:Traducir pseudocódigo de archivos para estudiantes)
+    Luego hay que meterlo en la carpeta del proyecto
+     
+    hacer bien los hashcode de escudería
+    
+    arreglar el bug que guarda los resultados con numeros redondeados
+    
+    usar el getClassName para los pilotos y coches subclase
+    
+    Errores Solucionados:
+     piloto 5 (ogier) de la carrera en australia se le asigna un coche erróneo y hace que no finalice 
+     (comparador mal asignado. Se puso sortByCombustible y se tenia que haber puesto SortByDeposito)
+     
+     a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
+     (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size(). entonces se quedaba uno suelto)
+     
+     
+     
+     
+     
+     
+     
      
      
      
