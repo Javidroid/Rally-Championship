@@ -28,13 +28,6 @@ public class PilotoEstrellaTest
     @Before
     public void setUp()
     {
-        Concentracion normal = Concentracion.NORMAL;
-        PilotoEstrella piloto = new PilotoEstrella("Pilotin", normal);
-    }
-    
-    @Test
-    public void calcularDestreza(){
-        /*assertEquals(2.0, piloto.calcularDestreza);*/
     }
 
     /**
