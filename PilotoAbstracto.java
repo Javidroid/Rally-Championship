@@ -210,6 +210,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public double getTiempoUltimoResultado(){
         return Math.round(resultados.get(resultados.size()-1).getTiempo() * 100d)/100d;
     }
+   
 
     /**
      * Gestiona todos los métodos necesarios para que el piloto dispute una carrera 
@@ -218,7 +219,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * 
      */
     public void conducir(Circuito circuito){
-        Resultado resNuevaCarrera;
+         Resultado resNuevaCarrera;
 
         double tiempoParaAcabar; //tiempo necesario para finalizar el circuito
         tiempoParaAcabar = cocheAsignado.calcularTiempoNecesario(this, circuito);
@@ -226,18 +227,20 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
         //Además, es el valor que hay que restarle al depósito
 
-        if((getValorConcentracion() < tiempoParaAcabar) && (getValorConcentracion() < cocheAsignado.getDeposito())){ //abandona por falta de concentración
-            tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
-            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
-
-            cocheAsignado.reducirCombustible(tiempoConducido);
-
-            System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
+        if((getValorConcentracion() < tiempoParaAcabar) || (getValorConcentracion() < cocheAsignado.getDeposito())){       
+             tiempoConducido = getValorConcentracion();
+             resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+             
+             
+             if(getValorConcentracion() < tiempoParaAcabar){
+                 System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
                 + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
-
-            System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
+              }
+             if(getValorConcentracion() < cocheAsignado.getDeposito()){
+                 System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
                 + tiempoConducido + " minutos !!!");
-        }   
+              }
+        }  
         //caso en el que el depósito principal no es suficiente
         else if(cocheAsignado.getDeposito() < tiempoParaAcabar){
             //condicional que controla si el coche era cocheResistente y ha usado la Reserva
