@@ -210,7 +210,6 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     public double getTiempoUltimoResultado(){
         return Math.round(resultados.get(resultados.size()-1).getTiempo() * 100d)/100d;
     }
-   
 
     /**
      * Gestiona todos los métodos necesarios para que el piloto dispute una carrera 
@@ -227,11 +226,11 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
         //Además, es el valor que hay que restarle al depósito
 
-        if((getValorConcentracion() < tiempoParaAcabar) && (0 > cocheAsignado.getDeposito())){ //abandona por falta de concentración
+        if((getValorConcentracion() < tiempoParaAcabar) && (getValorConcentracion() < cocheAsignado.getDeposito())){ //abandona por falta de concentración
             tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
             resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
 
-            cocheAsignado.reducirCombustible(tiempoConducido);
+            cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar);
 
             System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
                 + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
@@ -240,7 +239,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
                 + tiempoConducido + " minutos !!!");
         }   
         //caso en el que el depósito principal no es suficiente
-        else if(cocheAsignado.getDeposito() < 0){
+        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){
             //condicional que controla si el coche era cocheResistente y ha usado la Reserva
             if(cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar) >= 0){
                 //entrar aquí significa que el coche no tenía suficiente combustible en el depósito original
@@ -266,7 +265,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
                     resNuevaCarrera = new Resultado(circuito, tiempoConducido);
 
                     tiempoConducido = Math.round((tiempoConducido)*100d)/100d;
-                    
+
                     //cocheAsignado.reducirCombustible(tiempoConducido);
 
                     System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
@@ -294,7 +293,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
 
         //reducimos el combustible
         cocheAsignado.reducirCombustible(tiempoConducido);
-        
+
         System.out.println("+++ El combustible del "+ cocheAsignado.getNombre() + " tras la carrera es " 
             +cocheAsignado.getDeposito() +" +++");
 
@@ -303,7 +302,6 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         //Es por esto por lo que hemos optado por inicializar el objeto resultado en cada
         //condición y, al final, ya añadirla a la lista.
         //Otra opción sería añadirla justo después de inicializar cada objeto pero se ahorra código
-    
     }
 
     //SETTERS

@@ -560,7 +560,7 @@ public class Organizacion
         Collections.sort(pilotosAbandono, new CMPTiempoResultado());
         for (Piloto piloto : pilotosAbandono){
             System.out.println("¡¡¡ Ha abandonado "+piloto.getNombre()+" - Tiempo: "
-                + piloto.getTiempoUltimoResultado() + "- Puntos: 0 !!!");
+                + piloto.getTiempoUltimoResultado() + " - Puntos: 0 !!!");
 
             if(piloto.getDescalificado()){
                 System.out.println(" - Además ha sido descalificado para el resto del Campeonato !!!");
