@@ -219,7 +219,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
      * 
      */
     public void conducir(Circuito circuito){
-         Resultado resNuevaCarrera;
+        Resultado resNuevaCarrera;
 
         double tiempoParaAcabar; //tiempo necesario para finalizar el circuito
         tiempoParaAcabar = cocheAsignado.calcularTiempoNecesario(this, circuito);
@@ -227,22 +227,20 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
         //Además, es el valor que hay que restarle al depósito
 
-        if((getValorConcentracion() < tiempoParaAcabar) || (getValorConcentracion() < cocheAsignado.getDeposito())){       
-             tiempoConducido = getValorConcentracion();
-             resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
-             
-             
-             if(getValorConcentracion() < tiempoParaAcabar){
-                 System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
+        if((getValorConcentracion() < tiempoParaAcabar) && (0 > cocheAsignado.getDeposito())){ //abandona por falta de concentración
+            tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
+            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+
+            cocheAsignado.reducirCombustible(tiempoConducido);
+
+            System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
                 + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
-              }
-             if(getValorConcentracion() < cocheAsignado.getDeposito()){
-                 System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
+
+            System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
                 + tiempoConducido + " minutos !!!");
-              }
-        }  
+        }   
         //caso en el que el depósito principal no es suficiente
-        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){
+        else if(cocheAsignado.getDeposito() < 0){
             //condicional que controla si el coche era cocheResistente y ha usado la Reserva
             if(cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar) >= 0){
                 //entrar aquí significa que el coche no tenía suficiente combustible en el depósito original
@@ -305,6 +303,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         //Es por esto por lo que hemos optado por inicializar el objeto resultado en cada
         //condición y, al final, ya añadirla a la lista.
         //Otra opción sería añadirla justo después de inicializar cada objeto pero se ahorra código
+    
     }
 
     //SETTERS

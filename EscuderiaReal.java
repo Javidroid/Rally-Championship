@@ -13,7 +13,7 @@ import java.util.*;
  * 
  * Además, es la clase "Contexto" para el Patrón "Strategy" usado para establecer un criterio
  * de ordenación de pilotos y coches.
- * 
+ * tiemo
  * @author Javier Florido Cartolano, Eugenia Andújar Sánchez y Carmen Martín Granado
  * @version v1 (27/11/2020)
  */
