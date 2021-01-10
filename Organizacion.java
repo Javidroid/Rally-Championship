@@ -298,9 +298,9 @@ public class Organizacion
                     +" - Puntos Totales: "+piloto.getTotalPuntos()+" @@@");
 
                 for (Resultado result : piloto.getListaResultados()){
-                    System.out.println("Carrera("+result.getCircuito().getNombre()+") - Puntos:"+result.getPuntos()+
-                        " - Tiempo:"+result.getTiempo()+" minutos");
+                    System.out.println(result.toString());
                 }
+                System.out.println();
                 posicion++; //incrementamos la posicion para el siguiente piloto
             }
         }
@@ -321,10 +321,10 @@ public class Organizacion
         for (Piloto piloto : pilotosDescalificados){
             System.out.println("--- Piloto Descalificado: "+ piloto.getNombre()+
                 " - Puntos Totales Anulados: "+piloto.getTotalPuntos()+" ---");
-            System.out.println();
             for (Resultado result : piloto.getListaResultados()){
                 System.out.println(result.toString());
             }
+            System.out.println();
         }
     }
 
@@ -504,7 +504,7 @@ public class Organizacion
                 piloto.descalificar();
 
                 //podríamos añadir aquí el piloto en this.pilotosDescalificados pero como al mostrar los
-                //resultados los vamos a separar y añadir, pues consideramos que no es responsabilidad
+                //resultados los vamos a separar y añadir, pues considero que no es responsabilidad
                 //de este método añadir o quitar pilotos de listas de descalificación
 
                 System.out.println("@@@");

@@ -27,29 +27,22 @@ TO-DO LIST:
         **Usar Fixtures    
     
      
-     Revisar que el formato de plantilla de salida es correcto
-     
      IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
      
      cambiar la responsabilidad de mostrar cosas
      
-    breakpoint en linea 421 de organizacion para ver cuándo se inserta un coche nulo y un piloto doble
-     (dentro del metodo de devolverPilotos)
-     
      tal vez ordenar los coches dentro de la escuderia --> hacer un método juntar coches y pilotos para mostrar los resultados
-         
-    corregir: muestra algunas carreras sin redondear el tiempo (los resultados negativos)
-     
+
      
 INFORMARSE: 
     
-    Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.
+    Aprendido: Como hacer en la escudería para usar el strategy para anidar comparadores de forma arbitraria.
     Porque en el pseudocódigo siempre se anida por puntos, destreza y nombre. ¿y si se quisiera
     anidar por concentracion, nombre y después carreras terminadas?
     
-    Tengo muchos comparadores y SortBy, pero porque el enunciado lo pide y no se si es correcto o qué
+    Aprendido: Tengo muchos comparadores y SortBy, pero porque el enunciado lo pide y no se si es correcto o qué
             
-    Cómo ordenar los circuitos usando treeMap y cuándo se ordenan. De hecho, al mandar los datos da error gordo
+    Aprendido: Cómo ordenar los circuitos usando treeMap y cuándo se ordenan. De hecho, al mandar los datos da error gordo
     
     
     
@@ -195,6 +188,14 @@ HECHO:
      
      a Loeb (posición 3 de carrera en australia) no se le asignan puntos (se queda en -1)
      (Al asignar los puntos había un bucle for tal que i<pilotosCarrera.size(). entonces se quedaba uno suelto)
+     
+     breakpoint en linea 421 de organizacion para ver cuándo se inserta un coche nulo y un piloto doble
+     (dentro del metodo de devolverPilotos)
+     
+     corregir: muestra algunas carreras sin redondear el tiempo (los resultados negativos)
+     
+     Revisar que el formato de plantilla de salida es correcto
+     
      
      
      
