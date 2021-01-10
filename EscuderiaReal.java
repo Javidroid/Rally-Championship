@@ -82,7 +82,7 @@ public class EscuderiaReal implements Escuderia
     }
 
     /**
-     * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
+     * Ordena las listas de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
      * según ASCpiloto
      * 
      */
@@ -97,7 +97,7 @@ public class EscuderiaReal implements Escuderia
     }
 
     /**
-     * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
+     * Ordena las listas de coches según el criterio establecido y de forma Ascendente (true) o Descendente
      * según ASCcoche
      */
     public void ordenarCoches()
@@ -106,7 +106,8 @@ public class EscuderiaReal implements Escuderia
             criterioCoche.ordenarCoches(coches, ASCcoche);    //mandamos la lista de coches para que se ordene
         }
         if(this.cochesSinCombustible.size() > 1){
-            criterioCoche.ordenarCoches(cochesSinCombustible, ASCcoche);
+            //mandamos el orden contrario porque el combustible es negativo
+            criterioCoche.ordenarCoches(cochesSinCombustible, !ASCcoche); 
         }
     }
 
@@ -231,7 +232,7 @@ public class EscuderiaReal implements Escuderia
             }
         }
     }
-
+    
     /**
      * Método que devuelve true si aún quedan pilotos enviables por la escudería
      * 
@@ -343,6 +344,11 @@ public class EscuderiaReal implements Escuderia
      */
     @Override
     public String toString(){
+        // //hacemos que los pilotos y coches no disponibles se junten con los que sí para mostrar la salida correctamente
+        // //siguiendo el criterio de la escudería
+        // juntarPilotos();
+        // juntarCoches();
+        
         ordenarPilotos(); //ordenamos los pilotos y coches por si acaso estuvieran desordenados
         ordenarCoches();
 
@@ -366,6 +372,11 @@ public class EscuderiaReal implements Escuderia
             builder.append(c.toString());
             builder.append("\n");
         }
+        
+        // //volvemos a separar los pilotos y los coches no disponibles para que no se manden
+        // separarPilotos();
+        // separarCoches();
+        
         return builder.toString();
     }
 

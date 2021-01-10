@@ -29,14 +29,13 @@ public interface Escuderia
     public void insertarCoche(Coche coche);
 
     /**
-     * Ordena la lista de pilotos según el criterio establecido y de forma Ascendente (true) o Descendente
-     * según ASCpiloto
+     * Ordena los pilotos según el criterio establecido y de forma Ascendente (true) o Descendente según ASCpiloto
      * 
      */
     public void ordenarPilotos();
 
     /**
-     * Ordena la lista de coches según el criterio establecido y de forma Ascendente (true) o Descendente
+     * Ordena los coches según el criterio establecido y de forma Ascendente (true) o Descendente
      * según ASCcoche
      */
     public void ordenarCoches();
@@ -89,7 +88,7 @@ public interface Escuderia
      * Método que manda a cochesSinCombustible todos aquellos coches en coches que no tengan combustible
      */
     public void separarCoches();
-
+    
     //GETTERS
     /**
      * Método que devuelve nombre

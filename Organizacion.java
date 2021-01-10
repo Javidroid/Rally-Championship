@@ -352,6 +352,8 @@ public class Organizacion
 
                 System.out.println(escuderia.toString()); //Mostramos todos los pilotos y los coches de la escuderia
 
+                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
                 posicion++;
             }
         }
@@ -510,7 +512,7 @@ public class Organizacion
                 System.out.println("@@@");
                 System.out.println("¡¡¡ " +piloto.getNombre()+ " es DESCALIFICADO del campeonato por alcanzar "
                     +"el límite de abandonos("+limiteAbandonos+") !!!");
-                System.out.println("@@@");
+                
             }
             System.out.println("@@@");
             contadorPiloto++;

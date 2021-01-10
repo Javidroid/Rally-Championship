@@ -116,9 +116,10 @@ public class CocheNormal implements Coche
     /**
      * Muestra por pantalla la velocidad real base del coche (sin tener en cuenta si es rapido)
      * 
-     * Este método es concretamente útil para los cocheRapido. Porque al mostrar por pantalla su velocidad real
-     * con el método calcularVelocidadReal() y luego calcularTiempoNecesario() se reduce el nitro dos veces
-     * y esto influye en los resultados. Por eso se vuelve a calcular la forma pero de forma base.
+     * Este método es concretamente útil para los cocheRapido. Porque, al mostrar por pantalla su velocidad real
+     * con el método calcularVelocidadReal() y luego calcularTiempoNecesario(), se reduce el nitro dos veces
+     * y esto influye en los resultados. Por eso se vuelve a calcular la forma pero de forma base. Además de ser como
+     * se indica en la salida
      * 
      * @param  piloto       El piloto que conduce el coche
      * @param  circuito     El circuito en el que el coche compite (para usar la complejidad)

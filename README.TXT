@@ -19,20 +19,14 @@ TO-DO LIST:
     Hacer método que quite capas del decorator    
     
     Hacer las pruebas con JUnit de cada método público (interface) de:
-        -Circuito
-        -Coche
-        -Piloto
-        -Escuderia
+        //Circuito
+        //Coche
+        //Piloto
+        //Escuderia
         -Organizacion
         **Usar Fixtures    
     
-     
-     IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
-     
-     cambiar la responsabilidad de mostrar cosas
-     
-     tal vez ordenar los coches dentro de la escuderia --> hacer un método juntar coches y pilotos para mostrar los resultados
-
+        cambiar la responsabilidad de mostrar cosas
      
 INFORMARSE: 
     
@@ -195,6 +189,11 @@ HECHO:
      corregir: muestra algunas carreras sin redondear el tiempo (los resultados negativos)
      
      Revisar que el formato de plantilla de salida es correcto
+     
+     tal vez ordenar los coches dentro de la escuderia --> hacer un método juntar coches y pilotos para mostrar los resultados
+
+     IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
+     
      
      
      
