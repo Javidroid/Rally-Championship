@@ -90,17 +90,17 @@ public class CircuitoReal implements Circuito
     public String mostrarCaracteristicas()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("<circuito: ");
+        builder.append("<circuito:");
         builder.append(getNombre());
         builder.append("> <cond:");
         builder.append(this.toString()); //complicaciones extra separadas por un espacio
-        builder.append("> <comp: complejidad(original:");
-        builder.append(this.getComplejidad().getValor());
-        builder.append(")(actual:");
+        builder.append("> <comp: ");
+        builder.append(this.getComplejidad().toString());
+        builder.append("(actual:");
         builder.append(this.getValorComplejidad());
-        builder.append(")> <dist: distancia(original:");
-        builder.append(this.getDistancia().getValor());
-        builder.append(")(actual:");
+        builder.append(")> <dist: ");
+        builder.append(this.getDistancia().toString());
+        builder.append("(actual:");
         builder.append(this.getValorDistancia());
         builder.append(")>");
                 

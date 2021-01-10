@@ -1,5 +1,4 @@
 
-
 import java.util.*;
 /**
  * Clase que inicializa la simulación con datos con los que 
@@ -21,7 +20,8 @@ public class DatosCampeonatoCompleto{
     {
         //organizador debe ser una instancia única con la siguiente configuración:
         // Circuitos ordenados de forma descendente de acuerdo a su distancia
-        Organizacion organizacion = Organizacion.getInstancia(Collections.reverseOrder(new CMPDistanciaCircuito()), 3, 6);
+        //LimiteAbandonos=3, LimitePilotos=2, 
+        Organizacion organizacion = Organizacion.getInstancia(Collections.reverseOrder(new CMPDistanciaCircuito()), 3, 2);
 
         //creamos y añadimos los circuitos del campeonato:
         //Crear circuito portugal con nombre:”Portugal" - complejidad:MEDIA - distancia:INTERMEDIA);
@@ -85,7 +85,6 @@ public class DatosCampeonatoCompleto{
         chile = new Gravilla(chile);
         organizacion.insertarCircuito(chile);
 
-        
         // System.out.println(portugal.mostrarCaracteristicas());
         // System.out.println(cerdena.mostrarCaracteristicas());
         // System.out.println(australia.mostrarCaracteristicas());
@@ -93,7 +92,6 @@ public class DatosCampeonatoCompleto{
         // System.out.println(finlandia.mostrarCaracteristicas());
         // System.out.println(alemania.mostrarCaracteristicas());
         // System.out.println(chile.mostrarCaracteristicas());
-
 
         //creamos e inscribimos a las escuderías que participarán en el campeonato:    
         //Crear escuderia peugeot con nombre:"Peugeot"
@@ -119,7 +117,6 @@ public class DatosCampeonatoCompleto{
         // peugeot.toString();
         // citroen.toString();
         // seat.toString();
-
 
         //creamos los pilotos y los coches de cada escudería 
         //coches y pilotos de citroen
@@ -166,7 +163,7 @@ public class DatosCampeonatoCompleto{
 
         //inscribimos las escuderías al final porque al inscribir se guardan los pilotos en el mapa
         //y tienen que estar cargados los pilotos en la escuderia
-        
+
         seat.inscribirse();
         peugeot.inscribirse();
         citroen.inscribirse();

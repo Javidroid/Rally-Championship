@@ -47,6 +47,6 @@ public enum Complejidad
     @Override
     public String toString()
     {
-        return getNombre() + "(Original" + getValor() + ")";
+        return this.getNombre() + "(original:" + getValor() + ")";
     }
 }

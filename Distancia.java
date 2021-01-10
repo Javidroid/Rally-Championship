@@ -47,6 +47,6 @@ public enum Distancia
     @Override
     public String toString()
     {
-        return getNombre() + "(Original" + getValor() + ")";
+        return this.getNombre() + "(original:" + getValor() + ")";
     }
 }

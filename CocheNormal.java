@@ -211,14 +211,14 @@ public class CocheNormal implements Coche
         builder.append("<tipo: ");
         builder.append(getClass().getSimpleName());
         builder.append("> ");
-        builder.append("<vel_teó:");
+        builder.append("<vel_teó: ");
         builder.append(getVelocidad().toString());
         builder.append("> ");
-        builder.append("<comb: (");
+        builder.append("<comb: ");
         builder.append(getCombustibleTotal().toString());
-        builder.append(") (actual: ");
+        builder.append("(actual:");
         builder.append(getDeposito());
-        builder.append(")> ");
+        builder.append(")>");
         return builder.toString();
     }
     

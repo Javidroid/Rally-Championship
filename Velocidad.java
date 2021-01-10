@@ -10,7 +10,7 @@ public enum Velocidad
     TORTUGA ("TORTUGA", 200.0), 
     LENTA ("LENTA", 210.0), 
     NORMAL ("NORMAL", 220.0),
-    RAPIDO ("RAPIDO", 230.0),
+    RAPIDO ("RAPIDA", 230.0),
     GUEPARDO ("GUEPARDO", 240.0); 
     
     private final String nombre;

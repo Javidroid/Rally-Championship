@@ -167,6 +167,7 @@ public class EscuderiaReal implements Escuderia
         if(!coches.isEmpty()){ //si la lista NO está vacia, asignamos el primer coche
             cocheAsignable = coches.get(0);
             coches.remove(0); //sacamos al coche de la lista para evitar que otro piloto lo use
+            //System.out.println("Cogemos " + cocheAsignable.getNombre());
         }
 
         //Ya tenemos el primer coche con combustible de la lista (o no), y tenemos que asignarselo al primer
@@ -175,18 +176,22 @@ public class EscuderiaReal implements Escuderia
         //el mensaje del piloto concreto que no puede participar en la carrera
         if(!pilotos.isEmpty()){
             pilotoEnviable = pilotos.get(0);
+            //System.out.println("Cogemos " + pilotoEnviable.getNombre());
             pilotoEnviable.recibirCoche(cocheAsignable);
+            //System.out.println("Asignamos " + pilotoEnviable.getCocheAsignado().getNombre());
             if (cocheAsignable != null){ //si el piloto SI tiene coche, también lo borramos de la lista
                 pilotos.remove(0);
+                //System.out.println("Borramos " + pilotoEnviable.getNombre());
             }
         }
-        else{//si no hay piloto disponible, devolvemos el coche
+        else if (cocheAsignable != null){//si no hay piloto disponible, devolvemos el coche (si tampoco es nulo)
+            //System.out.println("Devolvemos " + cocheAsignable.getNombre() + " por no haber pilotos sin descalificar");
             coches.add(cocheAsignable);
         }
 
         //si hay piloto disponible (pilotoEnviable!=null) pero NO hay coche (null) entonces no se puede mandar el piloto
         if(pilotoEnviable != null && cocheAsignable == null){
-            pilotos.add(pilotoEnviable); //devolvemos al piloto porque no puede participar
+            //pilotos.add(pilotoEnviable); //devolvemos al piloto porque no puede participar
 
             System.out.println("¡¡¡ " + pilotoEnviable.getNombre() + " NO ES ENVIADO A LA CARRERA porque " +
                 "su escudería (" + nombre + ") no tiene más coches con combustible disponibles !!!");
@@ -344,7 +349,7 @@ public class EscuderiaReal implements Escuderia
         StringBuilder builder= new StringBuilder();
         builder.append("%%% ");
         builder.append(getNombre());
-        builder.append(" %%% \n");
+        builder.append(" %%%\n");
         for (Piloto p : pilotos){
             builder.append(p.toString());
             builder.append("\n");

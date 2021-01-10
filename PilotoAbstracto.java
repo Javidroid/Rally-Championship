@@ -226,53 +226,21 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         double tiempoConducido; //el tiempo que el piloto ha llegado a conducir en el circuito
         //Además, es el valor que hay que restarle al depósito
 
-        if((getValorConcentracion() < tiempoParaAcabar) && (getValorConcentracion() < cocheAsignado.getDeposito())){ //abandona por falta de concentración
-            tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
-            resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+        if (this.getValorConcentracion() < tiempoParaAcabar){
+            //el piloto va a abandonar la carrera, en principio por falta de concentración
+            //a no ser que tenga menos combustible que concentración
 
-            cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar);
+            tiempoConducido = cocheAsignado.getDeposito(); //almacenamos el depósito que le queda por si aband. por comb.
 
-            System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
-                + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+            //reducimos el combustible ahora para abordar el caso de que no tenga ni concentración ni deposito suficiente
+            //para terminar la carrera y que se quede sin concentración un piloto con un coche que recurra a la reserva
+            cocheAsignado.reducirCombustible(getValorConcentracion());
 
-            System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
-                + tiempoConducido + " minutos !!!");
-        }   
-        //caso en el que el depósito principal no es suficiente
-        else if(cocheAsignado.getDeposito() < tiempoParaAcabar){
-            //condicional que controla si el coche era cocheResistente y ha usado la Reserva
-            if(cocheAsignado.calcularReduccionCombustible(tiempoParaAcabar) >= 0){
-                //entrar aquí significa que el coche no tenía suficiente combustible en el depósito original
-                //pero resulta que es un CocheResistente y ha repostado el depósito con su reserva y puede
-                //terminar la carrera porque el depósito no se ha vaciado (si tiene concentración)
-                if((getValorConcentracion() < tiempoParaAcabar)){
-                    //Si llega aquí es que el coche ha repostado de su reserva, pero el piloto no tiene tanta
-                    //concentración como para acabar (p. ej: 200 para acabar, 100 de conc y 60 de comb (+100 reserva)
+            if(cocheAsignado.getDeposito() < 0){
+                //ha terminado porque se ha quedado sin combustible porque tenía menos depósito que concentración
+                //incluso habiendo recurrido a la reserva (porque sería positivo en ese caso)
+                //hay que restar, además, el tiempo que le faltaba para terminar para que se refleje en el deposito
 
-                    tiempoConducido = getValorConcentracion(); //tiempo que conduce es el que está concentrado
-                    resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
-
-                    cocheAsignado.reducirCombustible(tiempoConducido);
-
-                    System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
-                        + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
-
-                    System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
-                        + tiempoConducido + " minutos !!!");
-                }
-                else{
-                    tiempoConducido = tiempoParaAcabar;
-                    resNuevaCarrera = new Resultado(circuito, tiempoConducido);
-
-                    tiempoConducido = Math.round((tiempoConducido)*100d)/100d;
-
-                    //cocheAsignado.reducirCombustible(tiempoConducido);
-
-                    System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
-                }   
-            }
-            else{ //caso en el que no sea CocheResistente o si, incluso usando la reserva, se ha quedado sin combustible
-                tiempoConducido = cocheAsignado.getDeposito(); //tiempo que conduce es el que le queda de depósito
                 resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
 
                 System.out.println("¡¡¡ El " + cocheAsignado.getNombre() + " se quedó sin combustible a falta de "
@@ -280,20 +248,59 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
 
                 System.out.println("¡¡¡ En el momento de quedarse sin combustible llevaba en carrera "
                     + tiempoConducido + " minutos !!!");
+
+                //reducimos el tiempo total que necesitaba para acabar (explicado arriba el porqué)
+                cocheAsignado.reducirCombustible(tiempoParaAcabar - getValorConcentracion());
+            }
+            else{
+                //abandono porque se ha quedado sin concentración. porque aún le quedaba depósito
+                tiempoConducido = getValorConcentracion();
+
+                resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+
+                System.out.println("¡¡¡ " + nombre + " perdió la concentración a falta de "
+                    + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+
+                System.out.println("¡¡¡ En el momento del despiste llevaba en carrera "
+                    + tiempoConducido + " minutos !!!");
+
+                //ya hemos reducido el combustible el tiempo que ha conducido, es decir: la concentración
             }
         }
-        else{ //Termina la carrera
-            tiempoConducido = tiempoParaAcabar;
-            resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+        else{
+            //reducimos todo el tiempo de la carrera independientemente de que acabe o abandone por falta de combustible
+            //(porque si se llega aquí es porque le da la concentración)
 
-            //cocheAsignado.reducirCombustible(tiempoConducido);
+            tiempoConducido = cocheAsignado.getDeposito(); //almacenamos el depósito que le queda por si aband. por comb.
 
-            System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
+            //el combustible que se quite va a ser siempre lo necesario para acabar la carrera independientemente
+            //de que termine o de que abandone por falta de combustible (para reflejar en depósito lo que le faltaría)
+            this.cocheAsignado.reducirCombustible(tiempoParaAcabar);
+
+            if(cocheAsignado.getDeposito() < 0){
+                //abandono por falta de combustible porque el deposito es negativo
+
+                resNuevaCarrera = new Resultado(circuito, tiempoConducido - tiempoParaAcabar);
+
+                System.out.println("¡¡¡ El " + cocheAsignado.getNombre() + " se quedó sin combustible a falta de "
+                    + Math.round((tiempoParaAcabar-tiempoConducido)*100d)/100d + " minutos para terminar !!!");
+
+                System.out.println("¡¡¡ En el momento de quedarse sin combustible llevaba en carrera "
+                    + tiempoConducido + " minutos !!!");
+
+                //ya se ha reducido el combustible
+            }
+            else{
+                //ha terminado porque tiene concentración y el combustible ha acabado positivo
+
+                tiempoConducido = tiempoParaAcabar;
+                resNuevaCarrera = new Resultado(circuito, tiempoConducido);
+
+                System.out.println("+++ " + nombre + " termina la carrera en " + tiempoConducido +" minutos +++");
+
+                //ya se ha reducido el combustible
+            }
         }
-
-        //reducimos el combustible
-        cocheAsignado.reducirCombustible(tiempoConducido);
-
         System.out.println("+++ El combustible del "+ cocheAsignado.getNombre() + " tras la carrera es " 
             +cocheAsignado.getDeposito() +" +++");
 
@@ -380,7 +387,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
     @Override
     public String toString(){
         StringBuilder builder= new StringBuilder();
-        builder.append("<piloto: ");
+        builder.append("<piloto:");
         builder.append(getNombre());
         builder.append("> ");
         builder.append("<tipo: ");
@@ -392,7 +399,7 @@ public abstract class PilotoAbstracto implements Piloto //esta clase es abstract
         builder.append("<conc: ");
         builder.append(getConcentracion());
         builder.append("> ");
-        builder.append("<descalificado: ");
+        builder.append("<descalificado:");
         builder.append(getDescalificado());
         builder.append(">");
         return builder.toString();

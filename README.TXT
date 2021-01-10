@@ -31,19 +31,14 @@ TO-DO LIST:
      
      IMPORTANTE: asegurarse de que todos los métodos públicos de cada clase estén en su interfaz
      
-     IMPORTANTE: EL TIEMPO SE MUESTRA MUY REDONDEADO Y PUEDE QUE INFLUYA (VER SI ES QUE SE HA TRANSFORMADO A INT O 
-     SE HA REDONDEADO DEMASIADO
-     
-     hacer que escuderías se ordene
-     
      cambiar la responsabilidad de mostrar cosas
      
-     Kankunnen se guarda dos veces en peugeot
-     
-     en algún punto se guarda un coche nulo en peugeot
-     
-     breakpoint en linea 421 de organizacion para ver cuándo se inserta un coche nulo y un piloto doble
+    breakpoint en linea 421 de organizacion para ver cuándo se inserta un coche nulo y un piloto doble
      (dentro del metodo de devolverPilotos)
+     
+     tal vez ordenar los coches dentro de la escuderia --> hacer un método juntar coches y pilotos para mostrar los resultados
+         
+    corregir: muestra algunas carreras sin redondear el tiempo (los resultados negativos)
      
      
 INFORMARSE: 

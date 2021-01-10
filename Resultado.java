@@ -73,9 +73,9 @@ public class Resultado
         StringBuilder builder= new StringBuilder();
         builder.append("Carrera(");
         builder.append(getCircuito().getNombre());
-        builder.append(") - Puntos: ");
+        builder.append(") - Puntos:");
         builder.append(getPuntos());
-        builder.append(" - Tiempo: ");
+        builder.append(" - Tiempo:");
         builder.append(Math.round((getTiempo())*100d)/100d);
         builder.append(" minutos");
         return builder.toString();
